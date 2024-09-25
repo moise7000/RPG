@@ -1,0 +1,29 @@
+@startuml
+
+abstract class GameCharacter {
+    String name
+    int health
+    int experiencepoints
+    int level
+
+}
+
+class Warrior extends GameCharacter {
+    int strength
+}
+
+class Wizard extends GameCharacter {
+    int intelligence
+}
+
+class Healer extends GameCharacter {
+    int wisdom
+}
+
+class Team {
+    String name
+}
+
+Team "1" *-- "1..*" GameCharacter
+
+@enduml
