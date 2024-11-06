@@ -6,12 +6,18 @@ import lombok.ToString;
 
 
 @ToString
-@Getter
-@Setter
+
 public abstract class GameCharacter {
+    @Getter
     private final String name;
+    @Getter
+    @Setter
     private int health;
+    @Getter
+    @Setter
     private int experiencePoints;
+    @Getter
+    @Setter
     private int level;
 
     public GameCharacter(String name) {
