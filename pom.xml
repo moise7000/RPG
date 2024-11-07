@@ -9,7 +9,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
     </properties>
@@ -21,13 +21,7 @@
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
-        </dependency>
+
     </dependencies>
 
     <build>

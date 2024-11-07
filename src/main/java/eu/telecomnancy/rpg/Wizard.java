@@ -2,12 +2,9 @@ package eu.telecomnancy.rpg;
 
 import java.util.Random;
 
-import lombok.Getter;
-import lombok.Setter;
 
 public class Wizard extends GameCharacter {
-    @Getter
-    @Setter
+
     private int intelligence;
 
     public Wizard(String name) {
@@ -15,5 +12,13 @@ public class Wizard extends GameCharacter {
         intelligence = getLevel() * 10+new Random().nextInt(10);
     }
 
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+    
     
 }

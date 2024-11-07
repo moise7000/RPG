@@ -3,13 +3,12 @@ package eu.telecomnancy.rpg;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import lombok.Getter;
+
 
 public class Team {
-    @Getter
+
     private final String name;
 
-    @Getter
     private Collection<GameCharacter> players;
 
     public Team(String name) {
@@ -17,6 +16,13 @@ public class Team {
         players=new ArrayList<GameCharacter>();
     }
 
+    public String getName() {
+        return name;
+    }
+    
+    public Collection<GameCharacter> getPlayers() {
+        return players;
+    }
     public void addPlayer(GameCharacter player) {
         players.add(player);
     }

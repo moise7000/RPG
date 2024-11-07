@@ -1,24 +1,14 @@
 package eu.telecomnancy.rpg;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-
-@ToString
 
 public abstract class GameCharacter {
-    @Getter
+
     private final String name;
-    @Getter
-    @Setter
     private int health;
-    @Getter
-    @Setter
     private int experiencePoints;
-    @Getter
-    @Setter
     private int level;
+
 
     public GameCharacter(String name) {
         this.name = name;
@@ -26,4 +16,37 @@ public abstract class GameCharacter {
         this.level = 1;
     }
 
+    
+    public String getName() {
+        return name;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getExperiencePoints() {
+        return experiencePoints;
+    }
+
+    public void setExperiencePoints(int experiencePoints) {
+        this.experiencePoints = experiencePoints;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String toString() {
+        return name + " (Level " + level + ") with " + health + " HP and " + experiencePoints + " XP";
+    }
+    
 }
