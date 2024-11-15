@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class Team {
+public class Team implements Duplicable<Team>{
 
     private final String name;
     private List<GameCharacter> players;
@@ -22,6 +22,15 @@ public class Team {
             }
         }
         return null;
+    }
+
+    //Helper : Duplicate Constructor
+    public Team(Team team) {
+        this.name = team.name;
+        this.players = new ArrayList<>();
+        for (GameCharacter gameCharacter : team.players) {
+            this.players.add(gameCharacter.duplicate());
+        }
     }
 
 
@@ -52,6 +61,9 @@ public class Team {
         }
 
         public List<GameCharacter> getPlayers(){
+            if (this.players == null) {
+                return new ArrayList<GameCharacter>();
+            }
             return this.players;
         }
 
@@ -59,64 +71,14 @@ public class Team {
             return name;
         }
 
-        public Team build(){
-            return new Team(this);
-        }
+        public Team build(){ return new Team(this); }
+    }
+
+    @Override
+    public Team duplicate() {
+        return new Team(this);
     }
 
 
-
-
-
-    public Team(String name) {
-        this.name = name;
-        players=new ArrayList<GameCharacter>();
-    }
-
-    public Team(List<GameCharacter> players) {
-        this.name = "default";
-        this.players=players;
-
-    }
-
-
-    
-    public Collection<GameCharacter> getPlayers() {
-        return players;
-    }
-    public void addPlayer(GameCharacter player) {
-        players.add(player);
-    }
-
-    public void removePlayer(GameCharacter player) {
-        players.remove(player);
-    }
-
-    public void removePlayer(String name) {
-        for (GameCharacter player : players) {
-            if (player.getName().equals(name)) {
-                players.remove(player);
-                return;
-            }
-        }
-    }
-
-
-
-    public boolean containsPlayer(String name) {
-        for (GameCharacter player : players) {
-            if (player.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean containsPlayer(GameCharacter player) {
-        return players.contains(player);
-    }
-
-    public int size() {
-        return players.size();
-    }
 }
+            

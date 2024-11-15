@@ -13,10 +13,18 @@ public class Warrior extends GameCharacter {
     public int getStrength() {
         return strength;
     }
-    
+
     public void setStrength(int strength) {
         this.strength = strength;
     }
-    
-    
+
+    @Override
+    public Warrior duplicate() {
+        Warrior clonedWarrior = (Warrior) super.duplicate();
+        clonedWarrior.strength = this.strength;
+        return clonedWarrior;
+
+    }
+
+
 }

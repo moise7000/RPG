@@ -2,7 +2,7 @@ package eu.telecomnancy.rpg;
 
 
 
-public abstract class GameCharacter {
+public abstract class GameCharacter implements Duplicable<GameCharacter> {
 
     private final String name;
     private int health;
@@ -16,22 +16,26 @@ public abstract class GameCharacter {
         this.level = 1;
     }
 
-    
-    public String getName() {
-        return name;
+    @Override
+    public GameCharacter duplicate() {
+       try {
+           return (GameCharacter) super.clone();
+
+       } catch(CloneNotSupportedException e) {
+           throw new RuntimeException("GameCharacter could not be copied", e);
+       }
     }
 
-    public int getHealth() {
-        return health;
-    }
+    public String getName() { return name; }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
+    public int getHealth() { return health; }
 
     public int getExperiencePoints() {
         return experiencePoints;
     }
+
+    public void setHealth(int health) { this.health = health; }
+
 
     public void setExperiencePoints(int experiencePoints) {
         this.experiencePoints = experiencePoints;
@@ -40,13 +44,4 @@ public abstract class GameCharacter {
     public int getLevel() {
         return level;
     }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public String toString() {
-        return name + " (Level " + level + ") with " + health + " HP and " + experiencePoints + " XP";
-    }
-    
 }

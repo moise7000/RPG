@@ -19,6 +19,11 @@ public class Wizard extends GameCharacter {
     public void setIntelligence(int intelligence) {
         this.intelligence = intelligence;
     }
-    
-    
+
+    @Override
+    public Wizard duplicate() {
+        Wizard conedWizard = (Wizard) super.duplicate();
+        conedWizard.intelligence = intelligence;
+        return conedWizard;
+    }
 }
