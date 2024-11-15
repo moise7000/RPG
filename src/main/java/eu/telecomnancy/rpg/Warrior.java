@@ -20,7 +20,7 @@ public class Warrior extends GameCharacter {
 
     @Override
     public Warrior duplicate() {
-        Warrior clonedWarrior = (Warrior) super.duplicate();
+        Warrior clonedWarrior = new Warrior(this.getName());
         clonedWarrior.strength = this.strength;
         return clonedWarrior;
 

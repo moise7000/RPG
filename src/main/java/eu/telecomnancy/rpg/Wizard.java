@@ -22,7 +22,7 @@ public class Wizard extends GameCharacter {
 
     @Override
     public Wizard duplicate() {
-        Wizard conedWizard = (Wizard) super.duplicate();
+        Wizard conedWizard = new Wizard(this.getName());
         conedWizard.intelligence = intelligence;
         return conedWizard;
     }

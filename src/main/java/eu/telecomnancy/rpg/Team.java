@@ -15,25 +15,19 @@ public class Team implements Duplicable<Team>{
         return name;
     }
 
-    public GameCharacter getPlayer(String name) {
-        for (GameCharacter player : players) {
-            if (player.getName().equals(name)) {
-                return player;
-            }
-        }
-        return null;
-    }
+    public List<GameCharacter> getPlayers() { return this.players; }
+
+
+
 
     //Helper : Duplicate Constructor
-    public Team(Team team) {
+    private Team(Team team) {
         this.name = team.name;
         this.players = new ArrayList<>();
         for (GameCharacter gameCharacter : team.players) {
             this.players.add(gameCharacter.duplicate());
         }
     }
-
-
 
     //Private constructor to avoid the non use of the builder
     private Team(TeamBuilder builder){
