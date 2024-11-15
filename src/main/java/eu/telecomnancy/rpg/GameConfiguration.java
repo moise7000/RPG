@@ -37,4 +37,20 @@ public class GameConfiguration {
     }
 
 
+    public CharacterCreator getCharacterCreator() {
+        if (this.difficultyLevel == 1) {
+            return new WarriorCreator();
+        } else {
+            return new WizardCreator();
+        }
+    }
+
+
+
+
+    public static void main(String[] args) {
+        GameConfiguration config = new GameConfiguration();
+        config.getCharacterCreator().createCreator("Warrior");
+    }
+
 }

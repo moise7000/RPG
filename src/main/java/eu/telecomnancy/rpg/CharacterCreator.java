@@ -1,5 +1,5 @@
 package eu.telecomnancy.rpg;
 
-interface CharacterCreator {
-    public GameCharacter createCreator();
+public interface CharacterCreator {
+    public GameCharacter createCreator(String name);
 }
