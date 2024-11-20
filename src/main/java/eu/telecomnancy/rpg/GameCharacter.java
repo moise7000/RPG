@@ -18,28 +18,31 @@ public abstract class GameCharacter implements Duplicable<GameCharacter> {
 
     @Override
     public GameCharacter duplicate() {
-       try {
-           return (GameCharacter) super.clone();
+        try {
+            return (GameCharacter) super.clone();
 
-       } catch(CloneNotSupportedException e) {
-           throw new RuntimeException("GameCharacter could not be copied", e);
-       }
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("GameCharacter could not be copied", e);
+        }
     }
 
     public String getName() { return name; }
 
     public int getHealth() { return health; }
 
+    public void setHealth(int health) { this.health = health; }
+
     public int getExperiencePoints() {
         return experiencePoints;
     }
+    
+    public void setExperiencePoints(int experiencePoints) { this.experiencePoints = experiencePoints; }
 
-    public void setHealth(int health) { this.health = health; }
-
-
-    public void setExperiencePoints(int experiencePoints) {
-        this.experiencePoints = experiencePoints;
+    public int getLevel() {
+        return level;
     }
 
-    public int getLevel() { return level; }
+    public void setLevel(int level) {
+        this.level = level;
+    }
 }
