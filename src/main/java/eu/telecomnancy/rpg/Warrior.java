@@ -7,7 +7,7 @@ public class Warrior extends GameCharacter {
 
     public Warrior(String name) {
         super(name);
-        strength = getLevel() * 10+new Random().nextInt(10);
+        strength = getLevel() * 10 + new Random().nextInt(10);
     }
 
     public int getStrength() {
@@ -22,6 +22,8 @@ public class Warrior extends GameCharacter {
     public Warrior duplicate() {
         Warrior clonedWarrior = new Warrior(this.getName());
         clonedWarrior.strength = this.strength;
+        clonedWarrior.setHealth(this.getHealth());
+        clonedWarrior.setExperiencePoints(this.getExperiencePoints());
         return clonedWarrior;
 
     }

@@ -12,6 +12,8 @@ public class Wizard extends GameCharacter {
         intelligence = getLevel() * 10+new Random().nextInt(10);
     }
 
+
+
     public int getIntelligence() {
         return intelligence;
     }
@@ -22,8 +24,11 @@ public class Wizard extends GameCharacter {
 
     @Override
     public Wizard duplicate() {
-        Wizard conedWizard = new Wizard(this.getName());
-        conedWizard.intelligence = intelligence;
-        return conedWizard;
+        Wizard clonedWizard = new Wizard(this.getName());
+        clonedWizard.intelligence = intelligence;
+        clonedWizard.setHealth(this.getHealth());
+        clonedWizard.setExperiencePoints(this.getExperiencePoints());
+
+        return clonedWizard;
     }
 }
