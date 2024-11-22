@@ -5,7 +5,7 @@ public class WizardCreator implements CharacterCreator {
 
 
     @Override
-    public GameCharacter createCreator(String name) {
+    public GameCharacter create(String name) {
         return new Wizard(name);
     }
 }

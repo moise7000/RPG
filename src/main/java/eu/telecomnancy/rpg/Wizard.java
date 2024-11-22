@@ -12,15 +12,21 @@ public class Wizard extends GameCharacter {
         intelligence = getLevel() * 10+new Random().nextInt(10);
     }
 
-
-
-    public int getIntelligence() {
-        return intelligence;
-    }
-
-    public void setIntelligence(int intelligence) {
+    public Wizard(String name, int intelligence) {
+        super(name);
         this.intelligence = intelligence;
     }
+
+    public Wizard(Wizard wizard) {
+        super(wizard.getName());
+        this.intelligence = wizard.getIntelligence();
+    }
+
+
+
+    public int getIntelligence() {return intelligence;}
+
+    public void setIntelligence(int intelligence) {this.intelligence = intelligence;}
 
     @Override
     public Wizard duplicate() {

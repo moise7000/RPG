@@ -21,6 +21,7 @@ public class Warrior extends GameCharacter {
     @Override
     public Warrior duplicate() {
         Warrior clonedWarrior = new Warrior(this.getName());
+
         clonedWarrior.strength = this.strength;
         clonedWarrior.setHealth(this.getHealth());
         clonedWarrior.setExperiencePoints(this.getExperiencePoints());

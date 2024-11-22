@@ -30,6 +30,12 @@ public class CharacterTest {
     }
 
     @Test
+    void testGetExperiencePoints() {
+        Warrior warrior = new Warrior("Hercules");
+        assertEquals(0, warrior.getExperiencePoints());
+    }
+
+    @Test
     void testSetExperiencePoint() {
         Warrior warrior = new Warrior("Hercules");
         warrior.setExperiencePoints(10);
