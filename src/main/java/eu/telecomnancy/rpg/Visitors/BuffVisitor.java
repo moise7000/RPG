@@ -1,12 +1,11 @@
-package eu.telecomnancy.rpg;
+package eu.telecomnancy.rpg.Visitors;
+
+import eu.telecomnancy.rpg.Warrior;
+import eu.telecomnancy.rpg.Wizard;
 
 public class BuffVisitor implements CharacterVisitor {
 
-    @Override
-    public void visit(Character character) {
 
-
-    }
 
     @Override
     public void visit(Warrior warrior){

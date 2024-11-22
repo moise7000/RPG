@@ -1,7 +1,10 @@
-package eu.telecomnancy.rpg;
+package eu.telecomnancy.rpg.Visitors;
+
+import eu.telecomnancy.rpg.Warrior;
+import eu.telecomnancy.rpg.Wizard;
 
 public interface CharacterVisitor {
-    void visit(Character character);
+
 
     void visit(Warrior warrior);
     void visit(Wizard wizard);
