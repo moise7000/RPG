@@ -1,11 +1,12 @@
 package eu.telecomnancy.rpg.Visitors;
 
 import eu.telecomnancy.rpg.CharacterVisitor;
+import eu.telecomnancy.rpg.GameConfiguration;
 import eu.telecomnancy.rpg.Warrior;
 import eu.telecomnancy.rpg.Wizard;
 
 public class BuffVisitor implements CharacterVisitor {
-
+    private final GameConfiguration config = GameConfiguration.getShared();
 
 
     @Override
@@ -18,10 +19,10 @@ public class BuffVisitor implements CharacterVisitor {
         int currentExperiencePoints = warrior.getExperiencePoints();
 
         //Action
-        int levelBuff = currentLevel + 1;
-        int healthBuff = currentHealth + 10;
-        int strengthBuff = currentStrength + 10;
-        int experiencePointsBuff = currentExperiencePoints + 20;
+        int levelBuff = currentLevel + config.getLevelBuff();
+        int healthBuff = currentHealth + config.getWarriorHealthBuff();
+        int strengthBuff = currentStrength + config.getWarriorStrengthBuff();
+        int experiencePointsBuff = currentExperiencePoints + config.getWarriorXpBuff();
 
         //Set
         warrior.setLevel(levelBuff);
@@ -46,10 +47,10 @@ public class BuffVisitor implements CharacterVisitor {
         int currentExperiencePoints = wizard.getExperiencePoints();
 
         //Action
-        int levelBuff = currentLevel + 1;
-        int healthBuff = currentHealth + 50;
-        int intelligenceBuff = currentIntelligence + 30;
-        int experiencePointsBuff = currentExperiencePoints + 50;
+        int levelBuff = currentLevel + config.getLevelBuff();
+        int healthBuff = currentHealth + config.getWizardHealthBuff();
+        int intelligenceBuff = currentIntelligence + config.getWizardIntelligenceBuff();
+        int experiencePointsBuff = currentExperiencePoints + config.getWizardXpBuff();
 
         //Set
         wizard.setLevel(levelBuff);
@@ -58,14 +59,6 @@ public class BuffVisitor implements CharacterVisitor {
         wizard.setExperiencePoints(experiencePointsBuff);
 
 
-
-
-
-
-
     }
-
-
-
-
+    
 }

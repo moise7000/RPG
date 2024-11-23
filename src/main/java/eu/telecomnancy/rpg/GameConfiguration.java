@@ -159,7 +159,7 @@ public class GameConfiguration {
     //BuffVisitor getters
     public int getWarriorHealthBuff() {return VisitorStats.BuffStats.WARRIOR_HEALTH_BUFF * difficultyLevel;}
 
-    public int getWarriorStrength() {return VisitorStats.BuffStats.WARRIOR_STRENGTH_BUFF * difficultyLevel;}
+    public int getWarriorStrengthBuff() {return VisitorStats.BuffStats.WARRIOR_STRENGTH_BUFF * difficultyLevel;}
 
     public int getWarriorXpBuff() {return VisitorStats.BuffStats.WARRIOR_XP_BUFF * difficultyLevel;}
 
