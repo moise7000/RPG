@@ -113,6 +113,7 @@ public class GameConfiguration {
     public void setMaxTeamSize(int maxTeamSize) {this.maxTeamSize = maxTeamSize;}
 
 
+
     public CharacterCreator getCharacterCreator() {
         if (this.difficultyLevel == 1) {
             return new WarriorCreator();

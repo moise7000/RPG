@@ -1,15 +1,14 @@
 package eu.telecomnancy.rpg;
 
-import java.util.Random;
-
-
 public class Wizard extends GameCharacter {
 
     private int intelligence;
 
     public Wizard(String name) {
         super(name);
-        intelligence = getLevel() * 10+new Random().nextInt(10);
+        GameConfiguration config = GameConfiguration.getShared();
+        setHealth(config.getWizardHealthForLevel(getLevel()));
+        intelligence = config.getWizardIntelligenceForLevel(getLevel());
     }
 
     public Wizard(String name, int intelligence) {
@@ -27,6 +26,15 @@ public class Wizard extends GameCharacter {
     public int getIntelligence() {return intelligence;}
 
     public void setIntelligence(int intelligence) {this.intelligence = intelligence;}
+
+    @Override
+    public void levelUp() {
+        super.setLevel(getLevel() + 1);
+        GameConfiguration config = GameConfiguration.getShared();
+        setIntelligence(config.getWizardIntelligenceForLevel(getLevel()));
+        setHealth(config.getWizardHealthForLevel(getLevel()));
+
+    }
 
     @Override
     public Wizard duplicate() {

@@ -36,6 +36,8 @@ public abstract class GameCharacter implements Duplicable<GameCharacter> {
         }
     }
 
+    public abstract void levelUp();
+
     @Override
     public GameCharacter duplicate() {
         try {

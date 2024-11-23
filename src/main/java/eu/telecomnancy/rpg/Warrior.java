@@ -18,7 +18,7 @@ public class Warrior extends GameCharacter {
 
     public void setStrength(int strength) {this.strength = strength;}
 
-    
+    @Override
     public void levelUp() {
         super.setLevel(getLevel() + 1);
         GameConfiguration config = GameConfiguration.getShared();
