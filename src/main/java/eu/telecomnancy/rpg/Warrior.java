@@ -29,5 +29,8 @@ public class Warrior extends GameCharacter {
 
     }
 
+    @Override
+    public void accept(CharacterVisitor visitor) {visitor.visit(this);}
+
 
 }

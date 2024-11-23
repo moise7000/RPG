@@ -37,4 +37,7 @@ public class Wizard extends GameCharacter {
 
         return clonedWizard;
     }
+
+    @Override
+    public void accept(CharacterVisitor visitor) {visitor.visit(this);}
 }

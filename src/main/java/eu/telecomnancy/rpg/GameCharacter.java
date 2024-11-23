@@ -1,7 +1,6 @@
 package eu.telecomnancy.rpg;
 
 
-
 public abstract class GameCharacter implements Duplicable<GameCharacter> {
 
     private final String name;
@@ -45,4 +44,6 @@ public abstract class GameCharacter implements Duplicable<GameCharacter> {
     public void setLevel(int level) {
         this.level = level;
     }
+
+    public abstract void accept(CharacterVisitor visitor);
 }

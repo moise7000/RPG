@@ -50,7 +50,7 @@ public class GameConfiguration {
 
     public static void main(String[] args) {
         GameConfiguration config = new GameConfiguration();
-        config.getCharacterCreator().createCreator("Warrior");
+        config.getCharacterCreator().create("Warrior");
     }
 
 }

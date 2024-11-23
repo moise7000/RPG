@@ -1,9 +1,10 @@
 package eu.telecomnancy.rpg.Visitors;
 
+import eu.telecomnancy.rpg.CharacterVisitor;
 import eu.telecomnancy.rpg.Warrior;
 import eu.telecomnancy.rpg.Wizard;
 
-public class DamageVisitor implements CharacterVisitor{
+public class DamageVisitor implements CharacterVisitor {
     @Override
     public void visit(Warrior warrior){
         //Values before visiting
