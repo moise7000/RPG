@@ -1,17 +1,18 @@
 package eu.telecomnancy.rpg.Strategy;
 
+import eu.telecomnancy.rpg.GameConfiguration;
+
 public class AggressiveStrategy implements CombatStrategy {
-    private static final double DAMAGE_MULTIPLIER = 1.5;
-    private static final double DEFENSE_MULTIPLIER = 1.3;
+    private final GameConfiguration config = GameConfiguration.getShared();
 
     @Override
     public int calculateDamageDealt(int baseDamage){
-        return (int) (baseDamage * DAMAGE_MULTIPLIER);
+        return (int) (baseDamage * config.getAggressiveDamageMultiplier());
     }
 
     @Override
     public int calculateDamageReceived(int incomingDamage) {
-        return (int) (incomingDamage * DEFENSE_MULTIPLIER);
+        return (int) (incomingDamage * config.getAggressiveDamageMultiplier());
     }
 
 
