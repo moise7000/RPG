@@ -1,62 +1,76 @@
 package eu.telecomnancy.rpg;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import org.junit.Before;
+import org.junit.Test;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CharacterTest {
-    @Test
-    void testCreateCharacter() {
-        Warrior warrior = new Warrior("test");
-        assertEquals(0, warrior.getHealth());
-        
-    }
+    private Warrior warrior;
+    private Wizard wizard;
 
+    @Before
+    public void setUp() {
 
-    @Test
-    void testGetName() {
-        Warrior warrior = new Warrior("Hercules");
-        assertEquals("Hercules", warrior.getName());
-    }
+        CharacterCreator warriorCreator = new WarriorCreator();
+        CharacterCreator wizardCreator = new WizardCreator();
 
+        warrior = (Warrior) warriorCreator.create("Hercules");
+        wizard = (Wizard) wizardCreator.create("Gandalf");
 
-    @Test
-    void testSetHealth() {
-        Warrior warrior = new Warrior("Hercules");
-        warrior.setHealth(10);
-        assertEquals(10, warrior.getHealth());
 
     }
 
     @Test
-    void testGetExperiencePoints() {
-        Warrior warrior = new Warrior("Hercules");
-        assertEquals(0, warrior.getExperiencePoints());
+    public void testCreateWarriorCharacter() {assertNotEquals(warrior, null);}
+
+    @Test
+    public void testCreateWizardCharacter() {assertNotEquals(wizard, null);}
+
+
+    @Test
+    public void testGetWarriorName() {assertEquals("Hercules", warrior.getName());}
+
+    @Test
+    public void testGetWizardName() {assertEquals("Gandalf", wizard.getName());}
+
+
+    @Test
+    public void testSetWarriorHealth() {
+        int initialHealth = warrior.getHealth();
+        warrior.setHealth(initialHealth + 10);
+        assertNotEquals(initialHealth, warrior.getHealth());
+        assertEquals(110, warrior.getHealth());
+
     }
 
     @Test
-    void testSetExperiencePoint() {
-        Warrior warrior = new Warrior("Hercules");
-        warrior.setExperiencePoints(10);
-        assertEquals(10, warrior.getExperiencePoints());
+    public void testSetWizardHealth() {
+        int initialHealth = wizard.getHealth();
+        wizard.setHealth(initialHealth + 10);
+        assertNotEquals(initialHealth, wizard.getHealth());
+        assertEquals(90, wizard.getHealth());
+
     }
 
-    @Test
-    void testGetLevel() {
-        Warrior warrior = new Warrior("Hercules");
-        assertEquals(1, warrior.getLevel());
-    }
+
 
     @Test
-    void testSetLevel() {
-        Warrior warrior = new Warrior("Hercules");
+    public void testGetWarriorLevel() {assertEquals(1, warrior.getLevel());}
 
-        assertEquals(1, warrior.getLevel());
+    @Test
+    public void testGetWizardLevel() {assertEquals(1, wizard.getLevel());}
 
+    @Test
+    public void testSetWarriorLevel() {
         warrior.setLevel(2);
-
         assertEquals(2, warrior.getLevel());
+    }
+
+    @Test
+    public void testSetWizardLevel() {
+        warrior.setLevel(3);
+        assertEquals(3, warrior.getLevel());
     }
 
     
