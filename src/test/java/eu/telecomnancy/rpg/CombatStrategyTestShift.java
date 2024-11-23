@@ -4,7 +4,7 @@ import eu.telecomnancy.rpg.Strategy.*;
 import org.testng.annotations.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CombatStrategyTest {
+public class CombatStrategyTestShift {
 
     @Test
     public void testStrategyChanges() {
@@ -42,23 +42,5 @@ public class CombatStrategyTest {
     }
 
 
-    @Test
-    public void testAggressiveStrategy() {
-        // Character Creation
-        Warrior warrior = new Warrior("Conan");
-        Wizard wizard = new Wizard("Gandalf");
 
-        // Initial configuration
-        warrior.setHealth(100);
-        wizard.setHealth(100);
-
-        int baseWarriorDamage = 20;
-        int baseWizardDamage = 20;
-
-        warrior.setCombatStrategy(new AggressiveStrategy());
-
-        
-
-
-    }
 }
