@@ -42,6 +42,9 @@ public class GameConfiguration {
     }
 
 
+
+
+
     private GameConfiguration() {
         this.difficultyLevel = 1;
         this.maxTeamSize = 4;
@@ -121,6 +124,62 @@ public class GameConfiguration {
             return new WizardCreator();
         }
     }
+
+
+    private static final class VisitorStats {
+        //BuffVisitor stats
+        private static final class BuffStats {
+            //Warrior buffs
+            static final int WARRIOR_HEALTH_BUFF = 10;
+            static final int WARRIOR_STRENGTH_BUFF = 10;
+            static final int WARRIOR_XP_BUFF = 20;
+
+            //Wizard buffs
+            static final int WIZARD_HEALTH_BUFF = 50;
+            static final int WIZARD_INTELLIGENCE_BUFF = 30;
+            static final int WIZARD_XP_BUFF = 50;
+
+            static final int LEVEL_BUFF = 1;
+        }
+
+
+        //HealVisitor stats
+        private static final class HealStats {
+            static final int WARRIOR_HEAL_AMOUNT = 5;
+            static final int WIZARD_HEAL_AMOUT = 10;
+        }
+
+        //DamageVisitor stats
+        static final class DamageStats {
+            static final int BASE_DAMAGE_AMOUNT = 5;
+        }
+
+    }
+
+    //BuffVisitor getters
+    public int getWarriorHealthBuff() {return VisitorStats.BuffStats.WARRIOR_HEALTH_BUFF * difficultyLevel;}
+
+    public int getWarriorStrength() {return VisitorStats.BuffStats.WARRIOR_STRENGTH_BUFF * difficultyLevel;}
+
+    public int getWarriorXpBuff() {return VisitorStats.BuffStats.WARRIOR_XP_BUFF * difficultyLevel;}
+
+    public int getWizardHealthBuff() {return VisitorStats.BuffStats.WIZARD_HEALTH_BUFF * difficultyLevel;}
+
+    public int getWizardIntelligenceBuff() {return VisitorStats.BuffStats.WIZARD_INTELLIGENCE_BUFF * difficultyLevel;}
+
+    public int getWizardXpBuff() {return VisitorStats.BuffStats.WIZARD_XP_BUFF * difficultyLevel;}
+
+    public int getLevelBuff() {return VisitorStats.BuffStats.LEVEL_BUFF;}
+
+
+    //HealVisitor getters
+    public int getWarriorHealAmount() {return VisitorStats.HealStats.WARRIOR_HEAL_AMOUNT * difficultyLevel;}
+
+    public int getWizardHealAmount() {return VisitorStats.HealStats.WIZARD_HEAL_AMOUT * difficultyLevel;}
+
+
+    //DamageVisitor getters
+    public int getBaseDamageAmount() {return VisitorStats.DamageStats.BASE_DAMAGE_AMOUNT * difficultyLevel;}
 
 
 
