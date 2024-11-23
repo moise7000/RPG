@@ -1,6 +1,6 @@
 package eu.telecomnancy.rpg.Strategy;
 
-public class AgressiveStrategy implements CombatStrategy {
+public class AggressiveStrategy implements CombatStrategy {
     private static final double DAMAGE_MULTIPLIER = 1.5;
     private static final double DEFENSE_MULTIPLIER = 1.3;
 
