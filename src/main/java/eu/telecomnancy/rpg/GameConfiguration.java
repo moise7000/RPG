@@ -183,6 +183,33 @@ public class GameConfiguration {
 
 
 
+    private static final class DecoratorStats {
+        static final class ArmorStats {
+            static final double BASE_DAMAGE_REDUCTION = 0.25;
+            static final double DAMAGE_REDUCTION_PER_LEVEL = 0.05;
+        }
+
+        static final class InvincibilityStats {
+            static final int BASE_MINIMUM_HEALTH = 10;
+            static final int MINIMUM_HEALTH_PER_LEVEL = 5;
+        }
+    }
+
+    //ArmorDecorator getters
+    public double getArmorDamageReduction(int level) {
+        double reduction  = DecoratorStats.ArmorStats.BASE_DAMAGE_REDUCTION +
+                (DecoratorStats.ArmorStats.DAMAGE_REDUCTION_PER_LEVEL * (level - 1));
+        //Limit the reduction to 90% maximum
+        return Math.min(0.9, reduction * difficultyLevel);
+    }
+
+
+    //InvincibilityDecorator getters
+    public int getMinimumHealth(int level) {
+        return (DecoratorStats.InvincibilityStats.BASE_MINIMUM_HEALTH +
+                (DecoratorStats.InvincibilityStats.MINIMUM_HEALTH_PER_LEVEL * (level - 1))) * difficultyLevel;
+    }
+
 
     public static void main(String[] args) {
         GameConfiguration config = new GameConfiguration();
