@@ -10,8 +10,8 @@ public class AgressiveStrategy implements CombatStrategy {
     }
 
     @Override
-    public int calculateDamageReceived(int inCommingDamage) {
-        return (int) (inCommingDamage * DEFENSE_MULTIPLIER);
+    public int calculateDamageReceived(int incomingDamage) {
+        return (int) (incomingDamage * DEFENSE_MULTIPLIER);
     }
 
 
