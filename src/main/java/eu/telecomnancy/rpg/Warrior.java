@@ -7,15 +7,23 @@ public class Warrior extends GameCharacter {
 
     public Warrior(String name) {
         super(name);
-        strength = getLevel() * 10 + new Random().nextInt(10);
+        GameConfiguration config = GameConfiguration.getShared();
+        setHealth(config.getWarriorHealthForLevel(getLevel()));
+        strength = config.getWarriorStrengthForLevel(getLevel());
     }
 
     public int getStrength() {
         return strength;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
+    public void setStrength(int strength) {this.strength = strength;}
+
+    
+    public void levelUp() {
+        super.setLevel(getLevel() + 1);
+        GameConfiguration config = GameConfiguration.getShared();
+        setHealth(config.getWarriorHealthForLevel(getLevel()));
+        strength = config.getWarriorStrengthForLevel(getLevel());
     }
 
     @Override

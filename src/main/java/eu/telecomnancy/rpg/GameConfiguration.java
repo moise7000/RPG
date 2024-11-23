@@ -64,6 +64,10 @@ public class GameConfiguration {
         return getWarriorBaseHealth() + (WarriorStats.HEALTH_PER_LEVEL * (level - 1));
     }
 
+    public int getWarriorStrengthForLevel(int level) {
+        return getWarriorBaseStrength() + (WarriorStats.STRENGTH_PER_LEVEL * (level - 1));
+    }
+
     public int getWizardBaseHealth() {return WizardStats.BASE_HEALTH * difficultyLevel;}
 
     public int getWizardBaseIntelligence() {return WizardStats.BASE_INTELLIGENCE * difficultyLevel;}
