@@ -76,7 +76,7 @@ public class GameFacade {
 
     public void invincibilityToCharacter(String teamName, int characterIndex) {
         GameCharacter character = getCharacterFromTeam(teamName, characterIndex);
-        teams.get(teamName).set(characterIndex, new InvincibleDecorator(character);
+        teams.get(teamName).set(characterIndex, new InvincibleDecorator(character));
     }
 
     private void validateTeam(String teamName) {
