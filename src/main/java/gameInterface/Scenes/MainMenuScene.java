@@ -25,6 +25,7 @@ public class MainMenuScene {
         // Actions des boutons
         creditsButton.setOnAction(e -> mainApp.setSceneContent(CreditsScene.create(mainApp, config)));
         settingsButton.setOnAction(e -> mainApp.setSceneContent(SettingsScene.create(mainApp, config)));
+        playButton.setOnAction(e -> mainApp.setSceneContent(CharacterSelectionScene.create(mainApp, config)));
 
         return menu;
     }
