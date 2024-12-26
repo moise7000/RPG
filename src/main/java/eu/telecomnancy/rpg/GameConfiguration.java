@@ -45,6 +45,8 @@ public class GameConfiguration {
 
 
 
+
+
     private GameConfiguration() {
         this.difficultyLevel = 1;
         this.maxTeamSize = 4;
@@ -91,8 +93,6 @@ public class GameConfiguration {
 
     public double getDefensiveDefenseMultiplier() {return CombatMultipliers.DEFENSIVE_DEFENSE_MULTIPLIER;}
 
-
-
     public int getBaseXpGain() {return ProgressionStats.BAS_XP_GAIN;}
 
     public int getXpPerLevel() {return ProgressionStats.XP_PER_LEVEL;}
@@ -102,10 +102,6 @@ public class GameConfiguration {
     public int getXpRequiredForLevel(int level) {
         return ProgressionStats.BAS_XP_GAIN + (ProgressionStats.XP_PER_LEVEL * (level - 1));
     }
-
-
-
-
 
     public int getDifficultyLevel() {return this.difficultyLevel;}
 

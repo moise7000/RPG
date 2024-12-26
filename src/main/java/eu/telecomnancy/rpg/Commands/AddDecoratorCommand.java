@@ -24,7 +24,7 @@ public class AddDecoratorCommand implements Command {
                 game.addArmorToCharacter(teamName, characterIndex);
                 break;
             case INVINCIBLE:
-                game.addInvincibilityToCharacter(teamName, characterIndex);
+                //game.addInvincibilityToCharacter(teamName, characterIndex);
                 break;
 
         }
