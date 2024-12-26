@@ -16,7 +16,7 @@ public class CharacterSelectionScene {
 
         // Title
         Text title = new Text("Select Your Character");
-        title.setStyle("-fx-font-family: 'GothicPixels'; -fx-font-size: 32px; -fx-fill: white;");
+        title.setStyle("-fx-font-family: " + config.getFontName() + "; -fx-font-size: " + config.getFontSize() + "px; -fx-fill: white;");
 
         // Character preview container
         HBox characterContainer = new HBox(50);
@@ -25,19 +25,31 @@ public class CharacterSelectionScene {
         // Create character previews with all animations
         CharacterAnimation wizard = createWizardCharacter(config);
         CharacterAnimation evilWizard = createEvilWizardCharacter(config);
+        CharacterAnimation heroKnight = createHeroKnightCharacter(config);
+        CharacterAnimation martialHero = createMartialHeroCharacter(config);
 
         // Selection buttons
-        Button selectWizard = new Button("Select Wizard");
-        Button selectEvilWizard = new Button("Select Evil Wizard");
+        Button selectWizard = new Button("Wizard");
+        Button selectEvilWizard = new Button("Evil Wizard");
+        Button selectHeroKnight = new Button("Hero Knight");
+        Button selectMartialHero = new Button("Martial Hero");
 
         selectWizard.setStyle(config.getButtonStyle());
         selectEvilWizard.setStyle(config.getButtonStyle());
+        selectHeroKnight.setStyle(config.getButtonStyle());
+        selectMartialHero.setStyle(config.getButtonStyle());
 
         // Add preview animations to container
         characterContainer.getChildren().addAll(
                 createCharacterPreviewBox(wizard, selectWizard),
-                createCharacterPreviewBox(evilWizard, selectEvilWizard)
+                createCharacterPreviewBox(evilWizard, selectEvilWizard),
+                createCharacterPreviewBox(heroKnight, selectHeroKnight),
+                createCharacterPreviewBox(martialHero, selectMartialHero)
         );
+
+
+        selectWizard.setOnAction(e -> startGame(mainApp, config, wizard));
+        selectEvilWizard.setOnAction(e -> startGame(mainApp, config, evilWizard));
 
         root.getChildren().addAll(title, characterContainer);
         return root;
@@ -58,6 +70,14 @@ public class CharacterSelectionScene {
 
         character.setState(CharacterAnimation.CharacterState.IDLE);
         return character;
+    }
+
+    private static CharacterAnimation createHeroKnightCharacter(InterfaceConfiguration config) {
+        return config.getHeroKnightIdleAnimation();
+    }
+
+    private static CharacterAnimation createMartialHeroCharacter(InterfaceConfiguration config) {
+        return config.getMartialHeroIdleAnimation();
     }
 
     private static CharacterAnimation createEvilWizardCharacter(InterfaceConfiguration config) {
@@ -87,5 +107,11 @@ public class CharacterSelectionScene {
 
         previewBox.getChildren().addAll(character.getSpriteView(), selectButton);
         return previewBox;
+    }
+
+
+    private static void startGame(Main mainApp, InterfaceConfiguration config, CharacterAnimation selectedCharacter) {
+        // Create and transition to game scene with selected character
+        mainApp.setSceneContent(GameScene.create(mainApp, config));
     }
 }

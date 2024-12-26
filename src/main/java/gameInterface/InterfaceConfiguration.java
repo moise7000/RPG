@@ -15,6 +15,7 @@ public class InterfaceConfiguration {
 
 
 
+
     private static final class Window {
         static final String WINDOW_TITLE = "RPG";
         static final int WINDOW_WIDTH = 620;
@@ -25,7 +26,7 @@ public class InterfaceConfiguration {
         static final int WINDOW_BORDER_HEIGHT = 10;
         static final int WINDOW_BORDER_COLOR = 0x000000;
         static final int WINDOW_BACKGROUND_COLOR = 0xFFFFFF;
-        static final int WINDOW_FONT_SIZE = 16;
+        static final int WINDOW_FONT_SIZE = 30;
     }
 
     private static final class UserInterfaceConfiguration {
@@ -46,6 +47,7 @@ public class InterfaceConfiguration {
     }
 
     public double getZoom() {return ZOOM;}
+
 
     public String getWindowTitle() {return Window.WINDOW_TITLE;}
     public String getPlayButtonLabel() {return UserInterfaceConfiguration.PLAY;}
@@ -101,16 +103,7 @@ public class InterfaceConfiguration {
 
 
 
-    private static final class CreditsConfiguration {
-        static final String CREDITS_TEXT = "RPG by Ewan Decima";
-        static final String CREDITS_LINK = "https://github.com/ewan-decima";
-        static final String FONT = "Font : GothicPixels by LingDong Huang";
 
-        static final String temp = "Crédits\n\nDéveloppement : Ton Nom\nGraphismes : Artiste Nom\nMusique : Compositeur Nom\n";
-    }
-
-
-    public String getCreditsText() {return CreditsConfiguration.CREDITS_TEXT;}
 
 
 
@@ -121,21 +114,36 @@ public class InterfaceConfiguration {
 
 
     private static final class StylesConfiguration {
-        static final String BUTTON_STYLE = "-fx-font-family: 'GothicPixels';" +
+        static final String FONT_PATH = "file:src/assets/fonts/VeniceClassic.ttf";
+        static final String FONT_NAME = "'Venice Classic'";
+        static final int FONT_SIZE = 50;
+        static final String FONT_AUTHOR = "Venice Classic à by soixantedeux.";
+        static final String BUTTON_STYLE = "-fx-font-family:" + FONT_NAME + ";" +
                 "-fx-font-size: 25px;" +
                 "-fx-font-weight: bold;" +
                 "-fx-background-color: #000000;" +
                 "-fx-text-fill: #FFFFFF;";
-
-        static final String FONT_PATH = "file:src/assets/fonts/GothicPixels.ttf";
-
 
     }
 
 
     public String getButtonStyle() {return StylesConfiguration.BUTTON_STYLE;}
     public String getFontPath() {return StylesConfiguration.FONT_PATH;}
+    public String getFontName() {return StylesConfiguration.FONT_NAME;}
+    public int getFontSize() {return StylesConfiguration.FONT_SIZE;}
+    public String getFontAuthor() {return StylesConfiguration.FONT_AUTHOR;}
 
+
+    private static final class CreditsConfiguration {
+        static final String GAME_AUTHOR = "RPG by Ewan Decima";
+
+        static final String FONT = "Font : " + StylesConfiguration.FONT_AUTHOR;
+
+
+    }
+
+
+    public String getCreditsText() {return CreditsConfiguration.GAME_AUTHOR + "\n\n" + CreditsConfiguration.FONT;}
 
 
 
@@ -472,6 +480,24 @@ public class InterfaceConfiguration {
     public int getMartialHeroIdleSpriteWidth() {return CharacterConfiguration.MartialHero.IDLE.SPRITE_WIDTH;}
     public int getMartialHeroIdleSpriteFrameCount() {return CharacterConfiguration.MartialHero.IDLE.FRAME_COUNT;}
 
+    public CharacterAnimation getMartialHeroIdleAnimation() {
+        CharacterAnimation character = new CharacterAnimation();
+
+
+        character.addAnimation(
+                CharacterAnimation.CharacterState.IDLE,
+                getMartialHeroIdleSpritePath(),
+                getMartialHeroIdleSpriteFrameCount(),  // frameCount
+                getMartialHeroFrameWidth(), // frameWidth
+                getMartialHeroFrameHeight(), // frameHeight
+                Duration.millis(100)
+        );
+
+        // Set initial state
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+        return character;
+    }
+
     //MOVE
     public String getMartialHeroMoveSpritePath() {return CharacterConfiguration.MartialHero.MOVE.SPRITE_PATH;}
     public int getMartialHeroMoveSpriteWidth() {return CharacterConfiguration.MartialHero.MOVE.SPRITE_WIDTH;}
@@ -494,6 +520,14 @@ public class InterfaceConfiguration {
 
 
 
+
+    private static final class GamePlayConfiguration {
+        static final String ATTACK = "Attack";
+        static final String RECRUIT = "Recruit";
+    }
+
+    public String getAttackButtonLabel() {return GamePlayConfiguration.ATTACK;}
+    public String getRecruitButtonLabel() {return GamePlayConfiguration.RECRUIT;}
 
 
 

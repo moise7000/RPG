@@ -24,6 +24,8 @@ public class CharacterAnimation {
     public CharacterAnimation() {
         this.spriteView = new ImageView();
         this.currentState = CharacterState.IDLE;
+        //spriteView.setSmooth(false);
+        spriteView.setStyle("-fx-interpolation-hint: nearest-neighbor");
     }
 
     public void addAnimation(CharacterState state, String spriteSheetPath, int frameCount, int frameWidth, int frameHeight, Duration frameDuration) {
