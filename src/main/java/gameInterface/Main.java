@@ -8,14 +8,17 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
-import java.util.Objects;
+
 
 
 public class Main extends Application {
     private final InterfaceConfiguration config = InterfaceConfiguration.getShared();
     private StackPane root;
     private ParallaxBackground parallaxBackground;
+    private MediaPlayer mediaPlayer;
 
 
 
@@ -23,8 +26,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            String fontPath = getClass().getResource(config.getFontPath()).toExternalForm();
-            Font customFont = Font.loadFont(getClass().getResourceAsStream(config.getFontPath()), 16);
+            //String fontPath = getClass().getResource(config.getFontPath()).toExternalForm();
+            Font customFont = Font.loadFont(getClass().getResourceAsStream(config.getFontPath()), config.getFontSize());
 
             if (customFont == null) {
                 System.err.println("Impossible de charger la police personnalisée");
@@ -35,8 +38,18 @@ public class Main extends Application {
             System.err.println("Erreur lors du chargement de la police: " + e.getMessage());
             e.printStackTrace();
         }
-        System.out.println("Polices disponibles :");
-        Font.getFamilies().forEach(System.out::println);
+
+
+
+        try {
+            String musicPath = getClass().getResource(config.getMusicPath()).toExternalForm();
+            Media media = new Media(musicPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Erreur lors du chargement ou de la lecture de la musique." + e.getMessage());
+        }
 
 
 

@@ -38,7 +38,7 @@ public class InterfaceConfiguration {
         static final String LOAD = "Load";
         static final String SETTINGS = "Settings";
         static final String EXIT = "Exit";
-        static final String BACKGROUND_IMAGE_PATH = "file:src/assets/background/NightForest/NightForestWhitMist.png";
+        static final String BACKGROUND_IMAGE_PATH = "/assets/background/NightForest/NightForestWhitMist.png";
         static final int BACKGROUND_IMAGE_WIDTH = 620;
         static final int BACKGROUND_IMAGE_HEIGHT = 360;
 
@@ -86,12 +86,12 @@ public class InterfaceConfiguration {
 
     private static final class ParallaxConfiguration {
         static final List<String> PARALLAX_LAYERS = Arrays.asList(
-                "file:src/assets/background/NightForest/Layers/1.png",
-                "file:src/assets/background/NightForest/Layers/2.png",
-                "file:src/assets/background/NightForest/Layers/3.png",
-                "file:src/assets/background/NightForest/Layers/4.png",
-                "file:src/assets/background/NightForest/Layers/5.png",
-                "file:src/assets/background/NightForest/Layers/6.png"
+                "/assets/background/NightForest/Layers/1.png",
+                "/assets/background/NightForest/Layers/2.png",
+                "/assets/background/NightForest/Layers/3.png",
+                "/assets/background/NightForest/Layers/4.png",
+                "/assets/background/NightForest/Layers/5.png",
+                "/assets/background/NightForest/Layers/6.png"
         );;
 
         static final List<Double> PARALLAX_SPEEDS = Arrays.asList(0.1, 0.2, 0.3, 0.4, 0.5, 0.6);;
@@ -114,7 +114,7 @@ public class InterfaceConfiguration {
 
 
     private static final class StylesConfiguration {
-        static final String FONT_PATH = "file:src/assets/fonts/VeniceClassic.ttf";
+        static final String FONT_PATH = "/assets/fonts/VeniceClassic.ttf";
         static final String FONT_NAME = "'Venice Classic'";
         static final int FONT_SIZE = 50;
         static final String FONT_AUTHOR = "Venice Classic à by soixantedeux.";
@@ -136,22 +136,33 @@ public class InterfaceConfiguration {
 
     private static final class CreditsConfiguration {
         static final String GAME_AUTHOR = "RPG by Ewan Decima";
-
+        static final String MUSIC_NAME = "Challenge Accepted";
+        static final String MUSIC_PATH = "/assets/music/ChallengeAccepted.mp3";
+        static final String MUSIC_AUTHOR = "Darren Curtis";
         static final String FONT = "Font : " + StylesConfiguration.FONT_AUTHOR;
+        static final String MUSIC = "Music : " + MUSIC_NAME + " by "  + MUSIC_AUTHOR;
 
 
     }
 
+    public String getMusicPath() {return CreditsConfiguration.MUSIC_PATH;}
 
-    public String getCreditsText() {return CreditsConfiguration.GAME_AUTHOR + "\n\n" + CreditsConfiguration.FONT;}
+
+    public String getCreditsText() {
+        return CreditsConfiguration.GAME_AUTHOR +
+                "\n\n" +
+                CreditsConfiguration.FONT +
+                "\n\n" +
+                CreditsConfiguration.MUSIC
+                ;}
 
 
 
     private static final class CharacterConfiguration {
-        static final String WIZARD_PATH = "file:src/assets/characters/Wizard";
-        static final String EVIL_WIZARD_PATH = "file:src/assets/characters/EvilWizard";
-        static final String HERO_KNIGHT_PATH = "file:src/assets/characters/HeroKnight";
-        static final String MARTIAL_HERO_PATH = "file:src/assets/characters/MartialHero";
+        static final String WIZARD_PATH = "/assets/characters/Wizard";
+        static final String EVIL_WIZARD_PATH = "/assets/characters/EvilWizard";
+        static final String HERO_KNIGHT_PATH = "/assets/characters/HeroKnight";
+        static final String MARTIAL_HERO_PATH = "/assets/characters/MartialHero";
 
 
         private static final class Wizard {

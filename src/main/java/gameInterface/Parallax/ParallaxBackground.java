@@ -39,7 +39,7 @@ public class ParallaxBackground extends Pane {
 
         layers.add(layer);
 
-        // Ajouter les deux ImageView de la couche au Pane
+
         getChildren().addAll(layer.getImageViews());
     }
 
