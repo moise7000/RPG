@@ -20,6 +20,7 @@ public class CreditsScene {
         // Bouton de retour
         Button backButton = new Button(config.getExitButtonLabel());
         backButton.setStyle(config.getButtonStyle());
+
         backButton.setOnAction(e -> mainApp.setSceneContent(MainMenuScene.create(mainApp, config)));
 
         creditsLayout.getChildren().addAll(creditsText, backButton);

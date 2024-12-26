@@ -17,6 +17,7 @@ public class MainMenuScene {
         settingsButton.setStyle(config.getButtonStyle());
         creditsButton.setStyle(config.getButtonStyle());
 
+
         VBox menu = new VBox(20, playButton, settingsButton, creditsButton);
         menu.setTranslateY(100);
         menu.setStyle("-fx-alignment: center;");

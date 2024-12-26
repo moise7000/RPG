@@ -101,6 +101,8 @@ public class InterfaceConfiguration {
     private static final class CreditsConfiguration {
         static final String CREDITS_TEXT = "RPG by Ewan Decima";
         static final String CREDITS_LINK = "https://github.com/ewan-decima";
+        static final String FONT = "Font : GothicPixels by LingDong Huang";
+
         static final String temp = "Crédits\n\nDéveloppement : Ton Nom\nGraphismes : Artiste Nom\nMusique : Compositeur Nom\n";
     }
 
@@ -116,11 +118,19 @@ public class InterfaceConfiguration {
 
 
     private static final class StylesConfiguration {
-        static final String BUTTON_STYLE = "-fx-font-size: 16px;" +
-                " -fx-font-weight: bold; -fx-background-color: #000000; -fx-text-fill: #FFFFFF;";
+        static final String BUTTON_STYLE = "-fx-font-family: 'GothicPixels';" +
+                "-fx-font-size: 25px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-background-color: #000000;" +
+                "-fx-text-fill: #FFFFFF;";
+
+        static final String FONT_PATH = "file:src/assets/fonts/GothicPixels.ttf";
+        
+
     }
 
 
     public String getButtonStyle() {return StylesConfiguration.BUTTON_STYLE;}
+    public String getFontPath() {return StylesConfiguration.FONT_PATH;}
 
 }
