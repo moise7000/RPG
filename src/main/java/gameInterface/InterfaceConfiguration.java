@@ -3,6 +3,7 @@ package gameInterface;
 import gameInterface.character.CharacterAnimation;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -163,6 +164,14 @@ public class InterfaceConfiguration {
         static final String EVIL_WIZARD_PATH = "/assets/characters/EvilWizard";
         static final String HERO_KNIGHT_PATH = "/assets/characters/HeroKnight";
         static final String MARTIAL_HERO_PATH = "/assets/characters/MartialHero";
+
+        static final List<CharacterAnimation.CharacterState> STATES = Arrays.asList(
+                CharacterAnimation.CharacterState.IDLE,
+                CharacterAnimation.CharacterState.MOVE,
+                CharacterAnimation.CharacterState.ATTACK,
+                CharacterAnimation.CharacterState.DEATH,
+                CharacterAnimation.CharacterState.HIT
+        );
 
 
         private static final class Wizard {
@@ -330,8 +339,34 @@ public class InterfaceConfiguration {
 
     }
 
+    public List<CharacterAnimation.CharacterState> getCharacterStates() {return CharacterConfiguration.STATES;}
+
 
     //----------------------------------------WIZARD------------------------------------------------------//
+
+    public List<String> getWizardSpritesPaths() {
+        List<String> spritesPaths = new ArrayList<>();
+        spritesPaths.add(getWizardIdleSpritePath());
+        spritesPaths.add(getWizardMoveSpritePath());
+        spritesPaths.add(getWizardAttackSpritePath());
+        spritesPaths.add(getWizardDeathSpritePath());
+        spritesPaths.add(getWizardHitSpritePath());
+
+
+        return spritesPaths;
+    }
+
+    public List<Integer> getWizardFrameCounts() {
+        List<Integer> frameCounts = new ArrayList<>();
+        frameCounts.add(getWizardIdleSpriteFrameCount());
+        frameCounts.add(getWizardMoveSpriteFrameCount());
+        frameCounts.add(getWizardAttackSpriteFrameCount());
+        frameCounts.add(getWizardDeathSpriteFrameCount());
+        frameCounts.add(getWizardHitSpriteFrameCount());
+        return frameCounts;
+    }
+
+
     public int getWizardFrameWidth() {return CharacterConfiguration.Wizard.FRAME_WIDTH;}
     public int getWizardFrameHeight() {return CharacterConfiguration.Wizard.FRAME_HEIGHT;}
 
@@ -339,6 +374,38 @@ public class InterfaceConfiguration {
     public String getWizardIdleSpritePath() {return CharacterConfiguration.Wizard.IDLE.SPRITE_PATH;}
     public int getWizardIdleSpriteWidth() {return CharacterConfiguration.Wizard.IDLE.SPRITE_WIDTH;}
     public int getWizardIdleSpriteFrameCount() {return CharacterConfiguration.Wizard.IDLE.FRAME_COUNT;}
+
+
+
+    //MOVE
+    public String getWizardMoveSpritePath() {return CharacterConfiguration.Wizard.MOVE.SPRITE_PATH;}
+    public int getWizardMoveSpriteWidth() {return CharacterConfiguration.Wizard.MOVE.SPRITE_WIDTH;}
+    public int getWizardMoveSpriteFrameCount() {return CharacterConfiguration.Wizard.MOVE.FRAME_COUNT;}
+
+
+
+
+    //ATTACK
+    public String getWizardAttackSpritePath() {return CharacterConfiguration.Wizard.ATTACK.SPRITE_PATH;}
+    public int getWizardAttackSpriteWidth() {return CharacterConfiguration.Wizard.ATTACK.SPRITE_WIDTH;}
+    public int getWizardAttackSpriteFrameCount() {return CharacterConfiguration.Wizard.ATTACK.FRAME_COUNT;}
+
+
+
+
+    //DEATH
+    public String getWizardDeathSpritePath() {return CharacterConfiguration.Wizard.DEATH.SPRITE_PATH;}
+    public int getWizardDeathSpriteWidth() {return CharacterConfiguration.Wizard.DEATH.SPRITE_WIDTH;}
+    public int getWizardDeathSpriteFrameCount() {return CharacterConfiguration.Wizard.DEATH.FRAME_COUNT;}
+
+
+
+
+
+    //HIT
+    public String getWizardHitSpritePath() {return CharacterConfiguration.Wizard.HIT.SPRITE_PATH;}
+    public int getWizardHitSpriteWidth() {return CharacterConfiguration.Wizard.HIT.SPRITE_WIDTH;}
+    public int getWizardHitSpriteFrameCount() {return CharacterConfiguration.Wizard.HIT.FRAME_COUNT;}
 
     public CharacterAnimation getWizardIdleAnimation() {
         CharacterAnimation character = new CharacterAnimation();
@@ -357,28 +424,89 @@ public class InterfaceConfiguration {
         character.setState(CharacterAnimation.CharacterState.IDLE);
         return character;
     }
-
-    //MOVE
-    public String getWizardMoveSpritePath() {return CharacterConfiguration.Wizard.MOVE.SPRITE_PATH;}
-    public int getWizardMoveSpriteWidth() {return CharacterConfiguration.Wizard.MOVE.SPRITE_WIDTH;}
-    public int getWizardMoveSpriteFrameCount() {return CharacterConfiguration.Wizard.MOVE.FRAME_COUNT;}
-
-    //ATTACK
-    public String getWizardAttackSpritePath() {return CharacterConfiguration.Wizard.ATTACK.SPRITE_PATH;}
-    public int getWizardAttackSpriteWidth() {return CharacterConfiguration.Wizard.ATTACK.SPRITE_WIDTH;}
-    public int getWizardAttackSpriteFrameCount() {return CharacterConfiguration.Wizard.ATTACK.FRAME_COUNT;}
-
-    //DEATH
-    public String getWizardDeathSpritePath() {return CharacterConfiguration.Wizard.DEATH.SPRITE_PATH;}
-    public int getWizardDeathSpriteWidth() {return CharacterConfiguration.Wizard.DEATH.SPRITE_WIDTH;}
-    public int getWizardDeathSpriteFrameCount() {return CharacterConfiguration.Wizard.DEATH.FRAME_COUNT;}
-
-    //HIT
-    public String getWizardHitSpritePath() {return CharacterConfiguration.Wizard.HIT.SPRITE_PATH;}
-    public int getWizardHitSpriteWidth() {return CharacterConfiguration.Wizard.HIT.SPRITE_WIDTH;}
-    public int getWizardHitSpriteFrameCount() {return CharacterConfiguration.Wizard.HIT.FRAME_COUNT;}
+    public CharacterAnimation getWizardMoveAnimation() {
+        CharacterAnimation character = new CharacterAnimation();
 
 
+        character.addAnimation(
+                CharacterAnimation.CharacterState.MOVE,
+                getWizardMoveSpritePath(),
+                getWizardMoveSpriteFrameCount(),  // frameCount
+                getWizardFrameWidth(), // frameWidth
+                getWizardFrameHeight(), // frameHeight
+                Duration.millis(100)
+        );
+
+        // Set initial state
+        character.setState(CharacterAnimation.CharacterState.MOVE);
+        return character;
+    }
+    public CharacterAnimation getWizardAttackAnimation() {
+        CharacterAnimation character = new CharacterAnimation();
+
+
+        character.addAnimation(
+                CharacterAnimation.CharacterState.ATTACK,
+                getWizardAttackSpritePath(),
+                getWizardAttackSpriteFrameCount(),  // frameCount
+                getWizardFrameWidth(), // frameWidth
+                getWizardFrameHeight(), // frameHeight
+                Duration.millis(100)
+        );
+
+        // Set initial state
+        character.setState(CharacterAnimation.CharacterState.ATTACK);
+        return character;
+    }
+    public CharacterAnimation getWizardDeathAnimation() {
+        CharacterAnimation character = new CharacterAnimation();
+
+
+        character.addAnimation(
+                CharacterAnimation.CharacterState.DEATH,
+                getWizardDeathSpritePath(),
+                getWizardDeathSpriteFrameCount(),  // frameCount
+                getWizardFrameWidth(), // frameWidth
+                getWizardFrameHeight(), // frameHeight
+                Duration.millis(100)
+        );
+
+        // Set initial state
+        character.setState(CharacterAnimation.CharacterState.DEATH);
+        return character;
+    }
+    public CharacterAnimation getWizardHitAnimation() {
+        CharacterAnimation character = new CharacterAnimation();
+
+
+        character.addAnimation(
+                CharacterAnimation.CharacterState.HIT,
+                getWizardHitSpritePath(),
+                getWizardHitSpriteFrameCount(),  // frameCount
+                getWizardFrameWidth(), // frameWidth
+                getWizardFrameHeight(), // frameHeight
+                Duration.millis(100)
+        );
+
+        // Set initial state
+        character.setState(CharacterAnimation.CharacterState.HIT);
+        return character;
+    }
+
+    public CharacterAnimation getWizardAnimations() {
+        CharacterAnimation character = new CharacterAnimation();
+        character.addAnimations(
+                getCharacterStates(),
+                getWizardSpritesPaths(),
+                getWizardFrameCounts(),
+                getWizardFrameWidth(),
+                getWizardFrameHeight(),
+                Duration.millis(100)
+        );
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+
+        return character;
+    }
 
 
 

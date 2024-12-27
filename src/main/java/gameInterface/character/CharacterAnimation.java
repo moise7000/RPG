@@ -8,8 +8,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+
 public class CharacterAnimation {
     private final ImageView spriteView;
+    private Map<CharacterState, AnimationData> animations;
     private Timeline currentAnimation;
     private CharacterState currentState;
 
@@ -21,58 +28,90 @@ public class CharacterAnimation {
         HIT
     }
 
+    private static class AnimationData {
+        final Image spriteSheet;
+        final Timeline timeline;
+        final int frameWidth;
+        final int frameHeight;
+
+        AnimationData(Image spriteSheet, Timeline timeline, int frameWidth, int frameHeight) {
+            this.spriteSheet = spriteSheet;
+            this.timeline = timeline;
+            this.frameWidth = frameWidth;
+            this.frameHeight = frameHeight;
+        }
+    }
+
     public CharacterAnimation() {
         this.spriteView = new ImageView();
+        this.animations = new HashMap<>();
         this.currentState = CharacterState.IDLE;
-        //spriteView.setSmooth(false);
         spriteView.setStyle("-fx-interpolation-hint: nearest-neighbor");
     }
 
     public void addAnimation(CharacterState state, String spriteSheetPath, int frameCount, int frameWidth, int frameHeight, Duration frameDuration) {
-        if (state == currentState) {
-            Image spriteSheet = new Image(spriteSheetPath);
+        Image spriteSheet = new Image(spriteSheetPath);
+
+        Timeline timeline = new Timeline();
+        for (int i = 0; i < frameCount; i++) {
+            final int frameIndex = i;
+            KeyFrame keyFrame = new KeyFrame(
+                    frameDuration.multiply(i),
+                    event -> updateFrame(state, frameIndex)
+            );
+            timeline.getKeyFrames().add(keyFrame);
+        }
+
+        timeline.setCycleCount(Animation.INDEFINITE);
+        AnimationData animData = new AnimationData(spriteSheet, timeline, frameWidth, frameHeight);
+        animations.put(state, animData);
+
+        // Initialiser la première animation
+        if (spriteView.getImage() == null) {
             spriteView.setImage(spriteSheet);
             spriteView.setViewport(new Rectangle2D(0, 0, frameWidth, frameHeight));
-
-            // Stop any existing animation
-            if (currentAnimation != null) {
-                currentAnimation.stop();
-            }
-
-            // Create new animation timeline
-            currentAnimation = new Timeline();
-
-            for (int i = 0; i < frameCount; i++) {
-                final int frameIndex = i;
-                KeyFrame keyFrame = new KeyFrame(
-                        frameDuration.multiply(i),
-                        event -> updateFrame(frameIndex, frameWidth, frameHeight)
-                );
-                currentAnimation.getKeyFrames().add(keyFrame);
-            }
-
-            // Configure animation properties
-            currentAnimation.setCycleCount(Animation.INDEFINITE);
-            currentAnimation.setAutoReverse(false);
-
-            // Start the animation
-            currentAnimation.play();
         }
     }
 
-    private void updateFrame(int frameIndex, int frameWidth, int frameHeight) {
-        spriteView.setViewport(new Rectangle2D(
-                frameIndex * frameWidth, 0,
-                frameWidth, frameHeight
-        ));
+    public void addAnimations(List<CharacterState> states,List<String> spriteSheetPaths,
+                              List<Integer> frameCounts, int frameWidth, int frameHeight,
+                              Duration frameDuration) {
+        if (states.size() != spriteSheetPaths.size() || states.size() != frameCounts.size()) {
+            throw new IllegalArgumentException("The size of states, spriteSheetPaths and frameCounts must be the same.");
+        }
+        for (int i = 0; i < states.size(); i++) {
+            addAnimation(states.get(i), spriteSheetPaths.get(i), frameCounts.get(i), frameWidth, frameHeight, frameDuration);
+        }
+    }
+
+
+
+
+
+    private void updateFrame(CharacterState state, int frameIndex) {
+        AnimationData animData = animations.get(state);
+        if (animData != null) {
+            if (spriteView.getImage() != animData.spriteSheet) {
+                spriteView.setImage(animData.spriteSheet);
+            }
+            spriteView.setViewport(new Rectangle2D(
+                    frameIndex * animData.frameWidth, 0,
+                    animData.frameWidth, animData.frameHeight
+            ));
+        }
     }
 
     public void setState(CharacterState newState) {
-        if (currentState != newState) {
+        if (currentAnimation != null) {
+            currentAnimation.stop();
+        }
+
+        AnimationData newAnimData = animations.get(newState);
+        if (newAnimData != null) {
+            spriteView.setImage(newAnimData.spriteSheet);
+            currentAnimation = newAnimData.timeline;
             currentState = newState;
-            if (currentAnimation != null) {
-                currentAnimation.play();
-            }
+            currentAnimation.play();
         }
     }
 

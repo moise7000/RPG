@@ -5,6 +5,7 @@ import gameInterface.Main;
 import gameInterface.character.CharacterAnimation;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -50,20 +51,38 @@ public class CharacterSelectionScene {
 
         selectWizard.setOnAction(e -> startGame(mainApp, config, wizard));
         selectEvilWizard.setOnAction(e -> startGame(mainApp, config, evilWizard));
+        selectHeroKnight.setOnAction(e -> startGame(mainApp, config, heroKnight));
+        selectMartialHero.setOnAction(e -> startGame(mainApp, config, martialHero));
 
         Button backButton = new Button(config.getExitButtonLabel());
         backButton.setStyle(config.getButtonStyle());
 
         backButton.setOnAction(e -> mainApp.setSceneContent(MainMenuScene.create(mainApp, config)));
 
-        root.getChildren().addAll(title, characterContainer, backButton);
+        Region spacer1 = new Region();
+        spacer1.setPrefHeight(100);
+
+        Region spacer2 = new Region();
+        spacer2.setPrefHeight(150);
+
+        root.getChildren().addAll(spacer2, title, characterContainer, spacer1, backButton);
         return root;
     }
 
+
     private static CharacterAnimation createWizardCharacter(InterfaceConfiguration config) {
+        CharacterAnimation character = config.getWizardAnimations();
+
+        character.setState(CharacterAnimation.CharacterState.DEATH);
+
+        return character;
+    }
+
+
+    private static CharacterAnimation createWizardCharacter2(InterfaceConfiguration config) {
         CharacterAnimation character = new CharacterAnimation();
 
-        // Add idle animation
+        // Ajout de toutes les animations
         character.addAnimation(
                 CharacterAnimation.CharacterState.IDLE,
                 config.getWizardIdleSpritePath(),
@@ -73,7 +92,26 @@ public class CharacterSelectionScene {
                 Duration.millis(100)
         );
 
-        character.setState(CharacterAnimation.CharacterState.IDLE);
+        character.addAnimation(
+                CharacterAnimation.CharacterState.ATTACK,
+                config.getWizardAttackSpritePath(),
+                config.getWizardAttackSpriteFrameCount(),
+                config.getWizardFrameWidth(),
+                config.getWizardFrameHeight(),
+                Duration.millis(100)
+        );
+
+        character.addAnimation(
+                CharacterAnimation.CharacterState.MOVE,
+                config.getWizardMoveSpritePath(),
+                config.getWizardMoveSpriteFrameCount(),
+                config.getWizardFrameWidth(),
+                config.getWizardFrameHeight(),
+                Duration.millis(100)
+        );
+
+        // Animation de l'attaque par défaut
+        character.setState(CharacterAnimation.CharacterState.ATTACK);
         return character;
     }
 
@@ -106,17 +144,25 @@ public class CharacterSelectionScene {
         VBox previewBox = new VBox(10);
         previewBox.setStyle("-fx-alignment: center;");
 
+        HBox spriteContainer = new HBox();
+        spriteContainer.setPrefSize(200, 200); // Fixed size for all sprites
+        spriteContainer.setStyle("-fx-alignment: center;");
+        spriteContainer.getChildren().add(character.getSpriteView());
+
+
         // Scale the sprite view to make it visible
         character.getSpriteView().setScaleX(2.0);
         character.getSpriteView().setScaleY(2.0);
 
-        previewBox.getChildren().addAll(character.getSpriteView(), selectButton);
+
+        previewBox.getChildren().addAll(spriteContainer, selectButton);
+
         return previewBox;
     }
 
 
     private static void startGame(Main mainApp, InterfaceConfiguration config, CharacterAnimation selectedCharacter) {
-        // Create and transition to game scene with selected character
-        mainApp.setSceneContent(GameScene.create(mainApp, config));
+        // Créer et transitionner vers la scène de jeu avec le personnage sélectionné
+        mainApp.setSceneContent(GameScene.create(mainApp, config, selectedCharacter));
     }
 }
