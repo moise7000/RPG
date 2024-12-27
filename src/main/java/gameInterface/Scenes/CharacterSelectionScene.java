@@ -51,7 +51,12 @@ public class CharacterSelectionScene {
         selectWizard.setOnAction(e -> startGame(mainApp, config, wizard));
         selectEvilWizard.setOnAction(e -> startGame(mainApp, config, evilWizard));
 
-        root.getChildren().addAll(title, characterContainer);
+        Button backButton = new Button(config.getExitButtonLabel());
+        backButton.setStyle(config.getButtonStyle());
+
+        backButton.setOnAction(e -> mainApp.setSceneContent(MainMenuScene.create(mainApp, config)));
+
+        root.getChildren().addAll(title, characterContainer, backButton);
         return root;
     }
 
