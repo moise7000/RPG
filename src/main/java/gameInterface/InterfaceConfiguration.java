@@ -366,6 +366,73 @@ public class InterfaceConfiguration {
         return frameCounts;
     }
 
+    public List<String> getEvilWizardSpritesPaths() {
+        List<String> spritesPaths = new ArrayList<>();
+        spritesPaths.add(getEvilWizardIdleSpritePath());
+        spritesPaths.add(getEvilWizardMoveSpritePath());
+        spritesPaths.add(getEvilWizardAttackSpritePath());
+        spritesPaths.add(getEvilWizardDeathSpritePath());
+        spritesPaths.add(getEvilWizardHitSpritePath());
+
+
+        return spritesPaths;
+    }
+
+    public List<Integer> getEvilWizardFrameCounts() {
+        List<Integer> frameCounts = new ArrayList<>();
+        frameCounts.add(getEvilWizardIdleSpriteFrameCount());
+        frameCounts.add(getEvilWizardMoveSpriteFrameCount());
+        frameCounts.add(getEvilWizardAttackSpriteFrameCount());
+        frameCounts.add(getEvilWizardDeathSpriteFrameCount());
+        frameCounts.add(getEvilWizardHitSpriteFrameCount());
+        return frameCounts;
+    }
+
+
+    public List<String> getHeroKnightSpritesPaths() {
+        List<String> spritesPaths = new ArrayList<>();
+        spritesPaths.add(getHeroKnightIdleSpritePath());
+        spritesPaths.add(getHeroKnightMoveSpritePath());
+        spritesPaths.add(getHeroKnightAttackSpritePath());
+        spritesPaths.add(getHeroKnightDeathSpritePath());
+        spritesPaths.add(getHeroKnightHitSpritePath());
+
+
+        return spritesPaths;
+    }
+
+    public List<Integer> getHeroKnightFrameCounts() {
+        List<Integer> frameCounts = new ArrayList<>();
+        frameCounts.add(getHeroKnightIdleSpriteFrameCount());
+        frameCounts.add(getHeroKnightMoveSpriteFrameCount());
+        frameCounts.add(getHeroKnightAttackSpriteFrameCount());
+        frameCounts.add(getHeroKnightDeathSpriteFrameCount());
+        frameCounts.add(getHeroKnightHitSpriteFrameCount());
+        return frameCounts;
+    }
+
+    public List<String> getMartialHeroSpritesPaths() {
+        List<String> spritesPaths = new ArrayList<>();
+        spritesPaths.add(getMartialHeroIdleSpritePath());
+        spritesPaths.add(getMartialHeroMoveSpritePath());
+        spritesPaths.add(getMartialHeroAttackSpritePath());
+        spritesPaths.add(getMartialHeroDeathSpritePath());
+        spritesPaths.add(getMartialHeroHitSpritePath());
+
+
+        return spritesPaths;
+    }
+
+    public List<Integer> getMartialHeroFrameCounts() {
+        List<Integer> frameCounts = new ArrayList<>();
+        frameCounts.add(getMartialHeroIdleSpriteFrameCount());
+        frameCounts.add(getMartialHeroMoveSpriteFrameCount());
+        frameCounts.add(getMartialHeroAttackSpriteFrameCount());
+        frameCounts.add(getMartialHeroDeathSpriteFrameCount());
+        frameCounts.add(getMartialHeroHitSpriteFrameCount());
+        return frameCounts;
+    }
+
 
     public int getWizardFrameWidth() {return CharacterConfiguration.Wizard.FRAME_WIDTH;}
     public int getWizardFrameHeight() {return CharacterConfiguration.Wizard.FRAME_HEIGHT;}
@@ -501,6 +568,51 @@ public class InterfaceConfiguration {
                 getWizardFrameCounts(),
                 getWizardFrameWidth(),
                 getWizardFrameHeight(),
+                Duration.millis(100)
+        );
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+
+        return character;
+    }
+
+    public CharacterAnimation getEvilWizardAnimations() {
+        CharacterAnimation character = new CharacterAnimation();
+        character.addAnimations(
+                getCharacterStates(),
+                getEvilWizardSpritesPaths(),
+                getEvilWizardFrameCounts(),
+                getEvilWizardFrameWidth(),
+                getEvilWizardFrameHeight(),
+                Duration.millis(100)
+        );
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+
+        return character;
+    }
+
+    public CharacterAnimation getHeroKnightAnimations() {
+        CharacterAnimation character = new CharacterAnimation();
+        character.addAnimations(
+                getCharacterStates(),
+                getHeroKnightSpritesPaths(),
+                getHeroKnightFrameCounts(),
+                getHeroKnightFrameWidth(),
+                getHeroKnightFrameHeight(),
+                Duration.millis(100)
+        );
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+
+        return character;
+    }
+
+    public CharacterAnimation getMartialHeroAnimations() {
+        CharacterAnimation character = new CharacterAnimation();
+        character.addAnimations(
+                getCharacterStates(),
+                getMartialHeroSpritesPaths(),
+                getMartialHeroFrameCounts(),
+                getMartialHeroFrameWidth(),
+                getMartialHeroFrameHeight(),
                 Duration.millis(100)
         );
         character.setState(CharacterAnimation.CharacterState.IDLE);

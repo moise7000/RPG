@@ -45,6 +45,7 @@ public class Main extends Application {
             String musicPath = getClass().getResource(config.getMusicPath()).toExternalForm();
             Media media = new Media(musicPath);
             MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             mediaPlayer.play();
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +55,7 @@ public class Main extends Application {
 
 
 
-        // Initialiser le parallaxe une seule fois
+
         parallaxBackground = new ParallaxBackground(
                 config.getWindowWidth(),
                 config.getWindowHeight()

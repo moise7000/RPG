@@ -73,72 +73,33 @@ public class CharacterSelectionScene {
     private static CharacterAnimation createWizardCharacter(InterfaceConfiguration config) {
         CharacterAnimation character = config.getWizardAnimations();
 
-        character.setState(CharacterAnimation.CharacterState.DEATH);
+        character.setState(CharacterAnimation.CharacterState.ATTACK);
 
         return character;
     }
 
+    private static CharacterAnimation createEvilWizardCharacter(InterfaceConfiguration config) {
+        CharacterAnimation character = config.getEvilWizardAnimations();
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+        return character;
+    }
 
-    private static CharacterAnimation createWizardCharacter2(InterfaceConfiguration config) {
-        CharacterAnimation character = new CharacterAnimation();
 
-        // Ajout de toutes les animations
-        character.addAnimation(
-                CharacterAnimation.CharacterState.IDLE,
-                config.getWizardIdleSpritePath(),
-                config.getWizardIdleSpriteFrameCount(),
-                config.getWizardFrameWidth(),
-                config.getWizardFrameHeight(),
-                Duration.millis(100)
-        );
 
-        character.addAnimation(
-                CharacterAnimation.CharacterState.ATTACK,
-                config.getWizardAttackSpritePath(),
-                config.getWizardAttackSpriteFrameCount(),
-                config.getWizardFrameWidth(),
-                config.getWizardFrameHeight(),
-                Duration.millis(100)
-        );
 
-        character.addAnimation(
-                CharacterAnimation.CharacterState.MOVE,
-                config.getWizardMoveSpritePath(),
-                config.getWizardMoveSpriteFrameCount(),
-                config.getWizardFrameWidth(),
-                config.getWizardFrameHeight(),
-                Duration.millis(100)
-        );
+    private static CharacterAnimation createHeroKnightCharacter(InterfaceConfiguration config) {
+        CharacterAnimation character = config.getHeroKnightAnimations();
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+        return character;
+    }
 
-        // Animation de l'attaque par défaut
+    private static CharacterAnimation createMartialHeroCharacter(InterfaceConfiguration config) {
+        CharacterAnimation character = config.getMartialHeroAnimations();
         character.setState(CharacterAnimation.CharacterState.ATTACK);
         return character;
     }
 
-    private static CharacterAnimation createHeroKnightCharacter(InterfaceConfiguration config) {
-        return config.getHeroKnightIdleAnimation();
-    }
 
-    private static CharacterAnimation createMartialHeroCharacter(InterfaceConfiguration config) {
-        return config.getMartialHeroIdleAnimation();
-    }
-
-    private static CharacterAnimation createEvilWizardCharacter(InterfaceConfiguration config) {
-        CharacterAnimation character = new CharacterAnimation();
-
-        // Add idle animation
-        character.addAnimation(
-                CharacterAnimation.CharacterState.IDLE,
-                config.getEvilWizardIdleSpritePath(),
-                config.getEvilWizardIdleSpriteFrameCount(),
-                config.getEvilWizardFrameWidth(),
-                config.getEvilWizardFrameHeight(),
-                Duration.millis(100)
-        );
-
-        character.setState(CharacterAnimation.CharacterState.IDLE);
-        return character;
-    }
 
     private static VBox createCharacterPreviewBox(CharacterAnimation character, Button selectButton) {
         VBox previewBox = new VBox(10);
