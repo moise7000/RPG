@@ -122,8 +122,10 @@ public class InterfaceConfiguration {
         static final String BUTTON_STYLE = "-fx-font-family:" + FONT_NAME + ";" +
                 "-fx-font-size: 25px;" +
                 "-fx-font-weight: bold;" +
-                "-fx-background-color: #000000;" +
+                "-fx-background-color: rgba(0, 0, 0, 0.5);" +
                 "-fx-text-fill: #FFFFFF;";
+
+        static final String BUTTON_HOVER_STYLE = "-fx-background-color: rgba(0, 0, 0, 0.8);";
 
     }
 
@@ -132,6 +134,7 @@ public class InterfaceConfiguration {
     public String getFontPath() {return StylesConfiguration.FONT_PATH;}
     public String getFontName() {return StylesConfiguration.FONT_NAME;}
     public int getFontSize() {return StylesConfiguration.FONT_SIZE;}
+    public String getButtonHoverStyle() {return StylesConfiguration.BUTTON_STYLE + StylesConfiguration.BUTTON_HOVER_STYLE;}
     public String getFontAuthor() {return StylesConfiguration.FONT_AUTHOR;}
 
 

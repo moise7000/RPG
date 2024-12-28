@@ -23,20 +23,20 @@ public class GameScene {
         VBox root = new VBox(20);
         root.setStyle("-fx-alignment: center;");
 
-        // Création du conteneur de jeu principal
+
         Pane gameContainer = new Pane();
         gameContainer.setPrefSize(config.getWindowWidth(), config.getWindowHeight());
 
 
 
 
-        // Positionnement du personnage
+        // Character Position
         playerCharacter.getSpriteView().setX(config.getWindowWidth() / 2); // Centre X
-        playerCharacter.getSpriteView().setY(config.getWindowHeight() / 2); // Centre Y
+        playerCharacter.getSpriteView().setY(config.getWindowHeight() /4); // Centre Y
         playerCharacter.getSpriteView().setScaleX(2.0); // Scale du sprite
         playerCharacter.getSpriteView().setScaleY(2.0); // Scale du sprite
 
-        // Ajout du personnage à la scène
+
         gameContainer.getChildren().add(playerCharacter.getSpriteView());
 
         // Création des boutons de contrôle

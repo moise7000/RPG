@@ -2,9 +2,12 @@ package gameInterface.Scenes;
 
 import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
+import gameInterface.helpers.ButtonStyleHelper;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+
+import java.util.List;
 
 public class MainMenuScene {
 
@@ -15,15 +18,11 @@ public class MainMenuScene {
         Button creditsButton = new Button(config.getCreditsButtonLabel());
         Button closeButton = new Button(config.getQuitButtonLabel());
 
-        playButton.setStyle(config.getButtonStyle());
-        settingsButton.setStyle(config.getButtonStyle());
-        creditsButton.setStyle(config.getButtonStyle());
-        closeButton.setStyle(config.getButtonStyle());
+        List<Button> buttons = List.of(playButton, settingsButton, creditsButton, closeButton);
 
-
-
-
-
+        ButtonStyleHelper.applyButtonStyle(buttons, config.getButtonStyle());
+        ButtonStyleHelper.applyHoverStyle(buttons, config.getButtonStyle(), config.getButtonHoverStyle());
+        
 
         VBox menu = new VBox(20, playButton, settingsButton, creditsButton, closeButton);
         menu.setTranslateY(100);
