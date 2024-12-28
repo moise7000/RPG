@@ -4,7 +4,7 @@
 This project implements a game system featuring different character types (Warrior, Wizard) with various combat mechanics and animations. The architecture follows several design patterns including Strategy, Observer, Decorator, and Visitor patterns.
 
 ## Interface Preview
-![Game Interface](assets/interface.png)
+
 ![video](assets/rpg_video_presentation.mp4)
 
 
