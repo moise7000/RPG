@@ -39,9 +39,8 @@ public class InterfaceConfiguration {
         static final String LOAD = "Load";
         static final String SETTINGS = "Settings";
         static final String EXIT = "Exit";
-        static final String BACKGROUND_IMAGE_PATH = "/assets/background/NightForest/NightForestWhitMist.png";
-        static final int BACKGROUND_IMAGE_WIDTH = 620;
-        static final int BACKGROUND_IMAGE_HEIGHT = 360;
+        static final String GAME_TITLE = "The Kingdom of the Lost Oyster";
+        static final String SELECT_CHARACTER = "Select your character";
 
 
 
@@ -49,11 +48,12 @@ public class InterfaceConfiguration {
 
     public double getZoom() {return ZOOM;}
 
-
+    public String getGameTitle() {return UserInterfaceConfiguration.GAME_TITLE;}
     public String getWindowTitle() {return Window.WINDOW_TITLE;}
     public String getPlayButtonLabel() {return UserInterfaceConfiguration.PLAY;}
     public String getCreditsButtonLabel() {return UserInterfaceConfiguration.CREDITS;}
     public String getQuitButtonLabel() {return UserInterfaceConfiguration.QUIT;}
+    public String getSelectCharacterButtonLabel() {return UserInterfaceConfiguration.SELECT_CHARACTER;}
     public String getSaveButtonLabel() {return UserInterfaceConfiguration.SAVE;}
     public String getLoadButtonLabel() {return UserInterfaceConfiguration.LOAD;}
     public String getSettingsButtonLabel() {return UserInterfaceConfiguration.SETTINGS;}
@@ -119,17 +119,25 @@ public class InterfaceConfiguration {
         static final String FONT_NAME = "'Venice Classic'";
         static final int FONT_SIZE = 50;
         static final String FONT_AUTHOR = "Venice Classic à by soixantedeux.";
-        static final String BUTTON_STYLE = "-fx-font-family:" + FONT_NAME + ";" +
+        static final String BUTTON_STYLE =
+                "-fx-font-family:" + FONT_NAME + ";" +
                 "-fx-font-size: 25px;" +
                 "-fx-font-weight: bold;" +
-                "-fx-background-color: rgba(0, 0, 0, 0.5);" +
+                "-fx-background-color: rgba(0, 0, 0, 0.0);" +
                 "-fx-text-fill: #FFFFFF;";
 
-        static final String BUTTON_HOVER_STYLE = "-fx-background-color: rgba(0, 0, 0, 0.8);";
+        static final String BUTTON_HOVER_STYLE = "-fx-background-color: rgba(0, 0, 0, 0.3);";
+        static final String GAME_TITLE_STYLE =
+                "-fx-font-family:" + FONT_NAME + ";" +
+                "-fx-font-size: 100px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-background-color: rgba(0, 0, 0, 0.0);" +
+                "-fx-text-fill: #FFFFFF;";
+
 
     }
 
-
+    public String getGameTitleStyle() {return StylesConfiguration.GAME_TITLE_STYLE;}
     public String getButtonStyle() {return StylesConfiguration.BUTTON_STYLE;}
     public String getFontPath() {return StylesConfiguration.FONT_PATH;}
     public String getFontName() {return StylesConfiguration.FONT_NAME;}

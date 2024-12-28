@@ -3,6 +3,7 @@ package gameInterface.Scenes;
 import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
 import gameInterface.character.CharacterAnimation;
+import gameInterface.helpers.ButtonStyleHelper;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -10,13 +11,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.util.List;
+
 public class CharacterSelectionScene {
     public static VBox create(Main mainApp, InterfaceConfiguration config) {
         VBox root = new VBox(20);
         root.setStyle("-fx-alignment: center;");
 
         // Title
-        Text title = new Text("Select Your Character");
+        Text title = new Text(config.getSelectCharacterButtonLabel());
         title.setStyle("-fx-font-family: " + config.getFontName() + "; -fx-font-size: " + config.getFontSize() + "px; -fx-fill: white;");
 
         // Character preview container
@@ -34,11 +37,13 @@ public class CharacterSelectionScene {
         Button selectEvilWizard = new Button("Evil Wizard");
         Button selectHeroKnight = new Button("Hero Knight");
         Button selectMartialHero = new Button("Martial Hero");
+        Button backButton = new Button(config.getExitButtonLabel());
 
-        selectWizard.setStyle(config.getButtonStyle());
-        selectEvilWizard.setStyle(config.getButtonStyle());
-        selectHeroKnight.setStyle(config.getButtonStyle());
-        selectMartialHero.setStyle(config.getButtonStyle());
+
+        List<Button> buttons = List.of(selectEvilWizard, selectWizard, selectHeroKnight, selectMartialHero, backButton);
+
+        ButtonStyleHelper.applyButtonStyle(buttons, config.getButtonStyle());
+        ButtonStyleHelper.applyHoverStyle(buttons, config.getButtonStyle(), config.getButtonHoverStyle());
 
         // Add preview animations to container
         characterContainer.getChildren().addAll(
@@ -54,8 +59,7 @@ public class CharacterSelectionScene {
         selectHeroKnight.setOnAction(e -> startGame(mainApp, config, heroKnight));
         selectMartialHero.setOnAction(e -> startGame(mainApp, config, martialHero));
 
-        Button backButton = new Button(config.getExitButtonLabel());
-        backButton.setStyle(config.getButtonStyle());
+
 
         backButton.setOnAction(e -> mainApp.setSceneContent(MainMenuScene.create(mainApp, config)));
 
@@ -123,7 +127,7 @@ public class CharacterSelectionScene {
 
 
     private static void startGame(Main mainApp, InterfaceConfiguration config, CharacterAnimation selectedCharacter) {
-        // Créer et transitionner vers la scène de jeu avec le personnage sélectionné
+        selectedCharacter.setState(CharacterAnimation.CharacterState.IDLE);
         mainApp.setSceneContent(GameScene.create(mainApp, config, selectedCharacter));
     }
 }
