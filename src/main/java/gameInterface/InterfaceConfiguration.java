@@ -11,14 +11,14 @@ public class InterfaceConfiguration {
 
     private static InterfaceConfiguration shared;
 
-    private final double ZOOM = 2.1;
+    private final double ZOOM = 2.3;
 
 
 
 
 
     private static final class Window {
-        static final String WINDOW_TITLE = "RPG";
+
         static final int WINDOW_WIDTH = 620;
         static final int WINDOW_HEIGHT = 360;
         static final int WINDOW_X = 0;
@@ -49,7 +49,7 @@ public class InterfaceConfiguration {
     public double getZoom() {return ZOOM;}
 
     public String getGameTitle() {return UserInterfaceConfiguration.GAME_TITLE;}
-    public String getWindowTitle() {return Window.WINDOW_TITLE;}
+    public String getWindowTitle() {return UserInterfaceConfiguration.GAME_TITLE ;}
     public String getPlayButtonLabel() {return UserInterfaceConfiguration.PLAY;}
     public String getCreditsButtonLabel() {return UserInterfaceConfiguration.CREDITS;}
     public String getQuitButtonLabel() {return UserInterfaceConfiguration.QUIT;}
@@ -175,6 +175,8 @@ public class InterfaceConfiguration {
         static final String EVIL_WIZARD_PATH = "/assets/characters/EvilWizard";
         static final String HERO_KNIGHT_PATH = "/assets/characters/HeroKnight";
         static final String MARTIAL_HERO_PATH = "/assets/characters/MartialHero";
+        static final String NECROMANCER_PATH = "/assets/characters/Necromancer";
+        static final String NIGHT_BORNE_PATH = "/assets/characters/NightBorne";
 
         static final List<CharacterAnimation.CharacterState> STATES = Arrays.asList(
                 CharacterAnimation.CharacterState.IDLE,
@@ -348,6 +350,76 @@ public class InterfaceConfiguration {
             }
         }
 
+        private static final class NightBorne {
+            static final int FRAME_WIDTH = 80;
+            static final int FRAME_HEIGHT = 80;
+
+            private static final class IDLE {
+                static final String SPRITE_PATH = NIGHT_BORNE_PATH + "/Idle.png";
+                static final int SPRITE_WIDTH = 720;
+                static final int FRAME_COUNT = 9;
+            }
+
+            private static final class MOVE {
+                static final String SPRITE_PATH = NIGHT_BORNE_PATH + "/Move.png";
+                static final int SPRITE_WIDTH = 480;
+                static final int FRAME_COUNT = 6;
+            }
+
+            private static final class ATTACK {
+                static final String SPRITE_PATH = NIGHT_BORNE_PATH + "/Attack.png";
+                static final int SPRITE_WIDTH = 960;
+                static final int FRAME_COUNT = 12;
+            }
+
+            private static final class DEATH {
+                static final String SPRITE_PATH = NIGHT_BORNE_PATH + "/Death.png";
+                static final int SPRITE_WIDTH = 1840;
+                static final int FRAME_COUNT = 23;
+            }
+
+            private static final class HIT {
+                static final String SPRITE_PATH = NIGHT_BORNE_PATH + "/Hit.png";
+                static final int SPRITE_WIDTH = 1840;
+                static final int FRAME_COUNT = 5;
+            }
+        }
+
+        private static final class Necromancer {
+            static final int FRAME_WIDTH = 160;
+            static final int FRAME_HEIGHT = 128;
+
+            private static final class IDLE {
+                static final String SPRITE_PATH = NECROMANCER_PATH + "/Idle.png";
+                static final int SPRITE_WIDTH = 2720;
+                static final int FRAME_COUNT = 8;
+            }
+
+            private static final class MOVE {
+                static final String SPRITE_PATH = NECROMANCER_PATH + "/Move.png";
+                static final int SPRITE_WIDTH = 2720;
+                static final int FRAME_COUNT = 8;
+            }
+
+            private static final class ATTACK {
+                static final String SPRITE_PATH = NECROMANCER_PATH + "/Attack2.png";
+                static final int SPRITE_WIDTH = 2720;
+                static final int FRAME_COUNT = 13;
+            }
+
+            private static final class DEATH {
+                static final String SPRITE_PATH = NECROMANCER_PATH + "/Death.png";
+                static final int SPRITE_WIDTH = 2720;
+                static final int FRAME_COUNT = 10;
+            }
+
+            private static final class HIT {
+                static final String SPRITE_PATH = NECROMANCER_PATH + "/Hit.png";
+                static final int SPRITE_WIDTH = 2720;
+                static final int FRAME_COUNT = 5;
+            }
+        }
+
     }
 
     public List<CharacterAnimation.CharacterState> getCharacterStates() {return CharacterConfiguration.STATES;}
@@ -366,7 +438,6 @@ public class InterfaceConfiguration {
 
         return spritesPaths;
     }
-
     public List<Integer> getWizardFrameCounts() {
         List<Integer> frameCounts = new ArrayList<>();
         frameCounts.add(getWizardIdleSpriteFrameCount());
@@ -388,7 +459,6 @@ public class InterfaceConfiguration {
 
         return spritesPaths;
     }
-
     public List<Integer> getEvilWizardFrameCounts() {
         List<Integer> frameCounts = new ArrayList<>();
         frameCounts.add(getEvilWizardIdleSpriteFrameCount());
@@ -398,7 +468,6 @@ public class InterfaceConfiguration {
         frameCounts.add(getEvilWizardHitSpriteFrameCount());
         return frameCounts;
     }
-
 
     public List<String> getHeroKnightSpritesPaths() {
         List<String> spritesPaths = new ArrayList<>();
@@ -411,7 +480,6 @@ public class InterfaceConfiguration {
 
         return spritesPaths;
     }
-
     public List<Integer> getHeroKnightFrameCounts() {
         List<Integer> frameCounts = new ArrayList<>();
         frameCounts.add(getHeroKnightIdleSpriteFrameCount());
@@ -433,7 +501,6 @@ public class InterfaceConfiguration {
 
         return spritesPaths;
     }
-
     public List<Integer> getMartialHeroFrameCounts() {
         List<Integer> frameCounts = new ArrayList<>();
         frameCounts.add(getMartialHeroIdleSpriteFrameCount());
@@ -441,6 +508,48 @@ public class InterfaceConfiguration {
         frameCounts.add(getMartialHeroAttackSpriteFrameCount());
         frameCounts.add(getMartialHeroDeathSpriteFrameCount());
         frameCounts.add(getMartialHeroHitSpriteFrameCount());
+        return frameCounts;
+    }
+
+    public List<String> getNightBorneSpritesPaths() {
+        List<String> spritesPaths = new ArrayList<>();
+        spritesPaths.add(getNightBorneIdleSpritePath());
+        spritesPaths.add(getNightBorneMoveSpritePath());
+        spritesPaths.add(getNightBorneAttackSpritePath());
+        spritesPaths.add(getNightBorneDeathSpritePath());
+        spritesPaths.add(getNightBorneHitSpritePath());
+
+
+        return spritesPaths;
+    }
+    public List<Integer> getNightBorneFrameCounts() {
+        List<Integer> frameCounts = new ArrayList<>();
+        frameCounts.add(getNightBorneIdleSpriteFrameCount());
+        frameCounts.add(getNightBorneMoveSpriteFrameCount());
+        frameCounts.add(getNightBorneAttackSpriteFrameCount());
+        frameCounts.add(getNightBorneDeathSpriteFrameCount());
+        frameCounts.add(getNightBorneHitSpriteFrameCount());
+        return frameCounts;
+    }
+
+    public List<String> getNecromancerSpritesPaths() {
+        List<String> spritesPaths = new ArrayList<>();
+        spritesPaths.add(getNecromancerIdleSpritePath());
+        spritesPaths.add(getNecromancerMoveSpritePath());
+        spritesPaths.add(getNecromancerAttackSpritePath());
+        spritesPaths.add(getNecromancerDeathSpritePath());
+        spritesPaths.add(getNecromancerHitSpritePath());
+
+
+        return spritesPaths;
+    }
+    public List<Integer> getNecromancerFrameCounts() {
+        List<Integer> frameCounts = new ArrayList<>();
+        frameCounts.add(getNecromancerIdleSpriteFrameCount());
+        frameCounts.add(getNecromancerMoveSpriteFrameCount());
+        frameCounts.add(getNecromancerAttackSpriteFrameCount());
+        frameCounts.add(getNecromancerDeathSpriteFrameCount());
+        frameCounts.add(getNecromancerHitSpriteFrameCount());
         return frameCounts;
     }
 
@@ -453,32 +562,20 @@ public class InterfaceConfiguration {
     public int getWizardIdleSpriteWidth() {return CharacterConfiguration.Wizard.IDLE.SPRITE_WIDTH;}
     public int getWizardIdleSpriteFrameCount() {return CharacterConfiguration.Wizard.IDLE.FRAME_COUNT;}
 
-
-
     //MOVE
     public String getWizardMoveSpritePath() {return CharacterConfiguration.Wizard.MOVE.SPRITE_PATH;}
     public int getWizardMoveSpriteWidth() {return CharacterConfiguration.Wizard.MOVE.SPRITE_WIDTH;}
     public int getWizardMoveSpriteFrameCount() {return CharacterConfiguration.Wizard.MOVE.FRAME_COUNT;}
-
-
-
 
     //ATTACK
     public String getWizardAttackSpritePath() {return CharacterConfiguration.Wizard.ATTACK.SPRITE_PATH;}
     public int getWizardAttackSpriteWidth() {return CharacterConfiguration.Wizard.ATTACK.SPRITE_WIDTH;}
     public int getWizardAttackSpriteFrameCount() {return CharacterConfiguration.Wizard.ATTACK.FRAME_COUNT;}
 
-
-
-
     //DEATH
     public String getWizardDeathSpritePath() {return CharacterConfiguration.Wizard.DEATH.SPRITE_PATH;}
     public int getWizardDeathSpriteWidth() {return CharacterConfiguration.Wizard.DEATH.SPRITE_WIDTH;}
     public int getWizardDeathSpriteFrameCount() {return CharacterConfiguration.Wizard.DEATH.FRAME_COUNT;}
-
-
-
-
 
     //HIT
     public String getWizardHitSpritePath() {return CharacterConfiguration.Wizard.HIT.SPRITE_PATH;}
@@ -624,6 +721,36 @@ public class InterfaceConfiguration {
                 getMartialHeroFrameCounts(),
                 getMartialHeroFrameWidth(),
                 getMartialHeroFrameHeight(),
+                Duration.millis(100)
+        );
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+
+        return character;
+    }
+
+    public CharacterAnimation getNightBorneAnimations() {
+        CharacterAnimation character = new CharacterAnimation();
+        character.addAnimations(
+                getCharacterStates(),
+                getNightBorneSpritesPaths(),
+                getNightBorneFrameCounts(),
+                getNightBorneFrameWidth(),
+                getNightBorneFrameHeight(),
+                Duration.millis(100)
+        );
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+
+        return character;
+    }
+
+    public CharacterAnimation getNecromancerAnimations() {
+        CharacterAnimation character = new CharacterAnimation();
+        character.addAnimations(
+                getCharacterStates(),
+                getNecromancerSpritesPaths(),
+                getNecromancerFrameCounts(),
+                getNecromancerFrameWidth(),
+                getNecromancerFrameHeight(),
                 Duration.millis(100)
         );
         character.setState(CharacterAnimation.CharacterState.IDLE);
@@ -780,6 +907,61 @@ public class InterfaceConfiguration {
     public int getMartialHeroHitSpriteWidth() {return CharacterConfiguration.MartialHero.HIT.SPRITE_WIDTH;}
     public int getMartialHeroHitSpriteFrameCount() {return CharacterConfiguration.MartialHero.HIT.FRAME_COUNT;}
 
+
+    //----------------------------------------NIGHT BORNE------------------------------------------------------//
+
+    public int getNightBorneFrameWidth() {return CharacterConfiguration.NightBorne.FRAME_WIDTH;}
+    public int getNightBorneFrameHeight() {return CharacterConfiguration.NightBorne.FRAME_HEIGHT;}
+
+    //IDLE
+    public String getNightBorneIdleSpritePath() {return CharacterConfiguration.NightBorne.IDLE.SPRITE_PATH;}
+    public int getNightBorneIdleSpriteFrameCount() {return CharacterConfiguration.NightBorne.IDLE.FRAME_COUNT;}
+
+    //MOVE
+    public String getNightBorneMoveSpritePath() {return CharacterConfiguration.NightBorne.MOVE.SPRITE_PATH;}
+    public int getNightBorneMoveSpriteFrameCount() {return CharacterConfiguration.NightBorne.MOVE.FRAME_COUNT;}
+
+    //ATTACK
+    public String getNightBorneAttackSpritePath() {return CharacterConfiguration.NightBorne.ATTACK.SPRITE_PATH;}
+    public int getNightBorneAttackSpriteFrameCount() {return CharacterConfiguration.NightBorne.ATTACK.FRAME_COUNT;}
+
+    //DEATH
+    public String getNightBorneDeathSpritePath() {return CharacterConfiguration.NightBorne.DEATH.SPRITE_PATH;}
+    public int getNightBorneDeathSpriteFrameCount() {return CharacterConfiguration.NightBorne.DEATH.FRAME_COUNT;}
+
+    //HIT
+    public String getNightBorneHitSpritePath() {return CharacterConfiguration.NightBorne.HIT.SPRITE_PATH;}
+    public int getNightBorneHitSpriteFrameCount() {return CharacterConfiguration.NightBorne.HIT.FRAME_COUNT;}
+
+
+    //----------------------------------------NECROMANCER------------------------------------------------------//
+
+
+    public int getNecromancerFrameWidth() {return CharacterConfiguration.Necromancer.FRAME_WIDTH;}
+    public int getNecromancerFrameHeight() {return CharacterConfiguration.Necromancer.FRAME_HEIGHT;}
+
+    //IDLE
+    public String getNecromancerIdleSpritePath() {return CharacterConfiguration.Necromancer.IDLE.SPRITE_PATH;}
+    public int getNecromancerIdleSpriteWidth() {return CharacterConfiguration.Necromancer.IDLE.SPRITE_WIDTH;}
+    public int getNecromancerIdleSpriteFrameCount() {return CharacterConfiguration.Necromancer.IDLE.FRAME_COUNT;}
+
+    //MOVE
+    public String getNecromancerMoveSpritePath() {return CharacterConfiguration.Necromancer.MOVE.SPRITE_PATH;}
+    public int getNecromancerMoveSpriteWidth() {return CharacterConfiguration.Necromancer.MOVE.SPRITE_WIDTH;}
+    public int getNecromancerMoveSpriteFrameCount() {return CharacterConfiguration.Necromancer.MOVE.FRAME_COUNT;}
+
+    //ATTACK
+    public String getNecromancerAttackSpritePath() {return CharacterConfiguration.Necromancer.ATTACK.SPRITE_PATH;}
+    public int getNecromancerAttackSpriteFrameCount() {return CharacterConfiguration.Necromancer.ATTACK.FRAME_COUNT;}
+
+    //DEATH
+    public String getNecromancerDeathSpritePath() {return CharacterConfiguration.Necromancer.DEATH.SPRITE_PATH;}
+    public int getNecromancerDeathSpriteFrameCount() {return CharacterConfiguration.Necromancer.DEATH.FRAME_COUNT;}
+
+    //HIT
+    public String getNecromancerHitSpritePath() {return CharacterConfiguration.Necromancer.HIT.SPRITE_PATH;}
+    public int getNecromancerHitSpriteWidth() {return CharacterConfiguration.Necromancer.HIT.SPRITE_WIDTH;}
+    public int getNecromancerHitSpriteFrameCount() {return CharacterConfiguration.Necromancer.HIT.FRAME_COUNT;}
 
 
 

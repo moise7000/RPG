@@ -31,8 +31,8 @@ public class GameScene {
 
 
         // Character Position
-        playerCharacter.getSpriteView().setX(config.getWindowWidth() / 2); // Centre X
-        playerCharacter.getSpriteView().setY(config.getWindowHeight() /4); // Centre Y
+        playerCharacter.getSpriteView().setX(0); // Centre X
+        playerCharacter.getSpriteView().setY(config.getWindowHeight() - 300); // Centre Y
         playerCharacter.getSpriteView().setScaleX(2.0); // Scale du sprite
         playerCharacter.getSpriteView().setScaleY(2.0); // Scale du sprite
 

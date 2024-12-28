@@ -31,16 +31,28 @@ public class CharacterSelectionScene {
         CharacterAnimation evilWizard = createEvilWizardCharacter(config);
         CharacterAnimation heroKnight = createHeroKnightCharacter(config);
         CharacterAnimation martialHero = createMartialHeroCharacter(config);
+        CharacterAnimation necromancer = createNecromancerCharacter(config);
+        CharacterAnimation nightBorne = createNightBorneCharacter(config);
 
         // Selection buttons
         Button selectWizard = new Button("Wizard");
         Button selectEvilWizard = new Button("Evil Wizard");
         Button selectHeroKnight = new Button("Hero Knight");
         Button selectMartialHero = new Button("Martial Hero");
+        Button selectNecromancer = new Button("Necromancer");
+        Button selectNightBorne = new Button("Night Borne");
         Button backButton = new Button(config.getExitButtonLabel());
 
 
-        List<Button> buttons = List.of(selectEvilWizard, selectWizard, selectHeroKnight, selectMartialHero, backButton);
+        List<Button> buttons = List.of(
+                selectEvilWizard,
+                selectWizard,
+                selectHeroKnight,
+                selectMartialHero,
+                selectNightBorne,
+                selectNecromancer,
+                backButton
+        );
 
         ButtonStyleHelper.applyButtonStyle(buttons, config.getButtonStyle());
         ButtonStyleHelper.applyHoverStyle(buttons, config.getButtonStyle(), config.getButtonHoverStyle());
@@ -50,7 +62,10 @@ public class CharacterSelectionScene {
                 createCharacterPreviewBox(wizard, selectWizard),
                 createCharacterPreviewBox(evilWizard, selectEvilWizard),
                 createCharacterPreviewBox(heroKnight, selectHeroKnight),
-                createCharacterPreviewBox(martialHero, selectMartialHero)
+                createCharacterPreviewBox(martialHero, selectMartialHero),
+                createCharacterPreviewBox(necromancer, selectNecromancer),
+                createCharacterPreviewBox(nightBorne, selectNightBorne)
+
         );
 
 
@@ -58,6 +73,8 @@ public class CharacterSelectionScene {
         selectEvilWizard.setOnAction(e -> startGame(mainApp, config, evilWizard));
         selectHeroKnight.setOnAction(e -> startGame(mainApp, config, heroKnight));
         selectMartialHero.setOnAction(e -> startGame(mainApp, config, martialHero));
+        selectNecromancer.setOnAction(e -> startGame(mainApp, config, necromancer));
+        selectNightBorne.setOnAction(e -> startGame(mainApp, config, nightBorne));
 
 
 
@@ -89,11 +106,20 @@ public class CharacterSelectionScene {
     }
 
 
-
-
     private static CharacterAnimation createHeroKnightCharacter(InterfaceConfiguration config) {
         CharacterAnimation character = config.getHeroKnightAnimations();
-        character.setState(CharacterAnimation.CharacterState.IDLE);
+        character.setState(CharacterAnimation.CharacterState.MOVE);
+        return character;
+    }
+
+    private static CharacterAnimation createNightBorneCharacter(InterfaceConfiguration config) {
+        CharacterAnimation character = config.getNightBorneAnimations();
+        character.setState(CharacterAnimation.CharacterState.DEATH);
+        return character;
+    }
+    private static CharacterAnimation createNecromancerCharacter(InterfaceConfiguration config) {
+        CharacterAnimation character = config.getNecromancerAnimations();
+        character.setState(CharacterAnimation.CharacterState.ATTACK);
         return character;
     }
 
@@ -127,6 +153,7 @@ public class CharacterSelectionScene {
 
 
     private static void startGame(Main mainApp, InterfaceConfiguration config, CharacterAnimation selectedCharacter) {
+        mainApp.stopParallax();
         selectedCharacter.setState(CharacterAnimation.CharacterState.IDLE);
         mainApp.setSceneContent(GameScene.create(mainApp, config, selectedCharacter));
     }
