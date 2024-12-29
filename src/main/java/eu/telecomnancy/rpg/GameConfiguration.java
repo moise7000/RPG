@@ -194,7 +194,7 @@ public class GameConfiguration {
     //ArmorDecorator getters
     public double getArmorDamageReduction(int level) {
         double reduction  = DecoratorStats.ArmorStats.BASE_DAMAGE_REDUCTION +
-                (DecoratorStats.ArmorStats.DAMAGE_REDUCTION_PER_LEVEL * (level - 1));
+                (DecoratorStats.ArmorStats.DAMAGE_REDUCTION_PER_LEVEL * level);
         //Limit the reduction to 90% maximum
         return Math.min(0.9, reduction * difficultyLevel);
     }
@@ -203,7 +203,7 @@ public class GameConfiguration {
     //InvincibilityDecorator getters
     public int getMinimumHealth(int level) {
         return (DecoratorStats.InvincibilityStats.BASE_MINIMUM_HEALTH +
-                (DecoratorStats.InvincibilityStats.MINIMUM_HEALTH_PER_LEVEL * (level - 1))) * difficultyLevel;
+                (DecoratorStats.InvincibilityStats.MINIMUM_HEALTH_PER_LEVEL * level )) * difficultyLevel;
     }
 
 
