@@ -207,9 +207,5 @@ public class GameConfiguration {
     }
 
 
-    public static void main(String[] args) {
-        GameConfiguration config = new GameConfiguration();
-        config.getCharacterCreator().create("Warrior");
-    }
 
 }

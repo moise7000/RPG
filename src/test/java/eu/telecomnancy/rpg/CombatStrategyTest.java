@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static java.lang.System.out;
 
 
 
@@ -16,78 +17,89 @@ public class CombatStrategyTest {
 
     @Before
     public void setUp() {
-        // Utilisation des factories pour créer les personnages
+        // Using factories to create the characters
         CharacterCreator warriorCreator = new WarriorCreator();
         CharacterCreator wizardCreator = new WizardCreator();
 
         warrior = (Warrior) warriorCreator.create("Conan");
         wizard = (Wizard) wizardCreator.create("Gandalf");
 
-        // Initialisation des stats pour les tests
+        // Initialization of stats for testing
         warrior.setHealth(INITIAL_HEALTH);
         wizard.setHealth(INITIAL_HEALTH);
     }
 
     @Test
     public void testAggressiveStrategy() {
-        // Configuration de la stratégie agressive
+        // Configuration of the aggressive strategy
         warrior.setCombatStrategy(new AggressiveStrategy());
         wizard.setCombatStrategy(new NeutralStrategy());
 
-        // Test des dégâts infligés en mode agressif
+        // Configuration of the aggressive strategy
         int damageDealt = warrior.attack(BASE_DAMAGE);
+
+
+
         wizard.receiveAttack(damageDealt);
 
-        // Vérification que les dégâts infligés sont augmentés (1.5x)
+
+
+        // Verify that the damage inflicted is increased (1.5x)
         assertEquals(70, wizard.getHealth()); // 100 - (20 * 1.5) = 70
 
-        // Test de la vulnérabilité accrue
+        // Test the increased vulnerability
         int counterDamage = wizard.attack(BASE_DAMAGE);
+
+
         warrior.receiveAttack(counterDamage);
 
-        // Le guerrier en mode agressif reçoit plus de dégâts (1.3x)
+        // The warrior in aggressive mode receives more damage (1.3x)
         assertEquals(74, warrior.getHealth()); // 100 - (20 * 1.3) = 74
     }
 
     @Test
     public void testDefensiveStrategy() {
-        // Configuration de la stratégie défensive
+        // Setting up the defensive strategy
         warrior.setCombatStrategy(new DefensiveStrategy());
         wizard.setCombatStrategy(new NeutralStrategy());
 
-        // Test des dégâts réduits en mode défensif
+        // Testing reduced damage in defensive mode
         int damageDealt = warrior.attack(BASE_DAMAGE);
+        assertEquals(14, damageDealt); //BASE_DAMAGE = 20 and DEFENSIVE_DAMAGE_MULTIPLIER = 0,7 -> 20*0,7=14
         wizard.receiveAttack(damageDealt);
 
-        // Vérification que les dégâts infligés sont réduits (0.7x)
+        // Verifying that the inflicted damage is reduced (0.7x)
         assertEquals(86, wizard.getHealth()); // 100 - (20 * 0.7) = 86
 
-        // Test de la défense améliorée
+        // Testing improved defense
         int counterDamage = wizard.attack(BASE_DAMAGE);
+        assertEquals(BASE_DAMAGE, counterDamage); // wizard strategy is neutral so is "strength" still
+
         warrior.receiveAttack(counterDamage);
 
-        // Le guerrier en mode défensif reçoit moins de dégâts (0.6x)
+
+        // The warrior in defensive mode receives less damage (0.6x)
         assertEquals(88, warrior.getHealth()); // 100 - (20 * 0.6) = 88
     }
 
     @Test
     public void testNeutralStrategy() {
-        // Configuration de la stratégie neutre
+        // Configuring the neutral strategy
         warrior.setCombatStrategy(new NeutralStrategy());
         wizard.setCombatStrategy(new NeutralStrategy());
 
-        // Test des dégâts normaux
+        // Testing normal damage
         int damageDealt = warrior.attack(BASE_DAMAGE);
         wizard.receiveAttack(damageDealt);
 
-        // Vérification que les dégâts sont normaux (1x)
+        // Verifying that the damage is normal (1x)
         assertEquals(80, wizard.getHealth()); // 100 - 20 = 80
 
-        // Test de la défense normale
+        // Testing normal defense
         int counterDamage = wizard.attack(BASE_DAMAGE);
         warrior.receiveAttack(counterDamage);
 
-        // Le guerrier reçoit des dégâts normaux (1x)
+        // The warrior receives normal damage (1x)
         assertEquals(80, warrior.getHealth()); // 100 - 20 = 80
     }
 }

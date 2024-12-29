@@ -53,9 +53,6 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
 
 
 
-
-
-
     public void setCombatStrategy(CombatStrategy combatStrategy) {this.combatStrategy = combatStrategy;}
 
     public int attack(int baseDamage) {

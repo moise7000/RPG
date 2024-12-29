@@ -14,7 +14,7 @@ public class DefensiveStrategy implements CombatStrategy {
 
     @Override
     public int calculateDamageReceived(int incomingDamage) {
-        return (int) (incomingDamage * config.getDefensiveDamageMultiplier());
+        return (int) (incomingDamage * config.getDefensiveDefenseMultiplier());
     }
 
 }
