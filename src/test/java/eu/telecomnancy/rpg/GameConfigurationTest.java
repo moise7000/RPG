@@ -20,8 +20,10 @@ class GameConfigurationTest {
         assertSame(config, anotherConfig, "GameConfiguration should be a singleton");
     }
 
-
-
+    @Test
+    void testMaxSizeTeam() {
+        assertEquals(4, config.getMaxTeamSize());
+    }
 
 }
 
