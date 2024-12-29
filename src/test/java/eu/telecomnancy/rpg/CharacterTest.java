@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CharacterTest {
     private Warrior warrior;
     private Wizard wizard;
+    private Warrior secondWarrior;
 
     @Before
     public void setUp() {
@@ -17,12 +18,21 @@ public class CharacterTest {
 
         warrior = (Warrior) warriorCreator.create("Hercules");
         wizard = (Wizard) wizardCreator.create("Gandalf");
+        secondWarrior = (Warrior) warriorCreator.create("Achilles");
 
 
     }
 
+
     @Test
     public void testCreateWarriorCharacter() {assertNotEquals(warrior, null);}
+
+    @Test
+    public void testCreateSecondWarriorCharacter() {assertNotEquals(secondWarrior, null);}
+
+    @Test
+    public void testWarriorsAreNotEqual() {assertNotEquals(warrior, secondWarrior);}
+
 
     @Test
     public void testCreateWizardCharacter() {assertNotEquals(wizard, null);}

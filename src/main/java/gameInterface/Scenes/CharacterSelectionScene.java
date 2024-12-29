@@ -59,12 +59,12 @@ public class CharacterSelectionScene {
 
         // Add preview animations to container
         characterContainer.getChildren().addAll(
-                createCharacterPreviewBox(wizard, selectWizard),
-                createCharacterPreviewBox(evilWizard, selectEvilWizard),
-                createCharacterPreviewBox(heroKnight, selectHeroKnight),
-                createCharacterPreviewBox(martialHero, selectMartialHero),
-                createCharacterPreviewBox(necromancer, selectNecromancer),
-                createCharacterPreviewBox(nightBorne, selectNightBorne)
+                createCharacterPreviewBox(wizard, selectWizard, config.getWizardInfo()),
+                createCharacterPreviewBox(evilWizard, selectEvilWizard, config.getEvilWizardInfo()),
+                createCharacterPreviewBox(heroKnight, selectHeroKnight, config.getHeroKnightInfo()),
+                createCharacterPreviewBox(martialHero, selectMartialHero, config.getMartialHeroInfo()),
+                createCharacterPreviewBox(necromancer, selectNecromancer, config.getNecromancerInfo()),
+                createCharacterPreviewBox(nightBorne, selectNightBorne, config.getNightBorneInfo())
 
         );
 
@@ -131,7 +131,10 @@ public class CharacterSelectionScene {
 
 
 
-    private static VBox createCharacterPreviewBox(CharacterAnimation character, Button selectButton) {
+    private static VBox createCharacterPreviewBox(CharacterAnimation character,
+                                                  Button selectButton,
+                                                  String characterInfo) {
+        InterfaceConfiguration config = InterfaceConfiguration.getShared();
         VBox previewBox = new VBox(10);
         previewBox.setStyle("-fx-alignment: center;");
 
@@ -145,8 +148,12 @@ public class CharacterSelectionScene {
         character.getSpriteView().setScaleX(2.0);
         character.getSpriteView().setScaleY(2.0);
 
+        Text infoText = new Text(characterInfo);
+        infoText.setStyle(config.getCharacterInfoStyle());
+        //infoText.setWrappingWidth(200); // Optional: Limit the width of the text
 
-        previewBox.getChildren().addAll(spriteContainer, selectButton);
+
+        previewBox.getChildren().addAll(spriteContainer, selectButton, infoText);
 
         return previewBox;
     }

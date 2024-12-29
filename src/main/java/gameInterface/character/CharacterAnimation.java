@@ -129,6 +129,8 @@ public class CharacterAnimation {
         }
     }
 
+
+
     public void resumeAnimation() {
         if (currentAnimation != null) {
             currentAnimation.play();

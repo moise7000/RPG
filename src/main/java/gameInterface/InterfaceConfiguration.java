@@ -1,6 +1,12 @@
 package gameInterface;
 
+import eu.telecomnancy.rpg.*;
+import eu.telecomnancy.rpg.Strategy.AggressiveStrategy;
+import eu.telecomnancy.rpg.Strategy.CombatStrategy;
+import eu.telecomnancy.rpg.Strategy.DefensiveStrategy;
+import eu.telecomnancy.rpg.Strategy.NeutralStrategy;
 import gameInterface.character.CharacterAnimation;
+import gameInterface.character.CharacterType;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -118,6 +124,7 @@ public class InterfaceConfiguration {
         static final String FONT_PATH = "/assets/fonts/VeniceClassic.ttf";
         static final String FONT_NAME = "'Venice Classic'";
         static final int FONT_SIZE = 50;
+        static final int FONT_CAPTION_SIZE = 20;
         static final String FONT_AUTHOR = "Venice Classic à by soixantedeux.";
         static final String BUTTON_STYLE =
                 "-fx-font-family:" + FONT_NAME + ";" +
@@ -134,6 +141,11 @@ public class InterfaceConfiguration {
                 "-fx-background-color: rgba(0, 0, 0, 0.0);" +
                 "-fx-text-fill: #FFFFFF;";
 
+        static final String CHARACTER_INFO_STYLE =
+                "-fx-font-family:" + FONT_NAME + ";" +
+                "-fx-font-size: "+ FONT_CAPTION_SIZE + "px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-text-fill: #FFFFFF;";
 
     }
 
@@ -144,6 +156,8 @@ public class InterfaceConfiguration {
     public int getFontSize() {return StylesConfiguration.FONT_SIZE;}
     public String getButtonHoverStyle() {return StylesConfiguration.BUTTON_STYLE + StylesConfiguration.BUTTON_HOVER_STYLE;}
     public String getFontAuthor() {return StylesConfiguration.FONT_AUTHOR;}
+    public int getFontCaptionSize() {return StylesConfiguration.FONT_CAPTION_SIZE;}
+    public String getCharacterInfoStyle() {return StylesConfiguration.CHARACTER_INFO_STYLE;}
 
 
     private static final class CreditsConfiguration {
@@ -192,6 +206,17 @@ public class InterfaceConfiguration {
             static final int FRAME_WIDTH = 231;
             static final int FRAME_HEIGHT = 190;
 
+            static final String NAME = "Wizard";
+            static final int HEALTH = 300;
+            static CombatStrategy STRATEGY = new DefensiveStrategy();
+            static final CharacterType TYPE = CharacterType.WIZARD;
+            static final String INFO =
+                    "Name: " + NAME + "\n"
+                    + "Health: " + HEALTH + "\n"
+                    + "Type: " + TYPE + "\n";
+
+
+
             private static final class IDLE {
                 static final String SPRITE_PATH = WIZARD_PATH + "/Idle.png";
                 static final int SPRITE_WIDTH = 1386;
@@ -229,6 +254,15 @@ public class InterfaceConfiguration {
 
             static final int FRAME_WIDTH = 150;
             static final int FRAME_HEIGHT = 150;
+
+            static final String NAME = "EvilWizard";
+            static final int HEALTH = 100;
+            static CombatStrategy STRATEGY = new AggressiveStrategy();
+            static final CharacterType TYPE = CharacterType.WIZARD;
+            static final String INFO =
+                    "Name: " + NAME + "\n"
+                    + "Health: " + HEALTH + "\n"
+                    + "Type: " + TYPE + "\n";
 
             private static final class IDLE {
                 static final String SPRITE_PATH = EVIL_WIZARD_PATH + "/Idle.png";
@@ -273,6 +307,14 @@ public class InterfaceConfiguration {
             static final int FRAME_WIDTH = 180;
             static final int FRAME_HEIGHT = 180;
 
+            static final String NAME = "HeroKnight";
+            static final int HEALTH = 200;
+            static CombatStrategy STRATEGY = new NeutralStrategy();
+            static final CharacterType TYPE = CharacterType.WARRIOR;
+            static final String INFO = "Name: " + NAME + "\n"
+                    + "Health: " + HEALTH + "\n"
+                    + "Type: " + TYPE + "\n";
+
             private static final class IDLE {
                 static final String SPRITE_PATH = HERO_KNIGHT_PATH + "/Idle.png";
                 static final int SPRITE_WIDTH = 1980;
@@ -314,6 +356,15 @@ public class InterfaceConfiguration {
             static final int FRAME_WIDTH = 200;
             static final int FRAME_HEIGHT = 190;
 
+            static final String NAME = "MartialHero";
+            static final int HEALTH = 250;
+            static CombatStrategy STRATEGY = new AggressiveStrategy();
+            static final CharacterType TYPE = CharacterType.WARRIOR;
+            static final String INFO =
+                    "Name: " + NAME + "\n"
+                    + "Health: " + HEALTH + "\n"
+                    + "Type: " + TYPE + "\n";
+
             private static final class IDLE {
                 static final String SPRITE_PATH = MARTIAL_HERO_PATH + "/Idle.png";
                 static final int SPRITE_WIDTH = 1600;
@@ -354,6 +405,15 @@ public class InterfaceConfiguration {
             static final int FRAME_WIDTH = 80;
             static final int FRAME_HEIGHT = 80;
 
+            static final String NAME = "NightBorne";
+            static final int HEALTH = 400;
+            static CombatStrategy STRATEGY = new DefensiveStrategy();
+            static final CharacterType TYPE = CharacterType.WARRIOR;
+            static final String INFO =
+                            "Name: " + NAME + "\n"
+                            + "Health: " + HEALTH + "\n"
+                            + "Type: " + TYPE + "\n";
+
             private static final class IDLE {
                 static final String SPRITE_PATH = NIGHT_BORNE_PATH + "/Idle.png";
                 static final int SPRITE_WIDTH = 720;
@@ -388,6 +448,15 @@ public class InterfaceConfiguration {
         private static final class Necromancer {
             static final int FRAME_WIDTH = 160;
             static final int FRAME_HEIGHT = 128;
+
+            static final String NAME = "Necromancer";
+            static final int HEALTH = 150;
+            static CombatStrategy STRATEGY = new AggressiveStrategy();
+            static final CharacterType TYPE = CharacterType.WIZARD;
+            static final String INFO =
+                    "Name: " + NAME + "\n"
+                            + "Health: " + HEALTH + "\n"
+                            + "Type: " + TYPE + "\n";
 
             private static final class IDLE {
                 static final String SPRITE_PATH = NECROMANCER_PATH + "/Idle.png";
@@ -425,7 +494,7 @@ public class InterfaceConfiguration {
     public List<CharacterAnimation.CharacterState> getCharacterStates() {return CharacterConfiguration.STATES;}
 
 
-    //----------------------------------------WIZARD------------------------------------------------------//
+
 
     public List<String> getWizardSpritesPaths() {
         List<String> spritesPaths = new ArrayList<>();
@@ -554,120 +623,6 @@ public class InterfaceConfiguration {
     }
 
 
-    public int getWizardFrameWidth() {return CharacterConfiguration.Wizard.FRAME_WIDTH;}
-    public int getWizardFrameHeight() {return CharacterConfiguration.Wizard.FRAME_HEIGHT;}
-
-    //IDLE
-    public String getWizardIdleSpritePath() {return CharacterConfiguration.Wizard.IDLE.SPRITE_PATH;}
-    public int getWizardIdleSpriteWidth() {return CharacterConfiguration.Wizard.IDLE.SPRITE_WIDTH;}
-    public int getWizardIdleSpriteFrameCount() {return CharacterConfiguration.Wizard.IDLE.FRAME_COUNT;}
-
-    //MOVE
-    public String getWizardMoveSpritePath() {return CharacterConfiguration.Wizard.MOVE.SPRITE_PATH;}
-    public int getWizardMoveSpriteWidth() {return CharacterConfiguration.Wizard.MOVE.SPRITE_WIDTH;}
-    public int getWizardMoveSpriteFrameCount() {return CharacterConfiguration.Wizard.MOVE.FRAME_COUNT;}
-
-    //ATTACK
-    public String getWizardAttackSpritePath() {return CharacterConfiguration.Wizard.ATTACK.SPRITE_PATH;}
-    public int getWizardAttackSpriteWidth() {return CharacterConfiguration.Wizard.ATTACK.SPRITE_WIDTH;}
-    public int getWizardAttackSpriteFrameCount() {return CharacterConfiguration.Wizard.ATTACK.FRAME_COUNT;}
-
-    //DEATH
-    public String getWizardDeathSpritePath() {return CharacterConfiguration.Wizard.DEATH.SPRITE_PATH;}
-    public int getWizardDeathSpriteWidth() {return CharacterConfiguration.Wizard.DEATH.SPRITE_WIDTH;}
-    public int getWizardDeathSpriteFrameCount() {return CharacterConfiguration.Wizard.DEATH.FRAME_COUNT;}
-
-    //HIT
-    public String getWizardHitSpritePath() {return CharacterConfiguration.Wizard.HIT.SPRITE_PATH;}
-    public int getWizardHitSpriteWidth() {return CharacterConfiguration.Wizard.HIT.SPRITE_WIDTH;}
-    public int getWizardHitSpriteFrameCount() {return CharacterConfiguration.Wizard.HIT.FRAME_COUNT;}
-
-    public CharacterAnimation getWizardIdleAnimation() {
-        CharacterAnimation character = new CharacterAnimation();
-
-
-        character.addAnimation(
-                CharacterAnimation.CharacterState.IDLE,
-                getWizardIdleSpritePath(),
-                getWizardIdleSpriteFrameCount(),  // frameCount
-                getWizardFrameWidth(), // frameWidth
-                getWizardFrameHeight(), // frameHeight
-                Duration.millis(100)
-        );
-
-        // Set initial state
-        character.setState(CharacterAnimation.CharacterState.IDLE);
-        return character;
-    }
-    public CharacterAnimation getWizardMoveAnimation() {
-        CharacterAnimation character = new CharacterAnimation();
-
-
-        character.addAnimation(
-                CharacterAnimation.CharacterState.MOVE,
-                getWizardMoveSpritePath(),
-                getWizardMoveSpriteFrameCount(),  // frameCount
-                getWizardFrameWidth(), // frameWidth
-                getWizardFrameHeight(), // frameHeight
-                Duration.millis(100)
-        );
-
-        // Set initial state
-        character.setState(CharacterAnimation.CharacterState.MOVE);
-        return character;
-    }
-    public CharacterAnimation getWizardAttackAnimation() {
-        CharacterAnimation character = new CharacterAnimation();
-
-
-        character.addAnimation(
-                CharacterAnimation.CharacterState.ATTACK,
-                getWizardAttackSpritePath(),
-                getWizardAttackSpriteFrameCount(),  // frameCount
-                getWizardFrameWidth(), // frameWidth
-                getWizardFrameHeight(), // frameHeight
-                Duration.millis(100)
-        );
-
-        // Set initial state
-        character.setState(CharacterAnimation.CharacterState.ATTACK);
-        return character;
-    }
-    public CharacterAnimation getWizardDeathAnimation() {
-        CharacterAnimation character = new CharacterAnimation();
-
-
-        character.addAnimation(
-                CharacterAnimation.CharacterState.DEATH,
-                getWizardDeathSpritePath(),
-                getWizardDeathSpriteFrameCount(),  // frameCount
-                getWizardFrameWidth(), // frameWidth
-                getWizardFrameHeight(), // frameHeight
-                Duration.millis(100)
-        );
-
-        // Set initial state
-        character.setState(CharacterAnimation.CharacterState.DEATH);
-        return character;
-    }
-    public CharacterAnimation getWizardHitAnimation() {
-        CharacterAnimation character = new CharacterAnimation();
-
-
-        character.addAnimation(
-                CharacterAnimation.CharacterState.HIT,
-                getWizardHitSpritePath(),
-                getWizardHitSpriteFrameCount(),  // frameCount
-                getWizardFrameWidth(), // frameWidth
-                getWizardFrameHeight(), // frameHeight
-                Duration.millis(100)
-        );
-
-        // Set initial state
-        character.setState(CharacterAnimation.CharacterState.HIT);
-        return character;
-    }
-
     public CharacterAnimation getWizardAnimations() {
         CharacterAnimation character = new CharacterAnimation();
         character.addAnimations(
@@ -758,9 +713,67 @@ public class InterfaceConfiguration {
         return character;
     }
 
+    //----------------------------------------WIZARD------------------------------------------------------//
+
+
+    public String getWizardName() {return CharacterConfiguration.Wizard.NAME;}
+    public int getWizardHealth() {return CharacterConfiguration.Wizard.HEALTH;}
+    public CombatStrategy getWizardCombatStrategy() {return CharacterConfiguration.Wizard.STRATEGY;}
+    public CharacterType getWizardType() {return CharacterConfiguration.Wizard.TYPE;}
+    public String getWizardInfo() {return CharacterConfiguration.Wizard.INFO;}
+
+    public GameCharacter createWizardGameCharacter() {
+        CharacterCreator wizardCreator = new WizardCreator();
+        return (Wizard) wizardCreator.create(getWizardName(), getWizardHealth(), getWizardCombatStrategy());
+    }
+
+
+    public int getWizardFrameWidth() {return CharacterConfiguration.Wizard.FRAME_WIDTH;}
+    public int getWizardFrameHeight() {return CharacterConfiguration.Wizard.FRAME_HEIGHT;}
+
+    //IDLE
+    public String getWizardIdleSpritePath() {return CharacterConfiguration.Wizard.IDLE.SPRITE_PATH;}
+    public int getWizardIdleSpriteWidth() {return CharacterConfiguration.Wizard.IDLE.SPRITE_WIDTH;}
+    public int getWizardIdleSpriteFrameCount() {return CharacterConfiguration.Wizard.IDLE.FRAME_COUNT;}
+
+    //MOVE
+    public String getWizardMoveSpritePath() {return CharacterConfiguration.Wizard.MOVE.SPRITE_PATH;}
+    public int getWizardMoveSpriteWidth() {return CharacterConfiguration.Wizard.MOVE.SPRITE_WIDTH;}
+    public int getWizardMoveSpriteFrameCount() {return CharacterConfiguration.Wizard.MOVE.FRAME_COUNT;}
+
+    //ATTACK
+    public String getWizardAttackSpritePath() {return CharacterConfiguration.Wizard.ATTACK.SPRITE_PATH;}
+    public int getWizardAttackSpriteWidth() {return CharacterConfiguration.Wizard.ATTACK.SPRITE_WIDTH;}
+    public int getWizardAttackSpriteFrameCount() {return CharacterConfiguration.Wizard.ATTACK.FRAME_COUNT;}
+
+    //DEATH
+    public String getWizardDeathSpritePath() {return CharacterConfiguration.Wizard.DEATH.SPRITE_PATH;}
+    public int getWizardDeathSpriteWidth() {return CharacterConfiguration.Wizard.DEATH.SPRITE_WIDTH;}
+    public int getWizardDeathSpriteFrameCount() {return CharacterConfiguration.Wizard.DEATH.FRAME_COUNT;}
+
+    //HIT
+    public String getWizardHitSpritePath() {return CharacterConfiguration.Wizard.HIT.SPRITE_PATH;}
+    public int getWizardHitSpriteWidth() {return CharacterConfiguration.Wizard.HIT.SPRITE_WIDTH;}
+    public int getWizardHitSpriteFrameCount() {return CharacterConfiguration.Wizard.HIT.FRAME_COUNT;}
+
+
+
+
 
 
     //----------------------------------------EVIL WIZARD------------------------------------------------------//
+
+    public String getEvilWizardName() {return CharacterConfiguration.EvilWizard.NAME;}
+    public int getEvilWizardHealth() {return CharacterConfiguration.EvilWizard.HEALTH;}
+    public CombatStrategy getEvilWizardCombatStrategy() {return CharacterConfiguration.EvilWizard.STRATEGY;}
+    public CharacterType getEvilWizardType() {return CharacterConfiguration.EvilWizard.TYPE;}
+    public String getEvilWizardInfo() {return CharacterConfiguration.EvilWizard.INFO;}
+
+    public GameCharacter createEvilWizardGameCharacter() {
+        CharacterCreator wizardCreator = new WizardCreator();
+        return (Wizard) wizardCreator.create(getEvilWizardName(), getEvilWizardHealth(), getEvilWizardCombatStrategy());
+    }
+
 
     public int getEvilWizardFrameWidth() {return CharacterConfiguration.EvilWizard.FRAME_WIDTH;}
     public int getEvilWizardFrameHeight() {return CharacterConfiguration.EvilWizard.FRAME_HEIGHT;}
@@ -769,25 +782,6 @@ public class InterfaceConfiguration {
     public String getEvilWizardIdleSpritePath() {return CharacterConfiguration.EvilWizard.IDLE.SPRITE_PATH;}
     public int getEvilWizardIdleSpriteWidth() {return CharacterConfiguration.EvilWizard.IDLE.SPRITE_WIDTH;}
     public int getEvilWizardIdleSpriteFrameCount() {return CharacterConfiguration.EvilWizard.IDLE.FRAME_COUNT;}
-
-    public CharacterAnimation getEvilWizardIdleAnimation() {
-        CharacterAnimation character = new CharacterAnimation();
-
-
-        character.addAnimation(
-                CharacterAnimation.CharacterState.IDLE,
-                getEvilWizardIdleSpritePath(),
-                getEvilWizardIdleSpriteFrameCount(),  // frameCount
-                getEvilWizardFrameWidth(), // frameWidth
-                getEvilWizardFrameHeight(), // frameHeight
-                Duration.millis(100)
-        );
-
-        // Set initial state
-        character.setState(CharacterAnimation.CharacterState.IDLE);
-        return character;
-    }
-
 
     //MOVE
     public String getEvilWizardMoveSpritePath() {return CharacterConfiguration.EvilWizard.MOVE.SPRITE_PATH;}
@@ -812,6 +806,17 @@ public class InterfaceConfiguration {
 
 
     //----------------------------------------HERO KNIGHT------------------------------------------------------//
+
+    public String getHeroKnightName() {return CharacterConfiguration.HeroKnight.NAME;}
+    public int getHeroKnightHealth() {return CharacterConfiguration.HeroKnight.HEALTH;}
+    public CombatStrategy getHeroKnightCombatStrategy() {return CharacterConfiguration.HeroKnight.STRATEGY;}
+    public CharacterType getHeroKnightType() {return CharacterConfiguration.HeroKnight.TYPE;}
+    public String getHeroKnightInfo() {return CharacterConfiguration.HeroKnight.INFO;}
+
+    public GameCharacter createHeroKnightGameCharacter() {
+        CharacterCreator warriorCreator = new WarriorCreator();
+        return (Warrior) warriorCreator.create(getHeroKnightName(), getHeroKnightHealth(), getHeroKnightCombatStrategy());
+    }
 
     public int getHeroKnightFrameWidth() {return CharacterConfiguration.HeroKnight.FRAME_WIDTH;}
     public int getHeroKnightFrameHeight() {return CharacterConfiguration.HeroKnight.FRAME_HEIGHT;}
@@ -861,6 +866,17 @@ public class InterfaceConfiguration {
 
     //----------------------------------------MARTIAL HERO------------------------------------------------------//
 
+    public String getMartialHeroName() {return CharacterConfiguration.MartialHero.NAME;}
+    public int getMartialHeroHealth() {return CharacterConfiguration.MartialHero.HEALTH;}
+    public CombatStrategy getMartialHeroCombatStrategy() {return CharacterConfiguration.MartialHero.STRATEGY;}
+    public CharacterType getMartialHeroType() {return CharacterConfiguration.MartialHero.TYPE;}
+    public String getMartialHeroInfo() {return CharacterConfiguration.MartialHero.INFO;}
+
+    public GameCharacter createMartialHeroGaleCharacter() {
+        CharacterCreator warriorCreator = new WarriorCreator();
+        return (Warrior) warriorCreator.create(getMartialHeroName(), getMartialHeroHealth(), getMartialHeroCombatStrategy());
+    }
+
     public int getMartialHeroFrameWidth() {return CharacterConfiguration.MartialHero.FRAME_WIDTH;}
     public int getMartialHeroFrameHeight() {return CharacterConfiguration.MartialHero.FRAME_HEIGHT;}
 
@@ -868,24 +884,6 @@ public class InterfaceConfiguration {
     public String getMartialHeroIdleSpritePath() {return CharacterConfiguration.MartialHero.IDLE.SPRITE_PATH;}
     public int getMartialHeroIdleSpriteWidth() {return CharacterConfiguration.MartialHero.IDLE.SPRITE_WIDTH;}
     public int getMartialHeroIdleSpriteFrameCount() {return CharacterConfiguration.MartialHero.IDLE.FRAME_COUNT;}
-
-    public CharacterAnimation getMartialHeroIdleAnimation() {
-        CharacterAnimation character = new CharacterAnimation();
-
-
-        character.addAnimation(
-                CharacterAnimation.CharacterState.IDLE,
-                getMartialHeroIdleSpritePath(),
-                getMartialHeroIdleSpriteFrameCount(),  // frameCount
-                getMartialHeroFrameWidth(), // frameWidth
-                getMartialHeroFrameHeight(), // frameHeight
-                Duration.millis(100)
-        );
-
-        // Set initial state
-        character.setState(CharacterAnimation.CharacterState.IDLE);
-        return character;
-    }
 
     //MOVE
     public String getMartialHeroMoveSpritePath() {return CharacterConfiguration.MartialHero.MOVE.SPRITE_PATH;}
@@ -909,6 +907,17 @@ public class InterfaceConfiguration {
 
 
     //----------------------------------------NIGHT BORNE------------------------------------------------------//
+
+    public String getNightBorneName() {return CharacterConfiguration.NightBorne.NAME;}
+    public int getNightBorneHealth() {return CharacterConfiguration.NightBorne.HEALTH;}
+    public CombatStrategy getNightBorneCombatStrategy() {return CharacterConfiguration.NightBorne.STRATEGY;}
+    public CharacterType getNightBorneType() {return CharacterConfiguration.NightBorne.TYPE;}
+    public String getNightBorneInfo() {return CharacterConfiguration.NightBorne.INFO;}
+
+    public GameCharacter createNightBorneGameCharacter() {
+        CharacterCreator warriorCreator = new WarriorCreator();
+        return (Warrior) warriorCreator.create(getNightBorneName(), getNightBorneHealth(), getNightBorneCombatStrategy());
+    }
 
     public int getNightBorneFrameWidth() {return CharacterConfiguration.NightBorne.FRAME_WIDTH;}
     public int getNightBorneFrameHeight() {return CharacterConfiguration.NightBorne.FRAME_HEIGHT;}
@@ -936,6 +945,16 @@ public class InterfaceConfiguration {
 
     //----------------------------------------NECROMANCER------------------------------------------------------//
 
+    public String getNecromancerName() {return CharacterConfiguration.Necromancer.NAME;}
+    public int getNecromancerHealth() {return CharacterConfiguration.Necromancer.HEALTH;}
+    public CombatStrategy getNecromancerCombatStrategy() {return CharacterConfiguration.Necromancer.STRATEGY;}
+    public CharacterType getNecromancerType() {return CharacterConfiguration.Necromancer.TYPE;}
+    public String getNecromancerInfo() {return CharacterConfiguration.Necromancer.INFO;}
+
+    public GameCharacter createNecromancerGameCharacter() {
+        CharacterCreator warriorCreator = new WarriorCreator();
+        return (Warrior) warriorCreator.create(getNecromancerName(), getNecromancerHealth(), getNecromancerCombatStrategy());
+    }
 
     public int getNecromancerFrameWidth() {return CharacterConfiguration.Necromancer.FRAME_WIDTH;}
     public int getNecromancerFrameHeight() {return CharacterConfiguration.Necromancer.FRAME_HEIGHT;}
@@ -974,6 +993,15 @@ public class InterfaceConfiguration {
     public String getRecruitButtonLabel() {return GamePlayConfiguration.RECRUIT;}
 
 
+    public String getStringFromType(CharacterType type) {
+        if (type == CharacterType.WARRIOR) {
+            return "Warrior";
+        }
+        if (type == CharacterType.WIZARD) {
+            return "Wizard";
+        }
+        return "Unknown";
+    }
 
 
 

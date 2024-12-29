@@ -29,6 +29,15 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
         this.observers = new ArrayList<>();
     }
 
+    public GameCharacter(String name, int health, CombatStrategy combatStrategy) {
+        this.name = name;
+        this.experiencePoints = 0;
+        this.level = 1;
+        this.health = health;
+        this.combatStrategy = combatStrategy;
+        this.observers = new ArrayList<>();
+    }
+
     @Override
     public void addObserver(CharacterObserver observer) {observers.add(observer);}
 

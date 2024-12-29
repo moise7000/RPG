@@ -135,7 +135,10 @@ public class GameScene {
         playerCharacter.setState(CharacterAnimation.CharacterState.ATTACK);
 
         // Crée une pause qui durera le temps de l'animation
-        PauseTransition pause = new PauseTransition(Duration.millis(800)); // 8 frames * 100ms
+        //TODO: playeCharacter.getAttackFrameCount() n'est pas possible dans l'état actuel des choses
+        // Soit il faut une fonciton générique (une succession de if),
+        // soit il faut que chaque CharacterAnimaiton soit instancié
+        PauseTransition pause = new PauseTransition(Duration.millis(1200)); // 8 frames * 100ms
 
         // Après la pause, retourne à l'état IDLE
         pause.setOnFinished(event -> playerCharacter.setState(CharacterAnimation.CharacterState.IDLE));
@@ -143,6 +146,8 @@ public class GameScene {
         // Lance la pause
         pause.play();
     }
+
+
 
     private static HBox createControlButtons(InterfaceConfiguration config) {
         HBox buttonContainer = new HBox(20);
