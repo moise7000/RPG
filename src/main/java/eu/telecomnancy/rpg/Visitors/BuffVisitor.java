@@ -5,10 +5,22 @@ import eu.telecomnancy.rpg.GameConfiguration;
 import eu.telecomnancy.rpg.Warrior;
 import eu.telecomnancy.rpg.Wizard;
 
+/**
+ * Visiteur appliquant des buffs aux personnages Warrior et Wizard.
+ * <p>
+ * Cette classe implémente l'interface {@link CharacterVisitor} pour appliquer des modifications spécifiques aux
+ * attributs de base des personnages Warrior et Wizard, en utilisant les valeurs de configuration définies dans {@link GameConfiguration}.
+ * </p>
+ */
 public class BuffVisitor implements CharacterVisitor {
     private final GameConfiguration config = GameConfiguration.getShared();
 
 
+    /**
+     * Applique des buffs au personnage Warrior.
+     *
+     * @param warrior le personnage Warrior à visiter.
+     */
     @Override
     public void visit(Warrior warrior){
 
@@ -37,6 +49,11 @@ public class BuffVisitor implements CharacterVisitor {
 
     }
 
+    /**
+     * Applique des buffs au personnage Wizard.
+     *
+     * @param wizard le personnage Wizard à visiter.
+     */
     @Override
     public void visit(Wizard wizard){
 
