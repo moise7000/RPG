@@ -3,6 +3,7 @@ package gameInterface.Scenes;
 import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
 import gameInterface.character.CharacterAnimation;
+import gameInterface.helpers.ButtonStyleHelper;
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -12,6 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
+import java.util.List;
 
 public class GameScene {
     private static CharacterAnimation playerCharacter;
@@ -46,6 +49,8 @@ public class GameScene {
         Button backButton = new Button(config.getExitButtonLabel());
         backButton.setStyle(config.getButtonStyle());
         backButton.setOnAction(e -> mainApp.setSceneContent(CharacterSelectionScene.create(mainApp, config)));
+
+        ButtonStyleHelper.applyHoverStyle(backButton, config.getButtonStyle(), config.getButtonHoverStyle());
 
         // Espacement
         Region spacer = new Region();
@@ -135,10 +140,8 @@ public class GameScene {
         playerCharacter.setState(CharacterAnimation.CharacterState.ATTACK);
 
         // Crée une pause qui durera le temps de l'animation
-        //TODO: playeCharacter.getAttackFrameCount() n'est pas possible dans l'état actuel des choses
-        // Soit il faut une fonciton générique (une succession de if),
-        // soit il faut que chaque CharacterAnimaiton soit instancié
-        PauseTransition pause = new PauseTransition(Duration.millis(1200)); // 8 frames * 100ms
+        int attackAnimationFrameCount = playerCharacter.getFrameCount(playerCharacter.getCurrentState());
+        PauseTransition pause = new PauseTransition(Duration.millis(attackAnimationFrameCount * 100));
 
         // Après la pause, retourne à l'état IDLE
         pause.setOnFinished(event -> playerCharacter.setState(CharacterAnimation.CharacterState.IDLE));
@@ -159,9 +162,15 @@ public class GameScene {
         Button decoratorButton = new Button("Add Decorator");
 
         // Style des boutons
-        attackButton.setStyle(config.getButtonStyle());
-        recruitButton.setStyle(config.getButtonStyle());
-        decoratorButton.setStyle(config.getButtonStyle());
+        List<Button> controlButtons = List.of(
+                attackButton,
+                recruitButton,
+                decoratorButton
+        );
+
+        ButtonStyleHelper.applyButtonStyle(controlButtons, config.getButtonStyle());
+        ButtonStyleHelper.applyHoverStyle(controlButtons, config.getButtonStyle(), config.getButtonHoverStyle());
+
 
         // Action du bouton Attack
         attackButton.setOnAction(e -> performAttackAnimation());

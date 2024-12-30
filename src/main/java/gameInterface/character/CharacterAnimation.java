@@ -19,6 +19,7 @@ public class CharacterAnimation {
     private Map<CharacterState, AnimationData> animations;
     private Timeline currentAnimation;
     private CharacterState currentState;
+    private Map<CharacterAnimation.CharacterState, Integer> animationsFrameCounts;
 
     public enum CharacterState {
         IDLE,
@@ -45,6 +46,7 @@ public class CharacterAnimation {
     public CharacterAnimation() {
         this.spriteView = new ImageView();
         this.animations = new HashMap<>();
+        this.animationsFrameCounts = new HashMap<>();
         this.currentState = CharacterState.IDLE;
         spriteView.setStyle("-fx-interpolation-hint: nearest-neighbor");
     }
@@ -65,6 +67,7 @@ public class CharacterAnimation {
         timeline.setCycleCount(Animation.INDEFINITE);
         AnimationData animData = new AnimationData(spriteSheet, timeline, frameWidth, frameHeight);
         animations.put(state, animData);
+        animationsFrameCounts.put(state, frameCount);
 
         // Initialiser la première animation
         if (spriteView.getImage() == null) {
@@ -82,6 +85,10 @@ public class CharacterAnimation {
         for (int i = 0; i < states.size(); i++) {
             addAnimation(states.get(i), spriteSheetPaths.get(i), frameCounts.get(i), frameWidth, frameHeight, frameDuration);
         }
+    }
+
+    public int getFrameCount(CharacterState state) {
+        return animationsFrameCounts.get(state);
     }
 
 
