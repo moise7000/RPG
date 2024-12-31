@@ -77,6 +77,7 @@ public class Warrior extends GameCharacter {
         clonedWarrior.setHealth(this.getHealth());
         clonedWarrior.setExperiencePoints(this.getExperiencePoints());
         clonedWarrior.setLevel(this.getLevel());
+        clonedWarrior.setAnimations(this.getAnimations());
         return clonedWarrior;
 
     }

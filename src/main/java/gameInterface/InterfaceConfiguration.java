@@ -724,7 +724,12 @@ public class InterfaceConfiguration {
 
     public GameCharacter createWizardGameCharacter() {
         CharacterCreator wizardCreator = new WizardCreator();
-        return (Wizard) wizardCreator.create(getWizardName(), getWizardHealth(), getWizardCombatStrategy());
+        return (Wizard) wizardCreator.create(
+                getWizardName(),
+                getWizardHealth(),
+                getWizardCombatStrategy(),
+                getWizardAnimations()
+        );
     }
 
 
@@ -771,7 +776,12 @@ public class InterfaceConfiguration {
 
     public GameCharacter createEvilWizardGameCharacter() {
         CharacterCreator wizardCreator = new WizardCreator();
-        return (Wizard) wizardCreator.create(getEvilWizardName(), getEvilWizardHealth(), getEvilWizardCombatStrategy());
+        return (Wizard) wizardCreator.create(
+                getEvilWizardName(),
+                getEvilWizardHealth(),
+                getEvilWizardCombatStrategy(),
+                getEvilWizardAnimations()
+        );
     }
 
 
@@ -815,7 +825,12 @@ public class InterfaceConfiguration {
 
     public GameCharacter createHeroKnightGameCharacter() {
         CharacterCreator warriorCreator = new WarriorCreator();
-        return (Warrior) warriorCreator.create(getHeroKnightName(), getHeroKnightHealth(), getHeroKnightCombatStrategy());
+        return (Warrior) warriorCreator.create(
+                getHeroKnightName(),
+                getHeroKnightHealth(),
+                getHeroKnightCombatStrategy(),
+                getHeroKnightAnimations()
+        );
     }
 
     public int getHeroKnightFrameWidth() {return CharacterConfiguration.HeroKnight.FRAME_WIDTH;}
@@ -826,23 +841,7 @@ public class InterfaceConfiguration {
     public int getHeroKnightIdleSpriteWidth() {return CharacterConfiguration.HeroKnight.IDLE.SPRITE_WIDTH;}
     public int getHeroKnightIdleSpriteFrameCount() {return CharacterConfiguration.HeroKnight.IDLE.FRAME_COUNT;}
 
-    public CharacterAnimation getHeroKnightIdleAnimation() {
-        CharacterAnimation character = new CharacterAnimation();
 
-
-        character.addAnimation(
-                CharacterAnimation.CharacterState.IDLE,
-                getHeroKnightIdleSpritePath(),
-                getHeroKnightIdleSpriteFrameCount(),  // frameCount
-                getHeroKnightFrameWidth(), // frameWidth
-                getHeroKnightFrameHeight(), // frameHeight
-                Duration.millis(100)
-        );
-
-        // Set initial state
-        character.setState(CharacterAnimation.CharacterState.IDLE);
-        return character;
-    }
 
     //MOVE
     public String getHeroKnightMoveSpritePath() {return CharacterConfiguration.HeroKnight.MOVE.SPRITE_PATH;}
@@ -874,7 +873,12 @@ public class InterfaceConfiguration {
 
     public GameCharacter createMartialHeroGaleCharacter() {
         CharacterCreator warriorCreator = new WarriorCreator();
-        return (Warrior) warriorCreator.create(getMartialHeroName(), getMartialHeroHealth(), getMartialHeroCombatStrategy());
+        return (Warrior) warriorCreator.create(
+                getMartialHeroName(),
+                getMartialHeroHealth(),
+                getMartialHeroCombatStrategy(),
+                getMartialHeroAnimations()
+        );
     }
 
     public int getMartialHeroFrameWidth() {return CharacterConfiguration.MartialHero.FRAME_WIDTH;}
@@ -916,7 +920,12 @@ public class InterfaceConfiguration {
 
     public GameCharacter createNightBorneGameCharacter() {
         CharacterCreator warriorCreator = new WarriorCreator();
-        return (Warrior) warriorCreator.create(getNightBorneName(), getNightBorneHealth(), getNightBorneCombatStrategy());
+        return (Warrior) warriorCreator.create(
+                getNightBorneName(),
+                getNightBorneHealth(),
+                getNightBorneCombatStrategy(),
+                getNightBorneAnimations()
+        );
     }
 
     public int getNightBorneFrameWidth() {return CharacterConfiguration.NightBorne.FRAME_WIDTH;}
@@ -953,7 +962,12 @@ public class InterfaceConfiguration {
 
     public GameCharacter createNecromancerGameCharacter() {
         CharacterCreator warriorCreator = new WarriorCreator();
-        return (Warrior) warriorCreator.create(getNecromancerName(), getNecromancerHealth(), getNecromancerCombatStrategy());
+        return (Warrior) warriorCreator.create(
+                getNecromancerName(),
+                getNecromancerHealth(),
+                getNecromancerCombatStrategy(),
+                getNecromancerAnimations()
+        );
     }
 
     public int getNecromancerFrameWidth() {return CharacterConfiguration.Necromancer.FRAME_WIDTH;}

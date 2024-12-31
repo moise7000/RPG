@@ -1,6 +1,7 @@
 package eu.telecomnancy.rpg;
 
 import eu.telecomnancy.rpg.Strategy.CombatStrategy;
+import gameInterface.character.CharacterAnimation;
 
 /**
  * Classe pour la création de personnages de type {@link Wizard}.
@@ -53,6 +54,19 @@ public class WizardCreator implements CharacterCreator {
         //TODO : Revoir l'initialisaiton du wizard en utilisant des constantes de GameConfiguration
         //TODO : Revoir la doc en conséquence
         wizard.setIntelligence(wizard.getIntelligence() * 15);
+        return wizard;
+    }
+
+    @Override
+    public GameCharacter create(String name, int health, CombatStrategy strategy, CharacterAnimation animations) {
+        Wizard wizard = new Wizard(name);
+        wizard.setLevel(1);
+        wizard.setHealth(health);
+        wizard.setCombatStrategy(strategy);
+        //TODO : Revoir l'initialisaiton du wizard en utilisant des constantes de GameConfiguration
+        //TODO : Revoir la doc en conséquence
+        wizard.setIntelligence(wizard.getIntelligence() * 15);
+        wizard.setAnimations(animations);
         return wizard;
     }
 }

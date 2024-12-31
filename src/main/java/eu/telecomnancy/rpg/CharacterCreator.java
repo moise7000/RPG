@@ -2,6 +2,7 @@ package eu.telecomnancy.rpg;
 
 
 import eu.telecomnancy.rpg.Strategy.CombatStrategy;
+import gameInterface.character.CharacterAnimation;
 
 /**
  * Interface pour la création de personnages dans le jeu.
@@ -32,6 +33,8 @@ public interface CharacterCreator {
      */
     public GameCharacter create(String name, int health, CombatStrategy strategy);
 
+
+    public GameCharacter create(String name, int health, CombatStrategy strategy, CharacterAnimation animations);
 
     /**
      * Crée un personnage avec un nom et un niveau spécifiés.

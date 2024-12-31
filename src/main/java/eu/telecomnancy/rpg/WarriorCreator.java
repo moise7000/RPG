@@ -1,6 +1,7 @@
 package eu.telecomnancy.rpg;
 
 import eu.telecomnancy.rpg.Strategy.CombatStrategy;
+import gameInterface.character.CharacterAnimation;
 
 /**
  * Classe pour la création de personnages de type {@link Warrior}.
@@ -54,6 +55,20 @@ public class WarriorCreator implements CharacterCreator {
         //TODO : Revoir l'initialisaiton du warrior en utilisant des constantes de GameConfiguration
         //TODO : Revoir la doc en conséquence
         warrior.setStrength(warrior.getLevel() * 10);
+        return warrior;
+    }
+
+
+    @Override
+    public Warrior create(String name, int health, CombatStrategy strategy, CharacterAnimation animations) {
+        Warrior warrior = new Warrior(name);
+        warrior.setLevel(1);
+        warrior.setHealth(health);
+        warrior.setCombatStrategy(strategy);
+        //TODO : Revoir l'initialisaiton du warrior en utilisant des constantes de GameConfiguration
+        //TODO : Revoir la doc en conséquence
+        warrior.setStrength(warrior.getLevel() * 10);
+        warrior.setAnimations(animations);
         return warrior;
     }
 

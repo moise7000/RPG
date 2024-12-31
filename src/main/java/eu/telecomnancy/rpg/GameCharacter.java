@@ -6,6 +6,7 @@ import eu.telecomnancy.rpg.Observers.CharacterObserver;
 import eu.telecomnancy.rpg.Observers.CharacterSubject;
 import eu.telecomnancy.rpg.Strategy.CombatStrategy;
 import eu.telecomnancy.rpg.Strategy.NeutralStrategy;
+import gameInterface.character.CharacterAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
     private int level;
     private CombatStrategy combatStrategy;
     private final List<CharacterObserver> observers;
+    private CharacterAnimation animations;
 
 
     /**
@@ -44,6 +46,7 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
         this.health = 100;
         this.combatStrategy = new NeutralStrategy();
         this.observers = new ArrayList<>();
+        this.animations = null;
     }
 
     /**
@@ -60,6 +63,19 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
         this.health = health;
         this.combatStrategy = combatStrategy;
         this.observers = new ArrayList<>();
+        this.animations = null;
+    }
+
+    public GameCharacter(String name, int health, CombatStrategy combatStrategy, CharacterAnimation animations ) {
+        this.name = name;
+        this.experiencePoints = 0;
+        this.level = 1;
+        this.health = health;
+        this.combatStrategy = combatStrategy;
+        this.animations = animations;
+        this.observers = new ArrayList<>();
+
+
     }
 
     /**
@@ -209,4 +225,9 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
      * @param visitor le visiteur à appliquer au personnage.
      */
     public abstract void accept(CharacterVisitor visitor);
+
+    public CharacterAnimation getAnimations() {return this.animations;}
+
+    public void setAnimations(CharacterAnimation animations) {this.animations = animations;}
+
 }

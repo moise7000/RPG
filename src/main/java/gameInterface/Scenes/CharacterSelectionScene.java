@@ -1,5 +1,6 @@
 package gameInterface.Scenes;
 
+import eu.telecomnancy.rpg.GameCharacter;
 import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
 import gameInterface.character.CharacterAnimation;
@@ -27,12 +28,16 @@ public class CharacterSelectionScene {
         characterContainer.setStyle("-fx-alignment: center;");
 
         // Create character previews with all animations
-        CharacterAnimation wizard = createWizardCharacter(config);
-        CharacterAnimation evilWizard = createEvilWizardCharacter(config);
-        CharacterAnimation heroKnight = createHeroKnightCharacter(config);
-        CharacterAnimation martialHero = createMartialHeroCharacter(config);
-        CharacterAnimation necromancer = createNecromancerCharacter(config);
-        CharacterAnimation nightBorne = createNightBorneCharacter(config);
+        GameCharacter wizard = config.createWizardGameCharacter();
+        GameCharacter evilWizard = config.createEvilWizardGameCharacter();
+        GameCharacter heroKnight = config.createHeroKnightGameCharacter();
+        GameCharacter martialHero = config.createMartialHeroGaleCharacter();
+        GameCharacter necromancer = config.createNecromancerGameCharacter();
+        GameCharacter nightBorne = config.createNightBorneGameCharacter();
+
+        setAllPreviewAnimations(wizard, evilWizard, heroKnight, martialHero, necromancer, nightBorne);
+
+
 
         // Selection buttons
         Button selectWizard = new Button("Wizard");
@@ -59,12 +64,12 @@ public class CharacterSelectionScene {
 
         // Add preview animations to container
         characterContainer.getChildren().addAll(
-                createCharacterPreviewBox(wizard, selectWizard, config.getWizardInfo()),
-                createCharacterPreviewBox(evilWizard, selectEvilWizard, config.getEvilWizardInfo()),
-                createCharacterPreviewBox(heroKnight, selectHeroKnight, config.getHeroKnightInfo()),
-                createCharacterPreviewBox(martialHero, selectMartialHero, config.getMartialHeroInfo()),
-                createCharacterPreviewBox(necromancer, selectNecromancer, config.getNecromancerInfo()),
-                createCharacterPreviewBox(nightBorne, selectNightBorne, config.getNightBorneInfo())
+                createCharacterPreviewBox(wizard.getAnimations(), selectWizard, config.getWizardInfo()),
+                createCharacterPreviewBox(evilWizard.getAnimations(), selectEvilWizard, config.getEvilWizardInfo()),
+                createCharacterPreviewBox(heroKnight.getAnimations(), selectHeroKnight, config.getHeroKnightInfo()),
+                createCharacterPreviewBox(martialHero.getAnimations(), selectMartialHero, config.getMartialHeroInfo()),
+                createCharacterPreviewBox(necromancer.getAnimations(), selectNecromancer, config.getNecromancerInfo()),
+                createCharacterPreviewBox(nightBorne.getAnimations(), selectNightBorne, config.getNightBorneInfo())
 
         );
 
@@ -91,45 +96,15 @@ public class CharacterSelectionScene {
     }
 
 
-    private static CharacterAnimation createWizardCharacter(InterfaceConfiguration config) {
-        CharacterAnimation character = config.getWizardAnimations();
+    private static void setAllPreviewAnimations(GameCharacter wizard, GameCharacter evilWizard, GameCharacter heroKnight, GameCharacter martialHero, GameCharacter necromancer, GameCharacter nightBorne) {
+        wizard.getAnimations().setState(CharacterAnimation.CharacterState.ATTACK);
+        evilWizard.getAnimations().setState(CharacterAnimation.CharacterState.IDLE);
+        heroKnight.getAnimations().setState(CharacterAnimation.CharacterState.MOVE);
+        martialHero.getAnimations().setState(CharacterAnimation.CharacterState.ATTACK);
+        necromancer.getAnimations().setState(CharacterAnimation.CharacterState.MOVE);
+        nightBorne.getAnimations().setState(CharacterAnimation.CharacterState.ATTACK);
 
-        character.setState(CharacterAnimation.CharacterState.ATTACK);
-
-        return character;
     }
-
-    private static CharacterAnimation createEvilWizardCharacter(InterfaceConfiguration config) {
-        CharacterAnimation character = config.getEvilWizardAnimations();
-        character.setState(CharacterAnimation.CharacterState.IDLE);
-        return character;
-    }
-
-
-    private static CharacterAnimation createHeroKnightCharacter(InterfaceConfiguration config) {
-        CharacterAnimation character = config.getHeroKnightAnimations();
-        character.setState(CharacterAnimation.CharacterState.MOVE);
-        return character;
-    }
-
-    private static CharacterAnimation createNightBorneCharacter(InterfaceConfiguration config) {
-        CharacterAnimation character = config.getNightBorneAnimations();
-        character.setState(CharacterAnimation.CharacterState.DEATH);
-        return character;
-    }
-    private static CharacterAnimation createNecromancerCharacter(InterfaceConfiguration config) {
-        CharacterAnimation character = config.getNecromancerAnimations();
-        character.setState(CharacterAnimation.CharacterState.ATTACK);
-        return character;
-    }
-
-    private static CharacterAnimation createMartialHeroCharacter(InterfaceConfiguration config) {
-        CharacterAnimation character = config.getMartialHeroAnimations();
-        character.setState(CharacterAnimation.CharacterState.ATTACK);
-        return character;
-    }
-
-
 
     private static VBox createCharacterPreviewBox(CharacterAnimation character,
                                                   Button selectButton,
@@ -159,9 +134,9 @@ public class CharacterSelectionScene {
     }
 
 
-    private static void startGame(Main mainApp, InterfaceConfiguration config, CharacterAnimation selectedCharacter) {
+    private static void startGame(Main mainApp, InterfaceConfiguration config, GameCharacter selectedCharacter) {
         mainApp.stopParallax();
-        selectedCharacter.setState(CharacterAnimation.CharacterState.IDLE);
+        selectedCharacter.getAnimations().setState(CharacterAnimation.CharacterState.IDLE);
         mainApp.setSceneContent(GameScene.create(mainApp, config, selectedCharacter));
     }
 }
