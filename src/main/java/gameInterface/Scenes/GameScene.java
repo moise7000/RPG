@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class GameScene {
     private static double playerInitialX;
     private static double playerInitialY;
     private static Label statusLabel; // Affiche le niveau et le statut du joueur
+    private static List<Rectangle> enemyHealthBars;
+    private static Rectangle playerHealthBar;
 
     private static Label turnLabel;
     private static int currentLevel = 1;
@@ -107,9 +110,9 @@ public class GameScene {
         playerCharacterAnimation.getSpriteView().setY(playerInitialY);
         playerCharacterAnimation.getSpriteView().setScaleX(2.0);
         playerCharacterAnimation.getSpriteView().setScaleY(2.0);
+
+
     }
-
-
 
 
 
@@ -133,6 +136,7 @@ public class GameScene {
 
 
     private static void performRunAndAttackAnimation(InterfaceConfiguration config) {
+        isPlayerTurn = false;
         double targetX = config.getWindowWidth() - 300; // Position proche des ennemis
         double durationInSeconds = 1.5; // Durée du déplacement vers l'ennemi
 
@@ -178,7 +182,7 @@ public class GameScene {
                     // Remettre l'état à IDLE après le retour
                     playerCharacterAnimation.setState(CharacterAnimation.CharacterState.IDLE);
                     playerCharacterAnimation.getSpriteView().setScaleX(2.0); // Reflip pour regarder à droite
-                    isPlayerTurn = true; // Permet au joueur de jouer à nouveau
+
                 });
 
                 returnToStart.play();
@@ -190,7 +194,7 @@ public class GameScene {
 
         moveToEnemy.play();
 
-        PauseTransition enemyTurnDelay = new PauseTransition(Duration.seconds(3));
+        PauseTransition enemyTurnDelay = new PauseTransition(Duration.seconds(3.5));
         enemyTurnDelay.setOnFinished(event -> performEnemyTurn(config));
         enemyTurnDelay.play();
     }
@@ -275,6 +279,7 @@ public class GameScene {
         });
 
         moveToPlayer.play();
+
     }
 
 
