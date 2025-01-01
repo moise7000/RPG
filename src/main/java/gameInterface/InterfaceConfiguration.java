@@ -47,6 +47,7 @@ public class InterfaceConfiguration {
         static final String EXIT = "Exit";
         static final String GAME_TITLE = "The Kingdom of the Lost Oyster";
         static final String SELECT_CHARACTER = "Select your character";
+        static final String GAME_OVER = "Game Over";
 
 
 
@@ -54,6 +55,7 @@ public class InterfaceConfiguration {
 
     public double getZoom() {return ZOOM;}
 
+    public String getGameOverLabel() {return UserInterfaceConfiguration.GAME_OVER;}
     public String getGameTitle() {return UserInterfaceConfiguration.GAME_TITLE;}
     public String getWindowTitle() {return UserInterfaceConfiguration.GAME_TITLE ;}
     public String getPlayButtonLabel() {return UserInterfaceConfiguration.PLAY;}
@@ -147,14 +149,35 @@ public class InterfaceConfiguration {
                 "-fx-font-weight: bold;" +
                 "-fx-text-fill: #FFFFFF;";
 
+        static final String GAME_OVER_STYLE =
+                "-fx-font-family:" + FONT_NAME + ";" +
+                        "-fx-font-size: 160px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-background-color: rgba(0, 0, 0, 0.0);" +
+                        "-fx-text-fill: #850606;";
+
+        static final String EXIT_BUTTON_STYLE =
+                "-fx-font-family:" + FONT_NAME + ";" +
+                        "-fx-font-size: 25px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-background-color: rgba(0, 0, 0, 0.0);" +
+                        "-fx-text-fill: #FFFFFF;";
+
+        static final String EXIT_BUTTON_HOVER_STYLE =
+                "-fx-background-color: rgba(0, 0, 0, 0.3);" +
+                " -fx-text-fill: #850606;";
+
     }
 
+    public String getGameOverStyle() {return StylesConfiguration.GAME_OVER_STYLE;}
     public String getGameTitleStyle() {return StylesConfiguration.GAME_TITLE_STYLE;}
     public String getButtonStyle() {return StylesConfiguration.BUTTON_STYLE;}
+    public String getExitButtonStyle() {return StylesConfiguration.EXIT_BUTTON_STYLE;}
     public String getFontPath() {return StylesConfiguration.FONT_PATH;}
     public String getFontName() {return StylesConfiguration.FONT_NAME;}
     public int getFontSize() {return StylesConfiguration.FONT_SIZE;}
     public String getButtonHoverStyle() {return StylesConfiguration.BUTTON_STYLE + StylesConfiguration.BUTTON_HOVER_STYLE;}
+    public String getExitButtonHoverStyle() {return  StylesConfiguration.BUTTON_STYLE + StylesConfiguration.EXIT_BUTTON_HOVER_STYLE;}
     public String getFontAuthor() {return StylesConfiguration.FONT_AUTHOR;}
     public int getFontCaptionSize() {return StylesConfiguration.FONT_CAPTION_SIZE;}
     public String getCharacterInfoStyle() {return StylesConfiguration.CHARACTER_INFO_STYLE;}

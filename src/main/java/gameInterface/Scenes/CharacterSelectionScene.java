@@ -44,8 +44,6 @@ public class CharacterSelectionScene {
         Button selectEvilWizard = new Button("Evil Wizard");
         Button selectHeroKnight = new Button("Hero Knight");
         Button selectMartialHero = new Button("Martial Hero");
-        Button selectNecromancer = new Button("Necromancer");
-        Button selectNightBorne = new Button("Night Borne");
         Button backButton = new Button(config.getExitButtonLabel());
 
 
@@ -54,8 +52,6 @@ public class CharacterSelectionScene {
                 selectWizard,
                 selectHeroKnight,
                 selectMartialHero,
-                selectNightBorne,
-                selectNecromancer,
                 backButton
         );
 
@@ -67,9 +63,7 @@ public class CharacterSelectionScene {
                 createCharacterPreviewBox(wizard.getAnimations(), selectWizard, config.getWizardInfo()),
                 createCharacterPreviewBox(evilWizard.getAnimations(), selectEvilWizard, config.getEvilWizardInfo()),
                 createCharacterPreviewBox(heroKnight.getAnimations(), selectHeroKnight, config.getHeroKnightInfo()),
-                createCharacterPreviewBox(martialHero.getAnimations(), selectMartialHero, config.getMartialHeroInfo()),
-                createCharacterPreviewBox(necromancer.getAnimations(), selectNecromancer, config.getNecromancerInfo()),
-                createCharacterPreviewBox(nightBorne.getAnimations(), selectNightBorne, config.getNightBorneInfo())
+                createCharacterPreviewBox(martialHero.getAnimations(), selectMartialHero, config.getMartialHeroInfo())
 
         );
 
@@ -78,8 +72,7 @@ public class CharacterSelectionScene {
         selectEvilWizard.setOnAction(e -> startGame(mainApp, config, evilWizard));
         selectHeroKnight.setOnAction(e -> startGame(mainApp, config, heroKnight));
         selectMartialHero.setOnAction(e -> startGame(mainApp, config, martialHero));
-        selectNecromancer.setOnAction(e -> startGame(mainApp, config, necromancer));
-        selectNightBorne.setOnAction(e -> startGame(mainApp, config, nightBorne));
+
 
 
 

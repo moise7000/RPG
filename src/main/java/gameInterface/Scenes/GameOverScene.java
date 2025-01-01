@@ -18,8 +18,8 @@ public class GameOverScene {
         root.setStyle("-fx-alignment: center;");
 
         // Game Over Title with fade animation
-        Label gameOverTitle = new Label("Game Over");
-        gameOverTitle.setStyle(config.getGameTitleStyle());
+        Label gameOverTitle = new Label(config.getGameOverLabel());
+        gameOverTitle.setStyle(config.getGameOverStyle());
         FadeTransition fadeTitle = new FadeTransition(Duration.seconds(2), gameOverTitle);
         fadeTitle.setFromValue(0);
         fadeTitle.setToValue(1);
