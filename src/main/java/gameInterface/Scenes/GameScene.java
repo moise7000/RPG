@@ -28,6 +28,7 @@ public class GameScene {
     private static boolean isPlayerTurn = true;
     private static double playerInitialX;
     private static double playerInitialY;
+    private static Label statusLabel; // Affiche le niveau et le statut du joueur
 
     private static Label turnLabel;
     private static int currentLevel = 1;
@@ -35,8 +36,10 @@ public class GameScene {
     private static Main mainApp;
 
     public static VBox create(Main mainApp, InterfaceConfiguration config, GameCharacter selectedCharacter) {
-        playerCharacterAnimation = selectedCharacter.getAnimations();
         playerCharacter = selectedCharacter;
+        playerCharacterAnimation = selectedCharacter.getAnimations();
+
+        System.out.println(playerCharacter.getName());
         enemies = createEnemies(currentLevel);
         enemyAnimations = new ArrayList<>();
 
@@ -49,6 +52,11 @@ public class GameScene {
         gameContainer.setPrefSize(config.getWindowWidth(), config.getWindowHeight());
 
 
+
+        // Créer le label de statut
+        statusLabel = new Label();
+        statusLabel.setStyle(config.getLevelStyle());
+        updateStatusLabel(); // Mettre à jour le texte initial du label
 
 
         // Characters Position
@@ -83,7 +91,7 @@ public class GameScene {
 
 
         // Assemblage de la scène
-        root.getChildren().addAll(gameContainer, controlButtons, spacer, backButton );
+        root.getChildren().addAll(statusLabel, gameContainer, controlButtons, spacer, backButton );
 
         return root;
     }
@@ -93,7 +101,7 @@ public class GameScene {
 
     private static void setupPlayerPosition(InterfaceConfiguration config) {
         playerInitialX = 0;
-        playerInitialY = config.getWindowHeight() - 300;
+        playerInitialY = config.getWindowHeight() - 350;
         playerCharacterAnimation.getSpriteView().setX(playerInitialX);
         playerCharacterAnimation.getSpriteView().setY(playerInitialY);
         playerCharacterAnimation.getSpriteView().setScaleX(2.0);
@@ -128,6 +136,7 @@ public class GameScene {
 
         // Une fois que le déplacement est terminé
         moveToEnemy.setOnFinished(event -> {
+            updateStatusLabel();
             // Jouer l'animation d'attaque
             playerCharacterAnimation.setState(CharacterAnimation.CharacterState.ATTACK);
             int attackAnimationFrameCount = playerCharacterAnimation.getFrameCount(playerCharacterAnimation.getCurrentState());
@@ -144,6 +153,7 @@ public class GameScene {
             // Remettre les ennemis à l'état IDLE après l'animation Hit
             PauseTransition attackPause = new PauseTransition(Duration.millis(attackDurationMillis));
             attackPause.setOnFinished(event3 -> {
+                updateStatusLabel();
                 for (CharacterAnimation enemyAnim : enemyAnimations) {
                     enemyAnim.setState(CharacterAnimation.CharacterState.IDLE);
                 }
@@ -170,8 +180,70 @@ public class GameScene {
         });
 
         moveToEnemy.play();
+
+        PauseTransition enemyTurnDelay = new PauseTransition(Duration.seconds(3));
+        enemyTurnDelay.setOnFinished(event -> performEnemyTurn(config));
+        enemyTurnDelay.play();
     }
 
+
+
+    private static void performEnemyTurn(InterfaceConfiguration config) {
+        // Trouver l'ennemi avec la santé la plus basse
+        GameCharacter weakestEnemy = enemies.stream()
+                .min((e1, e2) -> Integer.compare(e1.getHealth(), e2.getHealth()))
+                .orElse(null);
+
+        if (weakestEnemy == null) {
+            return; // Aucun ennemi
+        }
+
+        CharacterAnimation enemyAnimation = weakestEnemy.getAnimations();
+
+        // Position cible (joueur)
+        double targetX = playerInitialX + 50; // Ajustez pour viser la position du joueur
+        double durationInSeconds = 3; // Durée du déplacement vers le joueur
+
+        // Animation de déplacement vers le joueur
+        enemyAnimation.setState(CharacterAnimation.CharacterState.MOVE);
+        TranslateTransition moveToPlayer = new TranslateTransition(Duration.seconds(durationInSeconds), enemyAnimation.getSpriteView());
+        moveToPlayer.setToX(targetX);
+
+        moveToPlayer.setOnFinished(event -> {
+            // Jouer l'animation d'attaque
+            enemyAnimation.setState(CharacterAnimation.CharacterState.ATTACK);
+            int attackAnimationFrameCount = enemyAnimation.getFrameCount(enemyAnimation.getCurrentState());
+            double attackDurationMillis = attackAnimationFrameCount * 100;
+
+            // Animation Hit sur le joueur
+            PauseTransition hitDelay = new PauseTransition(Duration.millis(attackDurationMillis / 2));
+            hitDelay.setOnFinished(event2 -> {
+                playerCharacterAnimation.setState(CharacterAnimation.CharacterState.HIT);
+                // Réduire la santé du joueur (ajustez les dégâts)
+                playerCharacter.setHealth(playerCharacter.getHealth() - 10);
+                updateStatusLabel();
+            });
+
+            // Retour de l'ennemi à sa position initiale
+            PauseTransition attackPause = new PauseTransition(Duration.millis(attackDurationMillis));
+            attackPause.setOnFinished(event3 -> {
+                enemyAnimation.setState(CharacterAnimation.CharacterState.MOVE);
+                TranslateTransition returnToStart = new TranslateTransition(Duration.seconds(durationInSeconds), enemyAnimation.getSpriteView());
+                returnToStart.setToX(enemyAnimation.getSpriteView().getTranslateX());
+                returnToStart.setOnFinished(event4 -> {
+                    enemyAnimation.setState(CharacterAnimation.CharacterState.IDLE);
+                    isPlayerTurn = true; // Retour au tour du joueur
+                    updateStatusLabel();
+                });
+                returnToStart.play();
+            });
+
+            hitDelay.play();
+            attackPause.play();
+        });
+
+        moveToPlayer.play();
+    }
 
 
 
@@ -182,7 +254,7 @@ public class GameScene {
 
     private static void setupEnemiesPosition(InterfaceConfiguration config) {
         double startX = config.getWindowWidth() - 200;
-        double startY = config.getWindowHeight() - 300;
+        double startY = config.getWindowHeight() - 400;
 
         for (int i = 0; i < enemies.size(); i++) {
             CharacterAnimation enemyAnim = enemies.get(i).getAnimations();
@@ -195,13 +267,17 @@ public class GameScene {
             } else {
                 enemyAnim.getSpriteView().setX(startX  - (i * 100));
                 enemyAnim.getSpriteView().setY(startY + 80);
-                enemyAnim.getSpriteView().setScaleX(-2.0); // Flip sprite to face left
-                enemyAnim.getSpriteView().setScaleY(2.0);
+                enemyAnim.getSpriteView().setScaleX(-4.0); // Flip sprite to face left
+                enemyAnim.getSpriteView().setScaleY(4.0);
+
+
             }
 
             enemyAnimations.add(enemyAnim);
         }
     }
+
+
     private static List<GameCharacter> createEnemies(int level) {
         List<GameCharacter> enemyList = new ArrayList<>();
         int enemyCount = Math.min(level, 3);
@@ -235,6 +311,7 @@ public class GameScene {
 //            GameCharacter clonedPlayerCharacter = playerCharacter.duplicate();
 //            levelSystem.recruitMember(clonedPlayerCharacter);
 //        }
+        updateStatusLabel();
         mainApp.setSceneContent(GameOverScene.create(mainApp, config, playerCharacter, 1,1));
 
     }
@@ -266,6 +343,7 @@ public class GameScene {
         attackButton.setOnAction(e -> {
             if (isPlayerTurn) {
                 isPlayerTurn = false;
+                updateStatusLabel();
                 //performAttackAnimation();
                 performRunAndAttackAnimation(config);
             }
@@ -303,6 +381,11 @@ public class GameScene {
         }
     }
 
+
+    private static void updateStatusLabel() {
+        String turnText = isPlayerTurn ? "Your turn !" : "Enemies turn...";
+        statusLabel.setText("Level: " + currentLevel+ " "  + turnText);
+    }
 
 
 

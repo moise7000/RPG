@@ -48,7 +48,8 @@ public class CharacterAnimation {
         this.animations = new HashMap<>();
         this.animationsFrameCounts = new HashMap<>();
         this.currentState = CharacterState.IDLE;
-        spriteView.setStyle("-fx-interpolation-hint: nearest-neighbor");
+
+
     }
 
     public void addAnimation(CharacterState state, String spriteSheetPath, int frameCount, int frameWidth, int frameHeight, Duration frameDuration) {
@@ -71,6 +72,7 @@ public class CharacterAnimation {
 
         // Initialiser la première animation
         if (spriteView.getImage() == null) {
+
             spriteView.setImage(spriteSheet);
             spriteView.setViewport(new Rectangle2D(0, 0, frameWidth, frameHeight));
         }

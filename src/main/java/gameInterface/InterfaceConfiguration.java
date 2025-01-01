@@ -167,8 +167,15 @@ public class InterfaceConfiguration {
                 "-fx-background-color: rgba(0, 0, 0, 0.3);" +
                 " -fx-text-fill: #850606;";
 
+        static final String LEVEL_STYLE =
+                "-fx-font-family:" + FONT_NAME + ";" +
+                        "-fx-font-size:  40px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-text-fill: #FFFFFF;";
+
     }
 
+    public String getLevelStyle() {return StylesConfiguration.LEVEL_STYLE;}
     public String getGameOverStyle() {return StylesConfiguration.GAME_OVER_STYLE;}
     public String getGameTitleStyle() {return StylesConfiguration.GAME_TITLE_STYLE;}
     public String getButtonStyle() {return StylesConfiguration.BUTTON_STYLE;}
@@ -417,7 +424,7 @@ public class InterfaceConfiguration {
             }
 
             private static final class HIT {
-                static final String SPRITE_PATH = WIZARD_PATH + "/Hit.png";
+                static final String SPRITE_PATH = MARTIAL_HERO_PATH + "/Hit.png";
                 static final int SPRITE_WIDTH = 800;
                 static final int SPRITE_HEIGHT = 200;
                 static final int FRAME_COUNT = 4;

@@ -28,19 +28,19 @@ public class CharacterSelectionScene {
         characterContainer.setStyle("-fx-alignment: center;");
 
         // Create character previews with all animations
-        GameCharacter wizard = config.createWizardGameCharacter();
+
         GameCharacter evilWizard = config.createEvilWizardGameCharacter();
         GameCharacter heroKnight = config.createHeroKnightGameCharacter();
         GameCharacter martialHero = config.createMartialHeroGaleCharacter();
         GameCharacter necromancer = config.createNecromancerGameCharacter();
         GameCharacter nightBorne = config.createNightBorneGameCharacter();
 
-        setAllPreviewAnimations(wizard, evilWizard, heroKnight, martialHero, necromancer, nightBorne);
+        setAllPreviewAnimations(evilWizard, heroKnight, martialHero, necromancer, nightBorne);
 
 
 
         // Selection buttons
-        Button selectWizard = new Button("Wizard");
+
         Button selectEvilWizard = new Button("Evil Wizard");
         Button selectHeroKnight = new Button("Hero Knight");
         Button selectMartialHero = new Button("Martial Hero");
@@ -49,7 +49,7 @@ public class CharacterSelectionScene {
 
         List<Button> buttons = List.of(
                 selectEvilWizard,
-                selectWizard,
+
                 selectHeroKnight,
                 selectMartialHero,
                 backButton
@@ -60,7 +60,7 @@ public class CharacterSelectionScene {
 
         // Add preview animations to container
         characterContainer.getChildren().addAll(
-                createCharacterPreviewBox(wizard.getAnimations(), selectWizard, config.getWizardInfo()),
+
                 createCharacterPreviewBox(evilWizard.getAnimations(), selectEvilWizard, config.getEvilWizardInfo()),
                 createCharacterPreviewBox(heroKnight.getAnimations(), selectHeroKnight, config.getHeroKnightInfo()),
                 createCharacterPreviewBox(martialHero.getAnimations(), selectMartialHero, config.getMartialHeroInfo())
@@ -68,7 +68,7 @@ public class CharacterSelectionScene {
         );
 
 
-        selectWizard.setOnAction(e -> startGame(mainApp, config, wizard));
+
         selectEvilWizard.setOnAction(e -> startGame(mainApp, config, evilWizard));
         selectHeroKnight.setOnAction(e -> startGame(mainApp, config, heroKnight));
         selectMartialHero.setOnAction(e -> startGame(mainApp, config, martialHero));
@@ -89,8 +89,8 @@ public class CharacterSelectionScene {
     }
 
 
-    private static void setAllPreviewAnimations(GameCharacter wizard, GameCharacter evilWizard, GameCharacter heroKnight, GameCharacter martialHero, GameCharacter necromancer, GameCharacter nightBorne) {
-        wizard.getAnimations().setState(CharacterAnimation.CharacterState.ATTACK);
+    private static void setAllPreviewAnimations( GameCharacter evilWizard, GameCharacter heroKnight, GameCharacter martialHero, GameCharacter necromancer, GameCharacter nightBorne) {
+
         evilWizard.getAnimations().setState(CharacterAnimation.CharacterState.IDLE);
         heroKnight.getAnimations().setState(CharacterAnimation.CharacterState.MOVE);
         martialHero.getAnimations().setState(CharacterAnimation.CharacterState.ATTACK);
