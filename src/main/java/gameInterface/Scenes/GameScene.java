@@ -1,6 +1,7 @@
 package gameInterface.Scenes;
 
 import eu.telecomnancy.rpg.GameCharacter;
+import eu.telecomnancy.rpg.GameConfiguration;
 import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
 import gameInterface.character.CharacterAnimation;
@@ -120,6 +121,14 @@ public class GameScene {
         pause.play();
     }
 
+    private static void performHitAnimation() {
+        playerCharacterAnimation.setState(CharacterAnimation.CharacterState.HIT);
+        int HitAnimationFrameCount = playerCharacterAnimation.getFrameCount(playerCharacterAnimation.getCurrentState());
+        PauseTransition pause = new PauseTransition(Duration.millis(HitAnimationFrameCount * 100));
+        pause.setOnFinished(event -> playerCharacterAnimation.setState(CharacterAnimation.CharacterState.IDLE));
+        pause.play();
+    }
+
 
 
 
@@ -200,9 +209,12 @@ public class GameScene {
 
         CharacterAnimation enemyAnimation = weakestEnemy.getAnimations();
 
+
         // Position cible (joueur)
-        double targetX = playerInitialX + 50; // Ajustez pour viser la position du joueur
-        double durationInSeconds = 3; // Durée du déplacement vers le joueur
+        double targetX = playerInitialX - config.getWindowWidth() + 320; // Ajustez pour viser la position du joueur
+        double durationInSeconds = 1.5; // Durée du déplacement vers le joueur
+
+        System.out.println(playerInitialX);
 
         // Animation de déplacement vers le joueur
         enemyAnimation.setState(CharacterAnimation.CharacterState.MOVE);
@@ -218,9 +230,18 @@ public class GameScene {
             // Animation Hit sur le joueur
             PauseTransition hitDelay = new PauseTransition(Duration.millis(attackDurationMillis / 2));
             hitDelay.setOnFinished(event2 -> {
-                playerCharacterAnimation.setState(CharacterAnimation.CharacterState.HIT);
-                // Réduire la santé du joueur (ajustez les dégâts)
-                playerCharacter.setHealth(playerCharacter.getHealth() - 10);
+
+                //TODO: Hit animation
+                performHitAnimation();
+
+                //TODO: processDamage on player
+                 int damageForPlayer = weakestEnemy.attack(GameConfiguration.getShared().getBaseDamageAmount());
+
+
+
+                playerCharacter.receiveAttack(damageForPlayer);
+
+
                 updateStatusLabel();
             });
 
@@ -228,10 +249,21 @@ public class GameScene {
             PauseTransition attackPause = new PauseTransition(Duration.millis(attackDurationMillis));
             attackPause.setOnFinished(event3 -> {
                 enemyAnimation.setState(CharacterAnimation.CharacterState.MOVE);
+                if (weakestEnemy.getName().equals("Necromancer")) {
+                    enemyAnimation.getSpriteView().setScaleX(2.0);
+                } else {
+                    enemyAnimation.getSpriteView().setScaleX(4.0);
+                }
                 TranslateTransition returnToStart = new TranslateTransition(Duration.seconds(durationInSeconds), enemyAnimation.getSpriteView());
-                returnToStart.setToX(enemyAnimation.getSpriteView().getTranslateX());
+                returnToStart.setToX(100);
                 returnToStart.setOnFinished(event4 -> {
                     enemyAnimation.setState(CharacterAnimation.CharacterState.IDLE);
+                    if (weakestEnemy.getName().equals("Necromancer")) {
+                        enemyAnimation.getSpriteView().setScaleX(-2.0);
+                    } else {
+                        enemyAnimation.getSpriteView().setScaleX(-4.0);
+                    }
+
                     isPlayerTurn = true; // Retour au tour du joueur
                     updateStatusLabel();
                 });
