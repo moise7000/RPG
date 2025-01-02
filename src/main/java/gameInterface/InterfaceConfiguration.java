@@ -48,6 +48,8 @@ public class InterfaceConfiguration {
         static final String GAME_TITLE = "The Kingdom of the Lost Oyster";
         static final String SELECT_CHARACTER = "Select your character";
         static final String GAME_OVER = "Game Over";
+        static final String SELECT = "Select";
+
 
 
 
@@ -55,6 +57,7 @@ public class InterfaceConfiguration {
 
     public double getZoom() {return ZOOM;}
 
+    public String getSelectLabel() {return UserInterfaceConfiguration.SELECT;}
     public String getGameOverLabel() {return UserInterfaceConfiguration.GAME_OVER;}
     public String getGameTitle() {return UserInterfaceConfiguration.GAME_TITLE;}
     public String getWindowTitle() {return UserInterfaceConfiguration.GAME_TITLE ;}
@@ -173,8 +176,24 @@ public class InterfaceConfiguration {
                         "-fx-font-weight: bold;" +
                         "-fx-text-fill: #FFFFFF;";
 
+        static final String VISITOR_DESCRIPTION_STYLE =
+                "-fx-font-family:" + FONT_NAME + ";" +
+                "-fx-font-size:  14px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-text-fill: #FFFFFF;" +
+                "-fx-wrap-text: true;";
+
+        static final String VISITOR_NAME_STYLE =
+                "-fx-font-family:" + FONT_NAME + ";" +
+                        "-fx-font-size:  30px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-text-fill: #FFFFFF;" +
+                        "-fx-wrap-text: true;";
+
     }
 
+    public String getVisitorNameStyle() {return StylesConfiguration.VISITOR_NAME_STYLE;}
+    public String getVisitorDescriptionStyle() {return StylesConfiguration.VISITOR_DESCRIPTION_STYLE;}
     public String getLevelStyle() {return StylesConfiguration.LEVEL_STYLE;}
     public String getGameOverStyle() {return StylesConfiguration.GAME_OVER_STYLE;}
     public String getGameTitleStyle() {return StylesConfiguration.GAME_TITLE_STYLE;}
@@ -1031,10 +1050,12 @@ public class InterfaceConfiguration {
     private static final class GamePlayConfiguration {
         static final String ATTACK = "Attack";
         static final String RECRUIT = "Recruit";
+        static final String ADD_VISITORS = "Add bonus";
     }
 
     public String getAttackButtonLabel() {return GamePlayConfiguration.ATTACK;}
     public String getRecruitButtonLabel() {return GamePlayConfiguration.RECRUIT;}
+    public String getAddVisitorButtonLabel() {return GamePlayConfiguration.ADD_VISITORS;}
 
 
     public String getStringFromType(CharacterType type) {
@@ -1046,6 +1067,78 @@ public class InterfaceConfiguration {
         }
         return "Unknown";
     }
+
+
+
+    private static final class VisitorsConfiguration {
+        static final String BUFF_PATH = "/assets/visitors/Buff.png";
+        static final String HEAL_PATH = "/assets/visitors/Heal.png";
+
+        private static final class Buff {
+            static final int FRAME_COUNT = 13;
+            static final int FRAME_WIDTH = 18;
+            static final int FRAME_HEIGHT = 34;
+            static final String NAME = "Buff bonus";
+            static final String DESCRIPTION =
+                    "Improves warriors' strength \n" +
+                    "Improves mages' intelligence \n" +
+                    "Increases health \n" +
+                    "Increases level \n";
+
+        }
+
+        private static final class Heal {
+            static final int FRAME_COUNT = 8;
+            static final int FRAME_WIDTH = 22;
+            static final int FRAME_HEIGHT = 37;
+            static final String NAME = "Heal bonus";
+            static final String DESCRIPTION = "Increases health";
+        }
+
+    }
+
+    public String getBuffPath() {return VisitorsConfiguration.BUFF_PATH;}
+    public int getBuffFrameWidth() {return VisitorsConfiguration.Buff.FRAME_WIDTH;}
+    public int getBuffFrameHeight() {return VisitorsConfiguration.Buff.FRAME_HEIGHT;}
+    public int getBuffFrameCount() {return VisitorsConfiguration.Buff.FRAME_COUNT;}
+
+    public String getHealPath() {return VisitorsConfiguration.HEAL_PATH;}
+    public int getHealFrameWidth() {return VisitorsConfiguration.Heal.FRAME_WIDTH;}
+    public int getHealFrameHeight() {return VisitorsConfiguration.Heal.FRAME_HEIGHT;}
+    public int getHealFrameCount() {return VisitorsConfiguration.Heal.FRAME_COUNT;}
+
+    public CharacterAnimation getBuffAnimation() {
+        CharacterAnimation character = new CharacterAnimation();
+        character.addAnimation(
+                CharacterAnimation.CharacterState.IDLE,
+                getBuffPath(),
+                getBuffFrameCount(),
+                getBuffFrameWidth(),
+                getBuffFrameHeight(),
+                Duration.millis(100)
+        );
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+        return character;
+    }
+
+    public CharacterAnimation getHealAnimation() {
+        CharacterAnimation character = new CharacterAnimation();
+        character.addAnimation(
+                CharacterAnimation.CharacterState.IDLE,
+                getHealPath(),
+                getHealFrameCount(),
+                getHealFrameWidth(),
+                getHealFrameHeight(),
+                Duration.millis(100)
+        );
+        character.setState(CharacterAnimation.CharacterState.IDLE);
+        return character;
+    }
+
+    public String getBuffDescription() {return VisitorsConfiguration.Buff.DESCRIPTION;}
+    public String getBuffName() {return VisitorsConfiguration.Buff.NAME;}
+    public String getHealDescription() {return VisitorsConfiguration.Heal.DESCRIPTION;}
+    public String getHealName() {return VisitorsConfiguration.Heal.NAME;}
 
 
 

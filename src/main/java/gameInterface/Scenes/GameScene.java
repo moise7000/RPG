@@ -363,13 +363,13 @@ public class GameScene {
         // Création des boutons
         Button attackButton = new Button(config.getAttackButtonLabel());
         Button recruitButton = new Button(config.getRecruitButtonLabel());
-        Button decoratorButton = new Button("Add Decorator");
+        Button visitorButton = new Button(config.getAddVisitorButtonLabel());
 
         // Style des boutons
         List<Button> controlButtons = List.of(
                 attackButton,
                 recruitButton,
-                decoratorButton
+                visitorButton
         );
 
         ButtonStyleHelper.applyButtonStyle(controlButtons, config.getButtonStyle());
@@ -397,12 +397,14 @@ public class GameScene {
         });
 
         // Action du bouton Add Decorator (à implémenter selon vos besoins)
-        decoratorButton.setOnAction(e -> {
-            // TODO: Implémenter la logique d'ajout de décorateur
+        visitorButton.setOnAction(e -> {
+            if (isPlayerTurn) {
+                VisitorSelectionPopup.show(config);
+            }
 
         });
 
-        buttonContainer.getChildren().addAll(attackButton, recruitButton, decoratorButton);
+        buttonContainer.getChildren().addAll(attackButton, recruitButton, visitorButton);
         return buttonContainer;
     }
 
