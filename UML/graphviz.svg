@@ -1,0 +1,662 @@
+<svg width="6257pt" height="1643pt" viewBox="0.00 0.00 6256.93 1643.20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1639.2)">
+<title>rpg</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-1639.2 6252.93,-1639.2 6252.93,4 -4,4"/>
+<!-- AddDecoratorCommand -->
+<g id="node1" class="node">
+<title>AddDecoratorCommand</title>
+<polygon fill="none" stroke="black" points="0,-1207.9 0,-1374.3 413.82,-1374.3 413.82,-1207.9 0,-1207.9"/>
+<text text-anchor="middle" x="206.91" y="-1357.7" font-family="Times,serif" font-size="14.00">AddDecoratorCommand</text>
+<polyline fill="none" stroke="black" points="0,-1349.5 413.82,-1349.5"/>
+<text text-anchor="start" x="8" y="-1332.9" font-family="Times,serif" font-size="14.00">+ AddDecoratorCommand(GameFacade, String, int, DecoratorType) : </text>
+<polyline fill="none" stroke="black" points="0,-1324.7 413.82,-1324.7"/>
+<text text-anchor="start" x="8" y="-1308.1" font-family="Times,serif" font-size="14.00">- teamName : String</text>
+<text text-anchor="start" x="8" y="-1291.3" font-family="Times,serif" font-size="14.00"> - game : GameFacade</text>
+<text text-anchor="start" x="8" y="-1274.5" font-family="Times,serif" font-size="14.00"> - type : DecoratorType</text>
+<text text-anchor="start" x="8" y="-1257.7" font-family="Times,serif" font-size="14.00"> - characterIndex : int</text>
+<polyline fill="none" stroke="black" points="0,-1249.5 413.82,-1249.5"/>
+<text text-anchor="start" x="8" y="-1232.9" font-family="Times,serif" font-size="14.00">+ execute() : void</text>
+<text text-anchor="start" x="8" y="-1216.1" font-family="Times,serif" font-size="14.00"> + undo() : void</text>
+</g>
+<!-- Command -->
+<g id="node14" class="node">
+<title>Command</title>
+<polygon fill="none" stroke="black" points="545.29,-760.5 545.29,-843.7 660.53,-843.7 660.53,-760.5 545.29,-760.5"/>
+<text text-anchor="middle" x="602.91" y="-827.1" font-family="Times,serif" font-size="14.00">&lt;&lt;interface&gt;&gt;</text>
+<text text-anchor="middle" x="602.91" y="-810.3" font-family="Times,serif" font-size="14.00">Command</text>
+<polyline fill="none" stroke="black" points="545.29,-802.1 660.53,-802.1"/>
+<text text-anchor="start" x="553.29" y="-785.5" font-family="Times,serif" font-size="14.00">+ execute() : void</text>
+<text text-anchor="start" x="553.29" y="-768.7" font-family="Times,serif" font-size="14.00"> + undo() : void</text>
+</g>
+<!-- AddDecoratorCommand&#45;&gt;Command -->
+<g id="edge1" class="edge">
+<title>AddDecoratorCommand-&gt;Command</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M206.91,-1207.59C206.91,-1067.93 206.91,-802.1 206.91,-802.1 206.91,-802.1 533.39,-802.1 533.39,-802.1"/>
+<polygon fill="#008200" stroke="#008200" points="533.39,-805.6 543.39,-802.1 533.39,-798.6 533.39,-805.6"/>
+</g>
+<!-- AggressiveStrategy -->
+<g id="node2" class="node">
+<title>AggressiveStrategy</title>
+<polygon fill="none" stroke="black" points="1088.1,-1233.1 1088.1,-1349.1 1313.73,-1349.1 1313.73,-1233.1 1088.1,-1233.1"/>
+<text text-anchor="middle" x="1200.91" y="-1332.5" font-family="Times,serif" font-size="14.00">AggressiveStrategy</text>
+<polyline fill="none" stroke="black" points="1088.1,-1324.3 1313.73,-1324.3"/>
+<text text-anchor="start" x="1096.1" y="-1307.7" font-family="Times,serif" font-size="14.00">+ AggressiveStrategy() : </text>
+<polyline fill="none" stroke="black" points="1088.1,-1299.5 1313.73,-1299.5"/>
+<text text-anchor="start" x="1096.1" y="-1282.9" font-family="Times,serif" font-size="14.00">- config : GameConfiguration</text>
+<polyline fill="none" stroke="black" points="1088.1,-1274.7 1313.73,-1274.7"/>
+<text text-anchor="start" x="1096.1" y="-1258.1" font-family="Times,serif" font-size="14.00">+ calculateDamageReceived(int) : int</text>
+<text text-anchor="start" x="1096.1" y="-1241.3" font-family="Times,serif" font-size="14.00"> + calculateDamageDealt(int) : int</text>
+</g>
+<!-- CombatStrategy -->
+<g id="node13" class="node">
+<title>CombatStrategy</title>
+<polygon fill="none" stroke="black" points="1332.1,-760.5 1332.1,-843.7 1557.73,-843.7 1557.73,-760.5 1332.1,-760.5"/>
+<text text-anchor="middle" x="1444.91" y="-827.1" font-family="Times,serif" font-size="14.00">&lt;&lt;interface&gt;&gt;</text>
+<text text-anchor="middle" x="1444.91" y="-810.3" font-family="Times,serif" font-size="14.00">CombatStrategy</text>
+<polyline fill="none" stroke="black" points="1332.1,-802.1 1557.73,-802.1"/>
+<text text-anchor="start" x="1340.1" y="-785.5" font-family="Times,serif" font-size="14.00">+ calculateDamageReceived(int) : int</text>
+<text text-anchor="start" x="1340.1" y="-768.7" font-family="Times,serif" font-size="14.00"> + calculateDamageDealt(int) : int</text>
+</g>
+<!-- AggressiveStrategy&#45;&gt;CombatStrategy -->
+<g id="edge2" class="edge">
+<title>AggressiveStrategy-&gt;CombatStrategy</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M1200.91,-1232.9C1200.91,-1100.49 1200.91,-788.07 1200.91,-788.07 1200.91,-788.07 1320.33,-788.07 1320.33,-788.07"/>
+<polygon fill="#008200" stroke="#008200" points="1320.33,-791.57 1330.33,-788.07 1320.33,-784.57 1320.33,-791.57"/>
+</g>
+<!-- ArmoredDecorator -->
+<g id="node3" class="node">
+<title>ArmoredDecorator</title>
+<polygon fill="none" stroke="black" points="1822.94,-1233.1 1822.94,-1349.1 2064.89,-1349.1 2064.89,-1233.1 1822.94,-1233.1"/>
+<text text-anchor="middle" x="1943.91" y="-1332.5" font-family="Times,serif" font-size="14.00">ArmoredDecorator</text>
+<polyline fill="none" stroke="black" points="1822.94,-1324.3 2064.89,-1324.3"/>
+<text text-anchor="start" x="1830.94" y="-1307.7" font-family="Times,serif" font-size="14.00">+ ArmoredDecorator(GameCharacter) : </text>
+<polyline fill="none" stroke="black" points="1822.94,-1299.5 2064.89,-1299.5"/>
+<text text-anchor="start" x="1830.94" y="-1282.9" font-family="Times,serif" font-size="14.00">- config : GameConfiguration</text>
+<polyline fill="none" stroke="black" points="1822.94,-1274.7 2064.89,-1274.7"/>
+<text text-anchor="start" x="1830.94" y="-1258.1" font-family="Times,serif" font-size="14.00">+ receiveAttack(int) : void</text>
+<text text-anchor="start" x="1830.94" y="-1241.3" font-family="Times,serif" font-size="14.00"> + duplicate() : GameCharacter</text>
+</g>
+<!-- CharacterDecorator -->
+<g id="node7" class="node">
+<title>CharacterDecorator</title>
+<polygon fill="none" stroke="black" points="1805.26,-693.7 1805.26,-910.5 2096.57,-910.5 2096.57,-693.7 1805.26,-693.7"/>
+<text text-anchor="middle" x="1950.91" y="-893.9" font-family="Times,serif" font-size="14.00">CharacterDecorator</text>
+<polyline fill="none" stroke="black" points="1805.26,-885.7 2096.57,-885.7"/>
+<text text-anchor="start" x="1813.26" y="-869.1" font-family="Times,serif" font-size="14.00">+ CharacterDecorator(GameCharacter) : </text>
+<polyline fill="none" stroke="black" points="1805.26,-860.9 2096.57,-860.9"/>
+<text text-anchor="start" x="1813.26" y="-844.3" font-family="Times,serif" font-size="14.00"># decoratedCharacter : GameCharacter</text>
+<polyline fill="none" stroke="black" points="1805.26,-836.1 2096.57,-836.1"/>
+<text text-anchor="start" x="1813.26" y="-819.5" font-family="Times,serif" font-size="14.00">+ removeDecoratedCharacter() : GameCharacter</text>
+<text text-anchor="start" x="1813.26" y="-802.7" font-family="Times,serif" font-size="14.00"> + notifyObservers(CharacterEvent) : void</text>
+<text text-anchor="start" x="1813.26" y="-785.9" font-family="Times,serif" font-size="14.00"> + removeObserver(CharacterObserver) : void</text>
+<text text-anchor="start" x="1813.26" y="-769.1" font-family="Times,serif" font-size="14.00"> + levelUp() : void</text>
+<text text-anchor="start" x="1813.26" y="-752.3" font-family="Times,serif" font-size="14.00"> + getDecoratedCharacter() : GameCharacter</text>
+<text text-anchor="start" x="1813.26" y="-735.5" font-family="Times,serif" font-size="14.00"> + accept(CharacterVisitor) : void</text>
+<text text-anchor="start" x="1813.26" y="-718.7" font-family="Times,serif" font-size="14.00"> + addObserver(CharacterObserver) : void</text>
+<text text-anchor="start" x="1813.26" y="-701.9" font-family="Times,serif" font-size="14.00"> + setDecoratedCharacter(GameCharacter) : void</text>
+</g>
+<!-- ArmoredDecorator&#45;&gt;CharacterDecorator -->
+<g id="edge3" class="edge">
+<title>ArmoredDecorator-&gt;CharacterDecorator</title>
+<path fill="none" stroke="#000082" d="M1943.91,-1232.6C1943.91,-1232.6 1943.91,-922.2 1943.91,-922.2"/>
+<polygon fill="#000082" stroke="#000082" points="1947.41,-922.2 1943.91,-912.2 1940.41,-922.2 1947.41,-922.2"/>
+</g>
+<!-- AttackCommand -->
+<g id="node4" class="node">
+<title>AttackCommand</title>
+<polygon fill="none" stroke="black" points="431.74,-1191.1 431.74,-1391.1 774.08,-1391.1 774.08,-1191.1 431.74,-1191.1"/>
+<text text-anchor="middle" x="602.91" y="-1374.5" font-family="Times,serif" font-size="14.00">AttackCommand</text>
+<polyline fill="none" stroke="black" points="431.74,-1366.3 774.08,-1366.3"/>
+<text text-anchor="start" x="439.74" y="-1349.7" font-family="Times,serif" font-size="14.00">+ AttackCommand(GameFacade, String, int, String, int) : </text>
+<polyline fill="none" stroke="black" points="431.74,-1341.5 774.08,-1341.5"/>
+<text text-anchor="start" x="439.74" y="-1324.9" font-family="Times,serif" font-size="14.00">- attackerIndex : int</text>
+<text text-anchor="start" x="439.74" y="-1308.1" font-family="Times,serif" font-size="14.00"> - defendingTeam : String</text>
+<text text-anchor="start" x="439.74" y="-1291.3" font-family="Times,serif" font-size="14.00"> - defenderIndex : int</text>
+<text text-anchor="start" x="439.74" y="-1274.5" font-family="Times,serif" font-size="14.00"> - previousDefenderHealth : int</text>
+<text text-anchor="start" x="439.74" y="-1257.7" font-family="Times,serif" font-size="14.00"> - attackingTeam : String</text>
+<text text-anchor="start" x="439.74" y="-1240.9" font-family="Times,serif" font-size="14.00"> - game : GameFacade</text>
+<polyline fill="none" stroke="black" points="431.74,-1232.7 774.08,-1232.7"/>
+<text text-anchor="start" x="439.74" y="-1216.1" font-family="Times,serif" font-size="14.00">+ execute() : void</text>
+<text text-anchor="start" x="439.74" y="-1199.3" font-family="Times,serif" font-size="14.00"> + undo() : void</text>
+</g>
+<!-- AttackCommand&#45;&gt;Command -->
+<g id="edge4" class="edge">
+<title>AttackCommand-&gt;Command</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M602.91,-1190.67C602.91,-1190.67 602.91,-855.69 602.91,-855.69"/>
+<polygon fill="#008200" stroke="#008200" points="606.41,-855.69 602.91,-845.69 599.41,-855.69 606.41,-855.69"/>
+</g>
+<!-- BuffVisitor -->
+<g id="node5" class="node">
+<title>BuffVisitor</title>
+<polygon fill="none" stroke="black" points="2348.52,-1233.1 2348.52,-1349.1 2531.31,-1349.1 2531.31,-1233.1 2348.52,-1233.1"/>
+<text text-anchor="middle" x="2439.91" y="-1332.5" font-family="Times,serif" font-size="14.00">BuffVisitor</text>
+<polyline fill="none" stroke="black" points="2348.52,-1324.3 2531.31,-1324.3"/>
+<text text-anchor="start" x="2356.52" y="-1307.7" font-family="Times,serif" font-size="14.00">+ BuffVisitor() : </text>
+<polyline fill="none" stroke="black" points="2348.52,-1299.5 2531.31,-1299.5"/>
+<text text-anchor="start" x="2356.52" y="-1282.9" font-family="Times,serif" font-size="14.00">- config : GameConfiguration</text>
+<polyline fill="none" stroke="black" points="2348.52,-1274.7 2531.31,-1274.7"/>
+<text text-anchor="start" x="2356.52" y="-1258.1" font-family="Times,serif" font-size="14.00">+ visit(Wizard) : void</text>
+<text text-anchor="start" x="2356.52" y="-1241.3" font-family="Times,serif" font-size="14.00"> + visit(Warrior) : void</text>
+</g>
+<!-- CharacterVisitor -->
+<g id="node12" class="node">
+<title>CharacterVisitor</title>
+<polygon fill="none" stroke="black" points="2568.7,-760.5 2568.7,-843.7 2713.12,-843.7 2713.12,-760.5 2568.7,-760.5"/>
+<text text-anchor="middle" x="2640.91" y="-827.1" font-family="Times,serif" font-size="14.00">&lt;&lt;interface&gt;&gt;</text>
+<text text-anchor="middle" x="2640.91" y="-810.3" font-family="Times,serif" font-size="14.00">CharacterVisitor</text>
+<polyline fill="none" stroke="black" points="2568.7,-802.1 2713.12,-802.1"/>
+<text text-anchor="start" x="2576.7" y="-785.5" font-family="Times,serif" font-size="14.00">+ visit(Wizard) : void</text>
+<text text-anchor="start" x="2576.7" y="-768.7" font-family="Times,serif" font-size="14.00"> + visit(Warrior) : void</text>
+</g>
+<!-- BuffVisitor&#45;&gt;CharacterVisitor -->
+<g id="edge5" class="edge">
+<title>BuffVisitor-&gt;CharacterVisitor</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M2531.67,-1291.1C2540.34,-1291.1 2545.97,-1291.1 2545.97,-1291.1 2545.97,-1291.1 2545.97,-802.1 2545.97,-802.1 2545.97,-802.1 2556.96,-802.1 2556.96,-802.1"/>
+<polygon fill="#008200" stroke="#008200" points="2556.96,-805.6 2566.96,-802.1 2556.96,-798.6 2556.96,-805.6"/>
+</g>
+<!-- CharacterCreator -->
+<g id="node6" class="node">
+<title>CharacterCreator</title>
+<polygon fill="none" stroke="black" points="3149.09,-743.7 3149.09,-860.5 3596.73,-860.5 3596.73,-743.7 3149.09,-743.7"/>
+<text text-anchor="middle" x="3372.91" y="-843.9" font-family="Times,serif" font-size="14.00">&lt;&lt;interface&gt;&gt;</text>
+<text text-anchor="middle" x="3372.91" y="-827.1" font-family="Times,serif" font-size="14.00">CharacterCreator</text>
+<polyline fill="none" stroke="black" points="3149.09,-818.9 3596.73,-818.9"/>
+<text text-anchor="start" x="3157.09" y="-802.3" font-family="Times,serif" font-size="14.00">+ create(String, int) : GameCharacter</text>
+<text text-anchor="start" x="3157.09" y="-785.5" font-family="Times,serif" font-size="14.00"> + create(String, int, CombatStrategy) : GameCharacter</text>
+<text text-anchor="start" x="3157.09" y="-768.7" font-family="Times,serif" font-size="14.00"> + create(String) : GameCharacter</text>
+<text text-anchor="start" x="3157.09" y="-751.9" font-family="Times,serif" font-size="14.00"> + create(String, int, CombatStrategy, CharacterAnimation) : GameCharacter</text>
+</g>
+<!-- GameCharacter -->
+<g id="node20" class="node">
+<title>GameCharacter</title>
+<polygon fill="none" stroke="black" points="2009.8,-137.5 2009.8,-656.7 2424.03,-656.7 2424.03,-137.5 2009.8,-137.5"/>
+<text text-anchor="middle" x="2216.91" y="-640.1" font-family="Times,serif" font-size="14.00">GameCharacter</text>
+<polyline fill="none" stroke="black" points="2009.8,-631.9 2424.03,-631.9"/>
+<text text-anchor="start" x="2017.8" y="-615.3" font-family="Times,serif" font-size="14.00">+ GameCharacter(String) : </text>
+<text text-anchor="start" x="2017.8" y="-598.5" font-family="Times,serif" font-size="14.00"> + GameCharacter(String, int, CombatStrategy, CharacterAnimation) : </text>
+<text text-anchor="start" x="2017.8" y="-581.7" font-family="Times,serif" font-size="14.00"> + GameCharacter(String, int, CombatStrategy) : </text>
+<polyline fill="none" stroke="black" points="2009.8,-573.5 2424.03,-573.5"/>
+<text text-anchor="start" x="2017.8" y="-556.9" font-family="Times,serif" font-size="14.00">- combatStrategy : CombatStrategy</text>
+<text text-anchor="start" x="2017.8" y="-540.1" font-family="Times,serif" font-size="14.00"> - animations : CharacterAnimation</text>
+<text text-anchor="start" x="2017.8" y="-523.3" font-family="Times,serif" font-size="14.00"> - level : int</text>
+<text text-anchor="start" x="2017.8" y="-506.5" font-family="Times,serif" font-size="14.00"> - observers : List&lt;CharacterObserver&gt;</text>
+<text text-anchor="start" x="2017.8" y="-489.7" font-family="Times,serif" font-size="14.00"> - health : int</text>
+<text text-anchor="start" x="2017.8" y="-472.9" font-family="Times,serif" font-size="14.00"> - name : String</text>
+<text text-anchor="start" x="2017.8" y="-456.1" font-family="Times,serif" font-size="14.00"> - experiencePoints : int</text>
+<polyline fill="none" stroke="black" points="2009.8,-447.9 2424.03,-447.9"/>
+<text text-anchor="start" x="2017.8" y="-431.3" font-family="Times,serif" font-size="14.00">+ getLevel() : int</text>
+<text text-anchor="start" x="2017.8" y="-414.5" font-family="Times,serif" font-size="14.00"> + accept(CharacterVisitor) : void</text>
+<text text-anchor="start" x="2017.8" y="-397.7" font-family="Times,serif" font-size="14.00"> + addObserver(CharacterObserver) : void</text>
+<text text-anchor="start" x="2017.8" y="-380.9" font-family="Times,serif" font-size="14.00"> + levelUp() : void</text>
+<text text-anchor="start" x="2017.8" y="-364.1" font-family="Times,serif" font-size="14.00"> + duplicate() : GameCharacter</text>
+<text text-anchor="start" x="2017.8" y="-347.3" font-family="Times,serif" font-size="14.00"> + setLevel(int) : void</text>
+<text text-anchor="start" x="2017.8" y="-330.5" font-family="Times,serif" font-size="14.00"> + receiveAttack(int) : void</text>
+<text text-anchor="start" x="2017.8" y="-313.7" font-family="Times,serif" font-size="14.00"> + removeObserver(CharacterObserver) : void</text>
+<text text-anchor="start" x="2017.8" y="-296.9" font-family="Times,serif" font-size="14.00"> + setCombatStrategy(CombatStrategy) : void</text>
+<text text-anchor="start" x="2017.8" y="-280.1" font-family="Times,serif" font-size="14.00"> + getName() : String</text>
+<text text-anchor="start" x="2017.8" y="-263.3" font-family="Times,serif" font-size="14.00"> + notifyObservers(CharacterEvent) : void</text>
+<text text-anchor="start" x="2017.8" y="-246.5" font-family="Times,serif" font-size="14.00"> + getHealth() : int</text>
+<text text-anchor="start" x="2017.8" y="-229.7" font-family="Times,serif" font-size="14.00"> + setHealth(int) : void</text>
+<text text-anchor="start" x="2017.8" y="-212.9" font-family="Times,serif" font-size="14.00"> + setExperiencePoints(int) : void</text>
+<text text-anchor="start" x="2017.8" y="-196.1" font-family="Times,serif" font-size="14.00"> + setAnimations(CharacterAnimation) : void</text>
+<text text-anchor="start" x="2017.8" y="-179.3" font-family="Times,serif" font-size="14.00"> + attack(int) : int</text>
+<text text-anchor="start" x="2017.8" y="-162.5" font-family="Times,serif" font-size="14.00"> + getExperiencePoints() : int</text>
+<text text-anchor="start" x="2017.8" y="-145.7" font-family="Times,serif" font-size="14.00"> + getAnimations() : CharacterAnimation</text>
+</g>
+<!-- CharacterDecorator&#45;&gt;GameCharacter -->
+<g id="edge6" class="edge">
+<title>CharacterDecorator-&gt;GameCharacter</title>
+<path fill="none" stroke="#000082" d="M2053.18,-693.3C2053.18,-693.3 2053.18,-668.65 2053.18,-668.65"/>
+<polygon fill="#000082" stroke="#000082" points="2056.68,-668.65 2053.18,-658.65 2049.68,-668.65 2056.68,-668.65"/>
+</g>
+<!-- CharacterEvent -->
+<g id="node8" class="node">
+<title>CharacterEvent</title>
+<polygon fill="none" stroke="black" points="3836.17,-1207.9 3836.17,-1374.3 4053.66,-1374.3 4053.66,-1207.9 3836.17,-1207.9"/>
+<text text-anchor="middle" x="3944.91" y="-1357.7" font-family="Times,serif" font-size="14.00">&lt;&lt;enumeration&gt;&gt;</text>
+<text text-anchor="middle" x="3944.91" y="-1340.9" font-family="Times,serif" font-size="14.00">CharacterEvent</text>
+<polyline fill="none" stroke="black" points="3836.17,-1332.7 4053.66,-1332.7"/>
+<text text-anchor="start" x="3844.17" y="-1316.1" font-family="Times,serif" font-size="14.00">+ CharacterEvent() : </text>
+<polyline fill="none" stroke="black" points="3836.17,-1307.9 4053.66,-1307.9"/>
+<text text-anchor="start" x="3844.17" y="-1291.3" font-family="Times,serif" font-size="14.00">+ LEVEL_UP : </text>
+<text text-anchor="start" x="3844.17" y="-1274.5" font-family="Times,serif" font-size="14.00"> + LEVEL_DOWN : </text>
+<text text-anchor="start" x="3844.17" y="-1257.7" font-family="Times,serif" font-size="14.00"> + DEATH : </text>
+<polyline fill="none" stroke="black" points="3836.17,-1249.5 4053.66,-1249.5"/>
+<text text-anchor="start" x="3844.17" y="-1232.9" font-family="Times,serif" font-size="14.00">+ values() : CharacterEvent[]</text>
+<text text-anchor="start" x="3844.17" y="-1216.1" font-family="Times,serif" font-size="14.00"> + valueOf(String) : CharacterEvent</text>
+</g>
+<!-- CharacterObserver -->
+<g id="node9" class="node">
+<title>CharacterObserver</title>
+<polygon fill="none" stroke="black" points="4227.06,-768.9 4227.06,-835.3 4518.77,-835.3 4518.77,-768.9 4227.06,-768.9"/>
+<text text-anchor="middle" x="4372.91" y="-818.7" font-family="Times,serif" font-size="14.00">&lt;&lt;interface&gt;&gt;</text>
+<text text-anchor="middle" x="4372.91" y="-801.9" font-family="Times,serif" font-size="14.00">CharacterObserver</text>
+<polyline fill="none" stroke="black" points="4227.06,-793.7 4518.77,-793.7"/>
+<text text-anchor="start" x="4235.06" y="-777.1" font-family="Times,serif" font-size="14.00">+ update(GameCharacter, CharacterEvent) : void</text>
+</g>
+<!-- CharacterState -->
+<g id="node10" class="node">
+<title>CharacterState</title>
+<polygon fill="none" stroke="black" points="4691.83,-1215.9 4691.83,-1366.3 4941.99,-1366.3 4941.99,-1215.9 4691.83,-1215.9"/>
+<text text-anchor="middle" x="4816.91" y="-1349.7" font-family="Times,serif" font-size="14.00">&lt;&lt;interface&gt;&gt;</text>
+<text text-anchor="middle" x="4816.91" y="-1332.9" font-family="Times,serif" font-size="14.00">CharacterState</text>
+<polyline fill="none" stroke="black" points="4691.83,-1324.7 4941.99,-1324.7"/>
+<text text-anchor="start" x="4699.83" y="-1308.1" font-family="Times,serif" font-size="14.00">+ onAttack(Character, int) : void</text>
+<text text-anchor="start" x="4699.83" y="-1291.3" font-family="Times,serif" font-size="14.00"> + onExitState(Character) : void</text>
+<text text-anchor="start" x="4699.83" y="-1274.5" font-family="Times,serif" font-size="14.00"> + onReceive(Character, int) : void</text>
+<text text-anchor="start" x="4699.83" y="-1257.7" font-family="Times,serif" font-size="14.00"> + inHealthChanged(Character, int) : void</text>
+<text text-anchor="start" x="4699.83" y="-1240.9" font-family="Times,serif" font-size="14.00"> + onEnterState(Character) : void</text>
+<text text-anchor="start" x="4699.83" y="-1224.1" font-family="Times,serif" font-size="14.00"> + onUpdate(Character) : void</text>
+</g>
+<!-- CharacterSubject -->
+<g id="node11" class="node">
+<title>CharacterSubject</title>
+<polygon fill="none" stroke="black" points="2079.41,-0.5 2079.41,-100.5 2354.42,-100.5 2354.42,-0.5 2079.41,-0.5"/>
+<text text-anchor="middle" x="2216.91" y="-83.9" font-family="Times,serif" font-size="14.00">&lt;&lt;interface&gt;&gt;</text>
+<text text-anchor="middle" x="2216.91" y="-67.1" font-family="Times,serif" font-size="14.00">CharacterSubject</text>
+<polyline fill="none" stroke="black" points="2079.41,-58.9 2354.42,-58.9"/>
+<text text-anchor="start" x="2087.41" y="-42.3" font-family="Times,serif" font-size="14.00">+ notifyObservers(CharacterEvent) : void</text>
+<text text-anchor="start" x="2087.41" y="-25.5" font-family="Times,serif" font-size="14.00"> + addObserver(CharacterObserver) : void</text>
+<text text-anchor="start" x="2087.41" y="-8.7" font-family="Times,serif" font-size="14.00"> + removeObserver(CharacterObserver) : void</text>
+</g>
+<!-- DamageVisitor -->
+<g id="node15" class="node">
+<title>DamageVisitor</title>
+<polygon fill="none" stroke="black" points="2549.52,-1233.1 2549.52,-1349.1 2732.31,-1349.1 2732.31,-1233.1 2549.52,-1233.1"/>
+<text text-anchor="middle" x="2640.91" y="-1332.5" font-family="Times,serif" font-size="14.00">DamageVisitor</text>
+<polyline fill="none" stroke="black" points="2549.52,-1324.3 2732.31,-1324.3"/>
+<text text-anchor="start" x="2557.52" y="-1307.7" font-family="Times,serif" font-size="14.00">+ DamageVisitor() : </text>
+<polyline fill="none" stroke="black" points="2549.52,-1299.5 2732.31,-1299.5"/>
+<text text-anchor="start" x="2557.52" y="-1282.9" font-family="Times,serif" font-size="14.00">- config : GameConfiguration</text>
+<polyline fill="none" stroke="black" points="2549.52,-1274.7 2732.31,-1274.7"/>
+<text text-anchor="start" x="2557.52" y="-1258.1" font-family="Times,serif" font-size="14.00">+ visit(Wizard) : void</text>
+<text text-anchor="start" x="2557.52" y="-1241.3" font-family="Times,serif" font-size="14.00"> + visit(Warrior) : void</text>
+</g>
+<!-- DamageVisitor&#45;&gt;CharacterVisitor -->
+<g id="edge7" class="edge">
+<title>DamageVisitor-&gt;CharacterVisitor</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M2640.91,-1232.6C2640.91,-1232.6 2640.91,-855.42 2640.91,-855.42"/>
+<polygon fill="#008200" stroke="#008200" points="2644.41,-855.42 2640.91,-845.42 2637.41,-855.42 2644.41,-855.42"/>
+</g>
+<!-- DeathObserver -->
+<g id="node16" class="node">
+<title>DeathObserver</title>
+<polygon fill="none" stroke="black" points="4072.06,-1253.9 4072.06,-1328.3 4363.77,-1328.3 4363.77,-1253.9 4072.06,-1253.9"/>
+<text text-anchor="middle" x="4217.91" y="-1311.7" font-family="Times,serif" font-size="14.00">DeathObserver</text>
+<polyline fill="none" stroke="black" points="4072.06,-1303.5 4363.77,-1303.5"/>
+<text text-anchor="start" x="4080.06" y="-1286.9" font-family="Times,serif" font-size="14.00">+ DeathObserver() : </text>
+<polyline fill="none" stroke="black" points="4072.06,-1278.7 4363.77,-1278.7"/>
+<text text-anchor="start" x="4080.06" y="-1262.1" font-family="Times,serif" font-size="14.00">+ update(GameCharacter, CharacterEvent) : void</text>
+</g>
+<!-- DeathObserver&#45;&gt;CharacterObserver -->
+<g id="edge8" class="edge">
+<title>DeathObserver-&gt;CharacterObserver</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M4295.41,-1253.54C4295.41,-1253.54 4295.41,-847.04 4295.41,-847.04"/>
+<polygon fill="#008200" stroke="#008200" points="4298.91,-847.04 4295.41,-837.04 4291.91,-847.04 4298.91,-847.04"/>
+</g>
+<!-- DecoratorType -->
+<g id="node17" class="node">
+<title>DecoratorType</title>
+<polygon fill="none" stroke="black" points="4960.33,-1216.3 4960.33,-1365.9 5175.49,-1365.9 5175.49,-1216.3 4960.33,-1216.3"/>
+<text text-anchor="middle" x="5067.91" y="-1349.3" font-family="Times,serif" font-size="14.00">&lt;&lt;enumeration&gt;&gt;</text>
+<text text-anchor="middle" x="5067.91" y="-1332.5" font-family="Times,serif" font-size="14.00">DecoratorType</text>
+<polyline fill="none" stroke="black" points="4960.33,-1324.3 5175.49,-1324.3"/>
+<text text-anchor="start" x="4968.33" y="-1307.7" font-family="Times,serif" font-size="14.00">+ DecoratorType() : </text>
+<polyline fill="none" stroke="black" points="4960.33,-1299.5 5175.49,-1299.5"/>
+<text text-anchor="start" x="4968.33" y="-1282.9" font-family="Times,serif" font-size="14.00">+ ARMOR : </text>
+<text text-anchor="start" x="4968.33" y="-1266.1" font-family="Times,serif" font-size="14.00"> + INVINCIBLE : </text>
+<polyline fill="none" stroke="black" points="4960.33,-1257.9 5175.49,-1257.9"/>
+<text text-anchor="start" x="4968.33" y="-1241.3" font-family="Times,serif" font-size="14.00">+ values() : DecoratorType[]</text>
+<text text-anchor="start" x="4968.33" y="-1224.5" font-family="Times,serif" font-size="14.00"> + valueOf(String) : DecoratorType</text>
+</g>
+<!-- DefensiveStrategy -->
+<g id="node18" class="node">
+<title>DefensiveStrategy</title>
+<polygon fill="none" stroke="black" points="1332.1,-1233.1 1332.1,-1349.1 1557.73,-1349.1 1557.73,-1233.1 1332.1,-1233.1"/>
+<text text-anchor="middle" x="1444.91" y="-1332.5" font-family="Times,serif" font-size="14.00">DefensiveStrategy</text>
+<polyline fill="none" stroke="black" points="1332.1,-1324.3 1557.73,-1324.3"/>
+<text text-anchor="start" x="1340.1" y="-1307.7" font-family="Times,serif" font-size="14.00">+ DefensiveStrategy() : </text>
+<polyline fill="none" stroke="black" points="1332.1,-1299.5 1557.73,-1299.5"/>
+<text text-anchor="start" x="1340.1" y="-1282.9" font-family="Times,serif" font-size="14.00">- config : GameConfiguration</text>
+<polyline fill="none" stroke="black" points="1332.1,-1274.7 1557.73,-1274.7"/>
+<text text-anchor="start" x="1340.1" y="-1258.1" font-family="Times,serif" font-size="14.00">+ calculateDamageReceived(int) : int</text>
+<text text-anchor="start" x="1340.1" y="-1241.3" font-family="Times,serif" font-size="14.00"> + calculateDamageDealt(int) : int</text>
+</g>
+<!-- DefensiveStrategy&#45;&gt;CombatStrategy -->
+<g id="edge9" class="edge">
+<title>DefensiveStrategy-&gt;CombatStrategy</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M1444.91,-1232.6C1444.91,-1232.6 1444.91,-855.42 1444.91,-855.42"/>
+<polygon fill="#008200" stroke="#008200" points="1448.41,-855.42 1444.91,-845.42 1441.41,-855.42 1448.41,-855.42"/>
+</g>
+<!-- Duplicable&lt;T&gt; -->
+<g id="node19" class="node">
+<title>Duplicable&lt;T&gt;</title>
+<polygon fill="none" stroke="black" points="2439.18,-17.3 2439.18,-83.7 2546.65,-83.7 2546.65,-17.3 2439.18,-17.3"/>
+<text text-anchor="middle" x="2492.91" y="-67.1" font-family="Times,serif" font-size="14.00">&lt;&lt;interface&gt;&gt;</text>
+<text text-anchor="middle" x="2492.91" y="-50.3" font-family="Times,serif" font-size="14.00">Duplicable&lt;T&gt;</text>
+<polyline fill="none" stroke="black" points="2439.18,-42.1 2546.65,-42.1"/>
+<text text-anchor="start" x="2447.18" y="-25.5" font-family="Times,serif" font-size="14.00">+ duplicate() : T</text>
+</g>
+<!-- GameCharacter&#45;&gt;CharacterSubject -->
+<g id="edge10" class="edge">
+<title>GameCharacter-&gt;CharacterSubject</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M2216.91,-137.07C2216.91,-137.07 2216.91,-112.15 2216.91,-112.15"/>
+<polygon fill="#008200" stroke="#008200" points="2220.41,-112.15 2216.91,-102.15 2213.41,-112.15 2220.41,-112.15"/>
+</g>
+<!-- GameCharacter&#45;&gt;Duplicable&lt;T&gt; -->
+<g id="edge11" class="edge">
+<title>GameCharacter-&gt;Duplicable&lt;T&gt;</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M2389.22,-137.07C2389.22,-87.37 2389.22,-50.5 2389.22,-50.5 2389.22,-50.5 2427.43,-50.5 2427.43,-50.5"/>
+<polygon fill="#008200" stroke="#008200" points="2427.43,-54 2437.43,-50.5 2427.43,-47 2427.43,-54"/>
+</g>
+<!-- GameConfiguration -->
+<g id="node21" class="node">
+<title>GameConfiguration</title>
+<polygon fill="none" stroke="black" points="5193.55,-947.5 5193.55,-1634.7 5466.27,-1634.7 5466.27,-947.5 5193.55,-947.5"/>
+<text text-anchor="middle" x="5329.91" y="-1618.1" font-family="Times,serif" font-size="14.00">GameConfiguration</text>
+<polyline fill="none" stroke="black" points="5193.55,-1609.9 5466.27,-1609.9"/>
+<text text-anchor="start" x="5201.55" y="-1593.3" font-family="Times,serif" font-size="14.00">- GameConfiguration() : </text>
+<polyline fill="none" stroke="black" points="5193.55,-1585.1 5466.27,-1585.1"/>
+<text text-anchor="start" x="5201.55" y="-1568.5" font-family="Times,serif" font-size="14.00">- shared : GameConfiguration</text>
+<text text-anchor="start" x="5201.55" y="-1551.7" font-family="Times,serif" font-size="14.00"> - difficultyLevel : int</text>
+<text text-anchor="start" x="5201.55" y="-1534.9" font-family="Times,serif" font-size="14.00"> - maxTeamSize : int</text>
+<polyline fill="none" stroke="black" points="5193.55,-1526.7 5466.27,-1526.7"/>
+<text text-anchor="start" x="5201.55" y="-1510.1" font-family="Times,serif" font-size="14.00">+ getWizardHealthBuff() : int</text>
+<text text-anchor="start" x="5201.55" y="-1493.3" font-family="Times,serif" font-size="14.00"> + getDifficultyLevel() : int</text>
+<text text-anchor="start" x="5201.55" y="-1476.5" font-family="Times,serif" font-size="14.00"> + setMaxTeamSize(int) : void</text>
+<text text-anchor="start" x="5201.55" y="-1459.7" font-family="Times,serif" font-size="14.00"> + getMaxLevel() : int</text>
+<text text-anchor="start" x="5201.55" y="-1442.9" font-family="Times,serif" font-size="14.00"> + getLevelBuff() : int</text>
+<text text-anchor="start" x="5201.55" y="-1426.1" font-family="Times,serif" font-size="14.00"> + getXpPerLevel() : int</text>
+<text text-anchor="start" x="5201.55" y="-1409.3" font-family="Times,serif" font-size="14.00"> + getWarriorHealthForLevel(int) : int</text>
+<text text-anchor="start" x="5201.55" y="-1392.5" font-family="Times,serif" font-size="14.00"> + getWarriorBaseHealth() : int</text>
+<text text-anchor="start" x="5201.55" y="-1375.7" font-family="Times,serif" font-size="14.00"> + getMaxTeamSize() : int</text>
+<text text-anchor="start" x="5201.55" y="-1358.9" font-family="Times,serif" font-size="14.00"> + getWizardIntelligenceBuff() : int</text>
+<text text-anchor="start" x="5201.55" y="-1342.1" font-family="Times,serif" font-size="14.00"> + getAggressiveDamageMultiplier() : double</text>
+<text text-anchor="start" x="5201.55" y="-1325.3" font-family="Times,serif" font-size="14.00"> + getMinimumHealth(int) : int</text>
+<text text-anchor="start" x="5201.55" y="-1308.5" font-family="Times,serif" font-size="14.00"> + getWizardXpBuff() : int</text>
+<text text-anchor="start" x="5201.55" y="-1291.7" font-family="Times,serif" font-size="14.00"> + getBaseXpGain() : int</text>
+<text text-anchor="start" x="5201.55" y="-1274.9" font-family="Times,serif" font-size="14.00"> + getArmorDamageReduction(int) : double</text>
+<text text-anchor="start" x="5201.55" y="-1258.1" font-family="Times,serif" font-size="14.00"> + getXpRequiredForLevel(int) : int</text>
+<text text-anchor="start" x="5201.55" y="-1241.3" font-family="Times,serif" font-size="14.00"> + getWizardHealAmount() : int</text>
+<text text-anchor="start" x="5201.55" y="-1224.5" font-family="Times,serif" font-size="14.00"> + getWizardBaseIntelligence() : int</text>
+<text text-anchor="start" x="5201.55" y="-1207.7" font-family="Times,serif" font-size="14.00"> + getShared() : GameConfiguration</text>
+<text text-anchor="start" x="5201.55" y="-1190.9" font-family="Times,serif" font-size="14.00"> + getWizardBaseHealth() : int</text>
+<text text-anchor="start" x="5201.55" y="-1174.1" font-family="Times,serif" font-size="14.00"> + getDefensiveDefenseMultiplier() : double</text>
+<text text-anchor="start" x="5201.55" y="-1157.3" font-family="Times,serif" font-size="14.00"> + getWarriorHealthBuff() : int</text>
+<text text-anchor="start" x="5201.55" y="-1140.5" font-family="Times,serif" font-size="14.00"> + getCharacterCreator() : CharacterCreator</text>
+<text text-anchor="start" x="5201.55" y="-1123.7" font-family="Times,serif" font-size="14.00"> + getWarriorStrengthBuff() : int</text>
+<text text-anchor="start" x="5201.55" y="-1106.9" font-family="Times,serif" font-size="14.00"> + getWizardIntelligenceForLevel(int) : int</text>
+<text text-anchor="start" x="5201.55" y="-1090.1" font-family="Times,serif" font-size="14.00"> + getWarriorStrengthForLevel(int) : int</text>
+<text text-anchor="start" x="5201.55" y="-1073.3" font-family="Times,serif" font-size="14.00"> + getWarriorBaseStrength() : int</text>
+<text text-anchor="start" x="5201.55" y="-1056.5" font-family="Times,serif" font-size="14.00"> + getAggressiveDefenseMultiplier() : double</text>
+<text text-anchor="start" x="5201.55" y="-1039.7" font-family="Times,serif" font-size="14.00"> + setDifficultyLevel(int) : void</text>
+<text text-anchor="start" x="5201.55" y="-1022.9" font-family="Times,serif" font-size="14.00"> + getWarriorHealAmount() : int</text>
+<text text-anchor="start" x="5201.55" y="-1006.1" font-family="Times,serif" font-size="14.00"> + getWarriorXpBuff() : int</text>
+<text text-anchor="start" x="5201.55" y="-989.3" font-family="Times,serif" font-size="14.00"> + getDefensiveDamageMultiplier() : double</text>
+<text text-anchor="start" x="5201.55" y="-972.5" font-family="Times,serif" font-size="14.00"> + getBaseDamageAmount() : int</text>
+<text text-anchor="start" x="5201.55" y="-955.7" font-family="Times,serif" font-size="14.00"> + getWizardHealthForLevel(int) : int</text>
+</g>
+<!-- GameFacade -->
+<g id="node22" class="node">
+<title>GameFacade</title>
+<polygon fill="none" stroke="black" points="5484.36,-1149.1 5484.36,-1433.1 5811.46,-1433.1 5811.46,-1149.1 5484.36,-1149.1"/>
+<text text-anchor="middle" x="5647.91" y="-1416.5" font-family="Times,serif" font-size="14.00">GameFacade</text>
+<polyline fill="none" stroke="black" points="5484.36,-1408.3 5811.46,-1408.3"/>
+<text text-anchor="start" x="5492.36" y="-1391.7" font-family="Times,serif" font-size="14.00">+ GameFacade() : </text>
+<polyline fill="none" stroke="black" points="5484.36,-1383.5 5811.46,-1383.5"/>
+<text text-anchor="start" x="5492.36" y="-1366.9" font-family="Times,serif" font-size="14.00">- teams : Map&lt;String, List&lt;GameCharacter&gt;&gt;</text>
+<text text-anchor="start" x="5492.36" y="-1350.1" font-family="Times,serif" font-size="14.00"> - config : GameConfiguration</text>
+<polyline fill="none" stroke="black" points="5484.36,-1341.9 5811.46,-1341.9"/>
+<text text-anchor="start" x="5492.36" y="-1325.3" font-family="Times,serif" font-size="14.00">+ getCharacterFromTeam(String, int) : GameCharacter</text>
+<text text-anchor="start" x="5492.36" y="-1308.5" font-family="Times,serif" font-size="14.00"> + addArmorToCharacter(String, int) : void</text>
+<text text-anchor="start" x="5492.36" y="-1291.7" font-family="Times,serif" font-size="14.00"> + createTeam(String) : void</text>
+<text text-anchor="start" x="5492.36" y="-1274.9" font-family="Times,serif" font-size="14.00"> + healTeam(String) : void</text>
+<text text-anchor="start" x="5492.36" y="-1258.1" font-family="Times,serif" font-size="14.00"> - validateTeam(String) : void</text>
+<text text-anchor="start" x="5492.36" y="-1241.3" font-family="Times,serif" font-size="14.00"> + removeTeam(String) : void</text>
+<text text-anchor="start" x="5492.36" y="-1224.5" font-family="Times,serif" font-size="14.00"> + attackTeam(String, int, String, int) : void</text>
+<text text-anchor="start" x="5492.36" y="-1207.7" font-family="Times,serif" font-size="14.00"> + buffTeam(String) : void</text>
+<text text-anchor="start" x="5492.36" y="-1190.9" font-family="Times,serif" font-size="14.00"> + addCharacterToTeam(String, GameCharacter) : void</text>
+<text text-anchor="start" x="5492.36" y="-1174.1" font-family="Times,serif" font-size="14.00"> + invincibilityToCharacter(String, int) : void</text>
+<text text-anchor="start" x="5492.36" y="-1157.3" font-family="Times,serif" font-size="14.00"> + getTeams() : Map&lt;String, List&lt;GameCharacter&gt;&gt;</text>
+</g>
+<!-- GameInvoker -->
+<g id="node23" class="node">
+<title>GameInvoker</title>
+<polygon fill="none" stroke="black" points="5829.26,-1191.1 5829.26,-1391.1 6086.56,-1391.1 6086.56,-1191.1 5829.26,-1191.1"/>
+<text text-anchor="middle" x="5957.91" y="-1374.5" font-family="Times,serif" font-size="14.00">GameInvoker</text>
+<polyline fill="none" stroke="black" points="5829.26,-1366.3 6086.56,-1366.3"/>
+<text text-anchor="start" x="5837.26" y="-1349.7" font-family="Times,serif" font-size="14.00">+ GameInvoker() : </text>
+<polyline fill="none" stroke="black" points="5829.26,-1341.5 6086.56,-1341.5"/>
+<text text-anchor="start" x="5837.26" y="-1324.9" font-family="Times,serif" font-size="14.00">- commandQueue : Queue&lt;Command&gt;</text>
+<text text-anchor="start" x="5837.26" y="-1308.1" font-family="Times,serif" font-size="14.00"> - executedCommands : Stack&lt;Command&gt;</text>
+<polyline fill="none" stroke="black" points="5829.26,-1299.9 6086.56,-1299.9"/>
+<text text-anchor="start" x="5837.26" y="-1283.3" font-family="Times,serif" font-size="14.00">+ executeAllCommands() : void</text>
+<text text-anchor="start" x="5837.26" y="-1266.5" font-family="Times,serif" font-size="14.00"> + addCommand(Command) : void</text>
+<text text-anchor="start" x="5837.26" y="-1249.7" font-family="Times,serif" font-size="14.00"> + undoLastCommand() : void</text>
+<text text-anchor="start" x="5837.26" y="-1232.9" font-family="Times,serif" font-size="14.00"> + executeNextCommand() : void</text>
+<text text-anchor="start" x="5837.26" y="-1216.1" font-family="Times,serif" font-size="14.00"> + clearQueue() : void</text>
+<text text-anchor="start" x="5837.26" y="-1199.3" font-family="Times,serif" font-size="14.00"> + hasCommands() : boolean</text>
+</g>
+<!-- HealTeamCommand -->
+<g id="node24" class="node">
+<title>HealTeamCommand</title>
+<polygon fill="none" stroke="black" points="791.65,-1216.3 791.65,-1365.9 1070.18,-1365.9 1070.18,-1216.3 791.65,-1216.3"/>
+<text text-anchor="middle" x="930.91" y="-1349.3" font-family="Times,serif" font-size="14.00">HealTeamCommand</text>
+<polyline fill="none" stroke="black" points="791.65,-1341.1 1070.18,-1341.1"/>
+<text text-anchor="start" x="799.65" y="-1324.5" font-family="Times,serif" font-size="14.00">+ HealTeamCommand(GameFacade, String) : </text>
+<polyline fill="none" stroke="black" points="791.65,-1316.3 1070.18,-1316.3"/>
+<text text-anchor="start" x="799.65" y="-1299.7" font-family="Times,serif" font-size="14.00">- game : GameFacade</text>
+<text text-anchor="start" x="799.65" y="-1282.9" font-family="Times,serif" font-size="14.00"> - teamName : String</text>
+<text text-anchor="start" x="799.65" y="-1266.1" font-family="Times,serif" font-size="14.00"> - previousHealthValues : List&lt;Integer&gt;</text>
+<polyline fill="none" stroke="black" points="791.65,-1257.9 1070.18,-1257.9"/>
+<text text-anchor="start" x="799.65" y="-1241.3" font-family="Times,serif" font-size="14.00">+ execute() : void</text>
+<text text-anchor="start" x="799.65" y="-1224.5" font-family="Times,serif" font-size="14.00"> + undo() : void</text>
+</g>
+<!-- HealTeamCommand&#45;&gt;Command -->
+<g id="edge12" class="edge">
+<title>HealTeamCommand-&gt;Command</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M930.91,-1215.84C930.91,-1081.91 930.91,-816.13 930.91,-816.13 930.91,-816.13 672.31,-816.13 672.31,-816.13"/>
+<polygon fill="#008200" stroke="#008200" points="672.31,-812.63 662.31,-816.13 672.31,-819.63 672.31,-812.63"/>
+</g>
+<!-- HealVisitor -->
+<g id="node25" class="node">
+<title>HealVisitor</title>
+<polygon fill="none" stroke="black" points="2750.52,-1233.1 2750.52,-1349.1 2933.31,-1349.1 2933.31,-1233.1 2750.52,-1233.1"/>
+<text text-anchor="middle" x="2841.91" y="-1332.5" font-family="Times,serif" font-size="14.00">HealVisitor</text>
+<polyline fill="none" stroke="black" points="2750.52,-1324.3 2933.31,-1324.3"/>
+<text text-anchor="start" x="2758.52" y="-1307.7" font-family="Times,serif" font-size="14.00">+ HealVisitor() : </text>
+<polyline fill="none" stroke="black" points="2750.52,-1299.5 2933.31,-1299.5"/>
+<text text-anchor="start" x="2758.52" y="-1282.9" font-family="Times,serif" font-size="14.00">- config : GameConfiguration</text>
+<polyline fill="none" stroke="black" points="2750.52,-1274.7 2933.31,-1274.7"/>
+<text text-anchor="start" x="2758.52" y="-1258.1" font-family="Times,serif" font-size="14.00">+ visit(Warrior) : void</text>
+<text text-anchor="start" x="2758.52" y="-1241.3" font-family="Times,serif" font-size="14.00"> + visit(Wizard) : void</text>
+</g>
+<!-- HealVisitor&#45;&gt;CharacterVisitor -->
+<g id="edge13" class="edge">
+<title>HealVisitor-&gt;CharacterVisitor</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M2841.91,-1232.6C2841.91,-1102.8 2841.91,-802.1 2841.91,-802.1 2841.91,-802.1 2724.99,-802.1 2724.99,-802.1"/>
+<polygon fill="#008200" stroke="#008200" points="2724.99,-798.6 2714.99,-802.1 2724.99,-805.6 2724.99,-798.6"/>
+</g>
+<!-- InvincibleDecorator -->
+<g id="node26" class="node">
+<title>InvincibleDecorator</title>
+<polygon fill="none" stroke="black" points="2082.83,-1233.1 2082.83,-1349.1 2331,-1349.1 2331,-1233.1 2082.83,-1233.1"/>
+<text text-anchor="middle" x="2206.91" y="-1332.5" font-family="Times,serif" font-size="14.00">InvincibleDecorator</text>
+<polyline fill="none" stroke="black" points="2082.83,-1324.3 2331,-1324.3"/>
+<text text-anchor="start" x="2090.83" y="-1307.7" font-family="Times,serif" font-size="14.00">+ InvincibleDecorator(GameCharacter) : </text>
+<polyline fill="none" stroke="black" points="2082.83,-1299.5 2331,-1299.5"/>
+<text text-anchor="start" x="2090.83" y="-1282.9" font-family="Times,serif" font-size="14.00">- config : GameConfiguration</text>
+<polyline fill="none" stroke="black" points="2082.83,-1274.7 2331,-1274.7"/>
+<text text-anchor="start" x="2090.83" y="-1258.1" font-family="Times,serif" font-size="14.00">+ receiveAttack(int) : void</text>
+<text text-anchor="start" x="2090.83" y="-1241.3" font-family="Times,serif" font-size="14.00"> + duplicate() : GameCharacter</text>
+</g>
+<!-- InvincibleDecorator&#45;&gt;CharacterDecorator -->
+<g id="edge14" class="edge">
+<title>InvincibleDecorator-&gt;CharacterDecorator</title>
+<path fill="none" stroke="#000082" d="M2089.7,-1232.6C2089.7,-1232.6 2089.7,-922.2 2089.7,-922.2"/>
+<polygon fill="#000082" stroke="#000082" points="2093.2,-922.2 2089.7,-912.2 2086.2,-922.2 2093.2,-922.2"/>
+</g>
+<!-- LevelUpObserver -->
+<g id="node27" class="node">
+<title>LevelUpObserver</title>
+<polygon fill="none" stroke="black" points="4382.06,-1253.9 4382.06,-1328.3 4673.77,-1328.3 4673.77,-1253.9 4382.06,-1253.9"/>
+<text text-anchor="middle" x="4527.91" y="-1311.7" font-family="Times,serif" font-size="14.00">LevelUpObserver</text>
+<polyline fill="none" stroke="black" points="4382.06,-1303.5 4673.77,-1303.5"/>
+<text text-anchor="start" x="4390.06" y="-1286.9" font-family="Times,serif" font-size="14.00">+ LevelUpObserver() : </text>
+<polyline fill="none" stroke="black" points="4382.06,-1278.7 4673.77,-1278.7"/>
+<text text-anchor="start" x="4390.06" y="-1262.1" font-family="Times,serif" font-size="14.00">+ update(GameCharacter, CharacterEvent) : void</text>
+</g>
+<!-- LevelUpObserver&#45;&gt;CharacterObserver -->
+<g id="edge15" class="edge">
+<title>LevelUpObserver-&gt;CharacterObserver</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M4450.41,-1253.54C4450.41,-1253.54 4450.41,-847.04 4450.41,-847.04"/>
+<polygon fill="#008200" stroke="#008200" points="4453.91,-847.04 4450.41,-837.04 4446.91,-847.04 4453.91,-847.04"/>
+</g>
+<!-- NeutralStrategy -->
+<g id="node28" class="node">
+<title>NeutralStrategy</title>
+<polygon fill="none" stroke="black" points="1575.35,-1245.5 1575.35,-1336.7 1804.48,-1336.7 1804.48,-1245.5 1575.35,-1245.5"/>
+<text text-anchor="middle" x="1689.91" y="-1320.1" font-family="Times,serif" font-size="14.00">NeutralStrategy</text>
+<polyline fill="none" stroke="black" points="1575.35,-1311.9 1804.48,-1311.9"/>
+<text text-anchor="start" x="1583.35" y="-1295.3" font-family="Times,serif" font-size="14.00">+ NeutralStrategy() : </text>
+<polyline fill="none" stroke="black" points="1575.35,-1287.1 1804.48,-1287.1"/>
+<text text-anchor="start" x="1583.35" y="-1270.5" font-family="Times,serif" font-size="14.00">+ calculateDamageDealt(int) : int</text>
+<text text-anchor="start" x="1583.35" y="-1253.7" font-family="Times,serif" font-size="14.00"> + calculateDamageReceived(int) : int</text>
+</g>
+<!-- NeutralStrategy&#45;&gt;CombatStrategy -->
+<g id="edge16" class="edge">
+<title>NeutralStrategy-&gt;CombatStrategy</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M1689.91,-1245.1C1689.91,-1123.37 1689.91,-802.1 1689.91,-802.1 1689.91,-802.1 1569.6,-802.1 1569.6,-802.1"/>
+<polygon fill="#008200" stroke="#008200" points="1569.6,-798.6 1559.6,-802.1 1569.6,-805.6 1569.6,-798.6"/>
+</g>
+<!-- Team -->
+<g id="node29" class="node">
+<title>Team</title>
+<polygon fill="none" stroke="black" points="2442.5,-313.9 2442.5,-480.3 2677.33,-480.3 2677.33,-313.9 2442.5,-313.9"/>
+<text text-anchor="middle" x="2559.91" y="-463.7" font-family="Times,serif" font-size="14.00">Team</text>
+<polyline fill="none" stroke="black" points="2442.5,-455.5 2677.33,-455.5"/>
+<text text-anchor="start" x="2450.5" y="-438.9" font-family="Times,serif" font-size="14.00">- Team(TeamBuilder) : </text>
+<text text-anchor="start" x="2450.5" y="-422.1" font-family="Times,serif" font-size="14.00"> - Team(Team) : </text>
+<polyline fill="none" stroke="black" points="2442.5,-413.9 2677.33,-413.9"/>
+<text text-anchor="start" x="2450.5" y="-397.3" font-family="Times,serif" font-size="14.00">- players : List&lt;GameCharacter&gt;</text>
+<text text-anchor="start" x="2450.5" y="-380.5" font-family="Times,serif" font-size="14.00"> - name : String</text>
+<polyline fill="none" stroke="black" points="2442.5,-372.3 2677.33,-372.3"/>
+<text text-anchor="start" x="2450.5" y="-355.7" font-family="Times,serif" font-size="14.00">+ duplicate() : Team</text>
+<text text-anchor="start" x="2450.5" y="-338.9" font-family="Times,serif" font-size="14.00"> + getPlayers() : List&lt;GameCharacter&gt;</text>
+<text text-anchor="start" x="2450.5" y="-322.1" font-family="Times,serif" font-size="14.00"> + getName() : String</text>
+</g>
+<!-- Team&#45;&gt;Duplicable&lt;T&gt; -->
+<g id="edge17" class="edge">
+<title>Team-&gt;Duplicable&lt;T&gt;</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M2494.57,-313.64C2494.57,-313.64 2494.57,-95.69 2494.57,-95.69"/>
+<polygon fill="#008200" stroke="#008200" points="2498.07,-95.69 2494.57,-85.69 2491.07,-95.69 2498.07,-95.69"/>
+</g>
+<!-- TeamBuffVisitor -->
+<g id="node30" class="node">
+<title>TeamBuffVisitor</title>
+<polygon fill="none" stroke="black" points="6104.9,-1253.9 6104.9,-1328.3 6248.93,-1328.3 6248.93,-1253.9 6104.9,-1253.9"/>
+<text text-anchor="middle" x="6176.91" y="-1311.7" font-family="Times,serif" font-size="14.00">TeamBuffVisitor</text>
+<polyline fill="none" stroke="black" points="6104.9,-1303.5 6248.93,-1303.5"/>
+<text text-anchor="start" x="6112.9" y="-1286.9" font-family="Times,serif" font-size="14.00">+ TeamBuffVisitor() : </text>
+<polyline fill="none" stroke="black" points="6104.9,-1278.7 6248.93,-1278.7"/>
+<text text-anchor="start" x="6112.9" y="-1262.1" font-family="Times,serif" font-size="14.00">+ visit(Team) : void</text>
+</g>
+<!-- TeamVisitor -->
+<g id="node31" class="node">
+<title>TeamVisitor</title>
+<polygon fill="none" stroke="black" points="6112.67,-768.9 6112.67,-835.3 6241.15,-835.3 6241.15,-768.9 6112.67,-768.9"/>
+<text text-anchor="middle" x="6176.91" y="-818.7" font-family="Times,serif" font-size="14.00">&lt;&lt;interface&gt;&gt;</text>
+<text text-anchor="middle" x="6176.91" y="-801.9" font-family="Times,serif" font-size="14.00">TeamVisitor</text>
+<polyline fill="none" stroke="black" points="6112.67,-793.7 6241.15,-793.7"/>
+<text text-anchor="start" x="6120.67" y="-777.1" font-family="Times,serif" font-size="14.00">+ visit(Team) : void</text>
+</g>
+<!-- TeamBuffVisitor&#45;&gt;TeamVisitor -->
+<g id="edge18" class="edge">
+<title>TeamBuffVisitor-&gt;TeamVisitor</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M6176.91,-1253.54C6176.91,-1253.54 6176.91,-847.04 6176.91,-847.04"/>
+<polygon fill="#008200" stroke="#008200" points="6180.41,-847.04 6176.91,-837.04 6173.41,-847.04 6180.41,-847.04"/>
+</g>
+<!-- Warrior -->
+<g id="node32" class="node">
+<title>Warrior</title>
+<polygon fill="none" stroke="black" points="2114.39,-718.9 2114.39,-885.3 2319.43,-885.3 2319.43,-718.9 2114.39,-718.9"/>
+<text text-anchor="middle" x="2216.91" y="-868.7" font-family="Times,serif" font-size="14.00">Warrior</text>
+<polyline fill="none" stroke="black" points="2114.39,-860.5 2319.43,-860.5"/>
+<text text-anchor="start" x="2122.39" y="-843.9" font-family="Times,serif" font-size="14.00">+ Warrior(String) : </text>
+<polyline fill="none" stroke="black" points="2114.39,-835.7 2319.43,-835.7"/>
+<text text-anchor="start" x="2122.39" y="-819.1" font-family="Times,serif" font-size="14.00">- strength : int</text>
+<polyline fill="none" stroke="black" points="2114.39,-810.9 2319.43,-810.9"/>
+<text text-anchor="start" x="2122.39" y="-794.3" font-family="Times,serif" font-size="14.00">+ getStrength() : int</text>
+<text text-anchor="start" x="2122.39" y="-777.5" font-family="Times,serif" font-size="14.00"> + setStrength(int) : void</text>
+<text text-anchor="start" x="2122.39" y="-760.7" font-family="Times,serif" font-size="14.00"> + accept(CharacterVisitor) : void</text>
+<text text-anchor="start" x="2122.39" y="-743.9" font-family="Times,serif" font-size="14.00"> + levelUp() : void</text>
+<text text-anchor="start" x="2122.39" y="-727.1" font-family="Times,serif" font-size="14.00"> + duplicate() : Warrior</text>
+</g>
+<!-- Warrior&#45;&gt;GameCharacter -->
+<g id="edge19" class="edge">
+<title>Warrior-&gt;GameCharacter</title>
+<path fill="none" stroke="#000082" d="M2216.91,-718.67C2216.91,-718.67 2216.91,-668.31 2216.91,-668.31"/>
+<polygon fill="#000082" stroke="#000082" points="2220.41,-668.31 2216.91,-658.31 2213.41,-668.31 2220.41,-668.31"/>
+</g>
+<!-- WarriorCreator -->
+<g id="node33" class="node">
+<title>WarriorCreator</title>
+<polygon fill="none" stroke="black" points="2951.61,-1237.1 2951.61,-1345.1 3352.21,-1345.1 3352.21,-1237.1 2951.61,-1237.1"/>
+<text text-anchor="middle" x="3151.91" y="-1328.5" font-family="Times,serif" font-size="14.00">WarriorCreator</text>
+<polyline fill="none" stroke="black" points="2951.61,-1320.3 3352.21,-1320.3"/>
+<text text-anchor="start" x="2959.61" y="-1303.7" font-family="Times,serif" font-size="14.00">+ WarriorCreator() : </text>
+<polyline fill="none" stroke="black" points="2951.61,-1295.5 3352.21,-1295.5"/>
+<text text-anchor="start" x="2959.61" y="-1278.9" font-family="Times,serif" font-size="14.00">+ create(String, int, CombatStrategy, CharacterAnimation) : Warrior</text>
+<text text-anchor="start" x="2959.61" y="-1262.1" font-family="Times,serif" font-size="14.00"> + create(String) : Warrior</text>
+<text text-anchor="start" x="2959.61" y="-1245.3" font-family="Times,serif" font-size="14.00"> + create(String, int, CombatStrategy) : Warrior</text>
+</g>
+<!-- WarriorCreator&#45;&gt;CharacterCreator -->
+<g id="edge20" class="edge">
+<title>WarriorCreator-&gt;CharacterCreator</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M3250.65,-1236.9C3250.65,-1236.9 3250.65,-872.23 3250.65,-872.23"/>
+<polygon fill="#008200" stroke="#008200" points="3254.15,-872.23 3250.65,-862.23 3247.15,-872.23 3254.15,-872.23"/>
+</g>
+<!-- Wizard -->
+<g id="node34" class="node">
+<title>Wizard</title>
+<polygon fill="none" stroke="black" points="2337.39,-702.1 2337.39,-902.1 2542.43,-902.1 2542.43,-702.1 2337.39,-702.1"/>
+<text text-anchor="middle" x="2439.91" y="-885.5" font-family="Times,serif" font-size="14.00">Wizard</text>
+<polyline fill="none" stroke="black" points="2337.39,-877.3 2542.43,-877.3"/>
+<text text-anchor="start" x="2345.39" y="-860.7" font-family="Times,serif" font-size="14.00">+ Wizard(String) : </text>
+<text text-anchor="start" x="2345.39" y="-843.9" font-family="Times,serif" font-size="14.00"> + Wizard(String, int) : </text>
+<text text-anchor="start" x="2345.39" y="-827.1" font-family="Times,serif" font-size="14.00"> + Wizard(Wizard) : </text>
+<polyline fill="none" stroke="black" points="2337.39,-818.9 2542.43,-818.9"/>
+<text text-anchor="start" x="2345.39" y="-802.3" font-family="Times,serif" font-size="14.00">- intelligence : int</text>
+<polyline fill="none" stroke="black" points="2337.39,-794.1 2542.43,-794.1"/>
+<text text-anchor="start" x="2345.39" y="-777.5" font-family="Times,serif" font-size="14.00">+ setIntelligence(int) : void</text>
+<text text-anchor="start" x="2345.39" y="-760.7" font-family="Times,serif" font-size="14.00"> + duplicate() : Wizard</text>
+<text text-anchor="start" x="2345.39" y="-743.9" font-family="Times,serif" font-size="14.00"> + levelUp() : void</text>
+<text text-anchor="start" x="2345.39" y="-727.1" font-family="Times,serif" font-size="14.00"> + getIntelligence() : int</text>
+<text text-anchor="start" x="2345.39" y="-710.3" font-family="Times,serif" font-size="14.00"> + accept(CharacterVisitor) : void</text>
+</g>
+<!-- Wizard&#45;&gt;GameCharacter -->
+<g id="edge21" class="edge">
+<title>Wizard-&gt;GameCharacter</title>
+<path fill="none" stroke="#000082" d="M2380.71,-701.73C2380.71,-701.73 2380.71,-668.42 2380.71,-668.42"/>
+<polygon fill="#000082" stroke="#000082" points="2384.21,-668.42 2380.71,-658.42 2377.21,-668.42 2384.21,-668.42"/>
+</g>
+<!-- WizardCreator -->
+<g id="node35" class="node">
+<title>WizardCreator</title>
+<polygon fill="none" stroke="black" points="3370.09,-1237.1 3370.09,-1345.1 3817.73,-1345.1 3817.73,-1237.1 3370.09,-1237.1"/>
+<text text-anchor="middle" x="3593.91" y="-1328.5" font-family="Times,serif" font-size="14.00">WizardCreator</text>
+<polyline fill="none" stroke="black" points="3370.09,-1320.3 3817.73,-1320.3"/>
+<text text-anchor="start" x="3378.09" y="-1303.7" font-family="Times,serif" font-size="14.00">+ WizardCreator() : </text>
+<polyline fill="none" stroke="black" points="3370.09,-1295.5 3817.73,-1295.5"/>
+<text text-anchor="start" x="3378.09" y="-1278.9" font-family="Times,serif" font-size="14.00">+ create(String, int, CombatStrategy) : GameCharacter</text>
+<text text-anchor="start" x="3378.09" y="-1262.1" font-family="Times,serif" font-size="14.00"> + create(String, int, CombatStrategy, CharacterAnimation) : GameCharacter</text>
+<text text-anchor="start" x="3378.09" y="-1245.3" font-family="Times,serif" font-size="14.00"> + create(String) : GameCharacter</text>
+</g>
+<!-- WizardCreator&#45;&gt;CharacterCreator -->
+<g id="edge22" class="edge">
+<title>WizardCreator-&gt;CharacterCreator</title>
+<path fill="none" stroke="#008200" stroke-dasharray="5,2" d="M3483.41,-1236.9C3483.41,-1236.9 3483.41,-872.23 3483.41,-872.23"/>
+<polygon fill="#008200" stroke="#008200" points="3486.91,-872.23 3483.41,-862.23 3479.91,-872.23 3486.91,-872.23"/>
+</g>
+</g>
+</svg>

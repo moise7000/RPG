@@ -1,29 +1,322 @@
 @startuml
 
-abstract class GameCharacter {
-    String name
-    int health
-    int experiencepoints
-    int level
+!theme plain
+top to bottom direction
+skinparam linetype ortho
 
+class AddDecoratorCommand {
+  + AddDecoratorCommand(GameFacade, String, int, DecoratorType):
+  - teamName: String
+  - game: GameFacade
+  - type: DecoratorType
+  - characterIndex: int
+  + execute(): void
+  + undo(): void
 }
-
-class Warrior extends GameCharacter {
-    int strength
+class AggressiveStrategy {
+  + AggressiveStrategy():
+  - config: GameConfiguration
+  + calculateDamageReceived(int): int
+  + calculateDamageDealt(int): int
 }
-
-class Wizard extends GameCharacter {
-    int intelligence
+class ArmoredDecorator {
+  + ArmoredDecorator(GameCharacter):
+  - config: GameConfiguration
+  + receiveAttack(int): void
+  + duplicate(): GameCharacter
 }
-
-class Healer extends GameCharacter {
-    int wisdom
+class AttackCommand {
+  + AttackCommand(GameFacade, String, int, String, int):
+  - attackerIndex: int
+  - defendingTeam: String
+  - defenderIndex: int
+  - previousDefenderHealth: int
+  - attackingTeam: String
+  - game: GameFacade
+  + execute(): void
+  + undo(): void
 }
-
+class BuffVisitor {
+  + BuffVisitor():
+  - config: GameConfiguration
+  + visit(Wizard): void
+  + visit(Warrior): void
+}
+interface CharacterCreator << interface >> {
+  + create(String, int): GameCharacter
+  + create(String, int, CombatStrategy): GameCharacter
+  + create(String): GameCharacter
+  + create(String, int, CombatStrategy, CharacterAnimation): GameCharacter
+}
+class CharacterDecorator {
+  + CharacterDecorator(GameCharacter):
+  # decoratedCharacter: GameCharacter
+  + removeDecoratedCharacter(): GameCharacter
+  + notifyObservers(CharacterEvent): void
+  + removeObserver(CharacterObserver): void
+  + levelUp(): void
+  + getDecoratedCharacter(): GameCharacter
+  + accept(CharacterVisitor): void
+  + addObserver(CharacterObserver): void
+  + setDecoratedCharacter(GameCharacter): void
+}
+enum CharacterEvent << enumeration >> {
+  + CharacterEvent():
+  + LEVEL_UP:
+  + LEVEL_DOWN:
+  + DEATH:
+  + values(): CharacterEvent[]
+  + valueOf(String): CharacterEvent
+}
+interface CharacterObserver << interface >> {
+  + update(GameCharacter, CharacterEvent): void
+}
+interface CharacterState << interface >> {
+  + onAttack(Character, int): void
+  + onExitState(Character): void
+  + onReceive(Character, int): void
+  + inHealthChanged(Character, int): void
+  + onEnterState(Character): void
+  + onUpdate(Character): void
+}
+interface CharacterSubject << interface >> {
+  + notifyObservers(CharacterEvent): void
+  + addObserver(CharacterObserver): void
+  + removeObserver(CharacterObserver): void
+}
+interface CharacterVisitor << interface >> {
+  + visit(Wizard): void
+  + visit(Warrior): void
+}
+interface CombatStrategy << interface >> {
+  + calculateDamageReceived(int): int
+  + calculateDamageDealt(int): int
+}
+interface Command << interface >> {
+  + execute(): void
+  + undo(): void
+}
+class DamageVisitor {
+  + DamageVisitor():
+  - config: GameConfiguration
+  + visit(Wizard): void
+  + visit(Warrior): void
+}
+class DeathObserver {
+  + DeathObserver():
+  + update(GameCharacter, CharacterEvent): void
+}
+enum DecoratorType << enumeration >> {
+  + DecoratorType():
+  + ARMOR:
+  + INVINCIBLE:
+  + values(): DecoratorType[]
+  + valueOf(String): DecoratorType
+}
+class DefensiveStrategy {
+  + DefensiveStrategy():
+  - config: GameConfiguration
+  + calculateDamageReceived(int): int
+  + calculateDamageDealt(int): int
+}
+interface Duplicable<T> << interface >> {
+  + duplicate(): T
+}
+class GameCharacter {
+  + GameCharacter(String):
+  + GameCharacter(String, int, CombatStrategy, CharacterAnimation):
+  + GameCharacter(String, int, CombatStrategy):
+  - combatStrategy: CombatStrategy
+  - animations: CharacterAnimation
+  - level: int
+  - observers: List<CharacterObserver>
+  - health: int
+  - name: String
+  - experiencePoints: int
+  + getLevel(): int
+  + accept(CharacterVisitor): void
+  + addObserver(CharacterObserver): void
+  + levelUp(): void
+  + duplicate(): GameCharacter
+  + setLevel(int): void
+  + receiveAttack(int): void
+  + removeObserver(CharacterObserver): void
+  + setCombatStrategy(CombatStrategy): void
+  + getName(): String
+  + notifyObservers(CharacterEvent): void
+  + getHealth(): int
+  + setHealth(int): void
+  + setExperiencePoints(int): void
+  + setAnimations(CharacterAnimation): void
+  + attack(int): int
+  + getExperiencePoints(): int
+  + getAnimations(): CharacterAnimation
+}
+class GameConfiguration {
+  - GameConfiguration():
+  - shared: GameConfiguration
+  - difficultyLevel: int
+  - maxTeamSize: int
+  + getWizardHealthBuff(): int
+  + getDifficultyLevel(): int
+  + setMaxTeamSize(int): void
+  + getMaxLevel(): int
+  + getLevelBuff(): int
+  + getXpPerLevel(): int
+  + getWarriorHealthForLevel(int): int
+  + getWarriorBaseHealth(): int
+  + getMaxTeamSize(): int
+  + getWizardIntelligenceBuff(): int
+  + getAggressiveDamageMultiplier(): double
+  + getMinimumHealth(int): int
+  + getWizardXpBuff(): int
+  + getBaseXpGain(): int
+  + getArmorDamageReduction(int): double
+  + getXpRequiredForLevel(int): int
+  + getWizardHealAmount(): int
+  + getWizardBaseIntelligence(): int
+  + getShared(): GameConfiguration
+  + getWizardBaseHealth(): int
+  + getDefensiveDefenseMultiplier(): double
+  + getWarriorHealthBuff(): int
+  + getCharacterCreator(): CharacterCreator
+  + getWarriorStrengthBuff(): int
+  + getWizardIntelligenceForLevel(int): int
+  + getWarriorStrengthForLevel(int): int
+  + getWarriorBaseStrength(): int
+  + getAggressiveDefenseMultiplier(): double
+  + setDifficultyLevel(int): void
+  + getWarriorHealAmount(): int
+  + getWarriorXpBuff(): int
+  + getDefensiveDamageMultiplier(): double
+  + getBaseDamageAmount(): int
+  + getWizardHealthForLevel(int): int
+}
+class GameFacade {
+  + GameFacade():
+  - teams: Map<String, List<GameCharacter>>
+  - config: GameConfiguration
+  + getCharacterFromTeam(String, int): GameCharacter
+  + addArmorToCharacter(String, int): void
+  + createTeam(String): void
+  + healTeam(String): void
+  - validateTeam(String): void
+  + removeTeam(String): void
+  + attackTeam(String, int, String, int): void
+  + buffTeam(String): void
+  + addCharacterToTeam(String, GameCharacter): void
+  + invincibilityToCharacter(String, int): void
+  + getTeams(): Map<String, List<GameCharacter>>
+}
+class GameInvoker {
+  + GameInvoker():
+  - commandQueue: Queue<Command>
+  - executedCommands: Stack<Command>
+  + executeAllCommands(): void
+  + addCommand(Command): void
+  + undoLastCommand(): void
+  + executeNextCommand(): void
+  + clearQueue(): void
+  + hasCommands(): boolean
+}
+class HealTeamCommand {
+  + HealTeamCommand(GameFacade, String):
+  - game: GameFacade
+  - teamName: String
+  - previousHealthValues: List<Integer>
+  + execute(): void
+  + undo(): void
+}
+class HealVisitor {
+  + HealVisitor():
+  - config: GameConfiguration
+  + visit(Warrior): void
+  + visit(Wizard): void
+}
+class InvincibleDecorator {
+  + InvincibleDecorator(GameCharacter):
+  - config: GameConfiguration
+  + receiveAttack(int): void
+  + duplicate(): GameCharacter
+}
+class LevelUpObserver {
+  + LevelUpObserver():
+  + update(GameCharacter, CharacterEvent): void
+}
+class NeutralStrategy {
+  + NeutralStrategy():
+  + calculateDamageDealt(int): int
+  + calculateDamageReceived(int): int
+}
 class Team {
-    String name
+  - Team(TeamBuilder):
+  - Team(Team):
+  - players: List<GameCharacter>
+  - name: String
+  + duplicate(): Team
+  + getPlayers(): List<GameCharacter>
+  + getName(): String
+}
+class TeamBuffVisitor {
+  + TeamBuffVisitor():
+  + visit(Team): void
+}
+interface TeamVisitor << interface >> {
+  + visit(Team): void
+}
+class Warrior {
+  + Warrior(String):
+  - strength: int
+  + getStrength(): int
+  + setStrength(int): void
+  + accept(CharacterVisitor): void
+  + levelUp(): void
+  + duplicate(): Warrior
+}
+class WarriorCreator {
+  + WarriorCreator():
+  + create(String, int, CombatStrategy, CharacterAnimation): Warrior
+  + create(String): Warrior
+  + create(String, int, CombatStrategy): Warrior
+}
+class Wizard {
+  + Wizard(String):
+  + Wizard(String, int):
+  + Wizard(Wizard):
+  - intelligence: int
+  + setIntelligence(int): void
+  + duplicate(): Wizard
+  + levelUp(): void
+  + getIntelligence(): int
+  + accept(CharacterVisitor): void
+}
+class WizardCreator {
+  + WizardCreator():
+  + create(String, int, CombatStrategy): GameCharacter
+  + create(String, int, CombatStrategy, CharacterAnimation): GameCharacter
+  + create(String): GameCharacter
 }
 
-Team "1" *-- "1..*" GameCharacter
-
+AddDecoratorCommand  -[#008200,dashed]-^  Command
+AggressiveStrategy   -[#008200,dashed]-^  CombatStrategy
+ArmoredDecorator     -[#000082,plain]-^  CharacterDecorator
+AttackCommand        -[#008200,dashed]-^  Command
+BuffVisitor          -[#008200,dashed]-^  CharacterVisitor
+CharacterDecorator   -[#000082,plain]-^  GameCharacter
+DamageVisitor        -[#008200,dashed]-^  CharacterVisitor
+DeathObserver        -[#008200,dashed]-^  CharacterObserver
+DefensiveStrategy    -[#008200,dashed]-^  CombatStrategy
+GameCharacter        -[#008200,dashed]-^  CharacterSubject
+GameCharacter        -[#008200,dashed]-^  Duplicable
+HealTeamCommand      -[#008200,dashed]-^  Command
+HealVisitor          -[#008200,dashed]-^  CharacterVisitor
+InvincibleDecorator  -[#000082,plain]-^  CharacterDecorator
+LevelUpObserver      -[#008200,dashed]-^  CharacterObserver
+NeutralStrategy      -[#008200,dashed]-^  CombatStrategy
+Team                 -[#008200,dashed]-^  Duplicable
+TeamBuffVisitor      -[#008200,dashed]-^  TeamVisitor
+Warrior              -[#000082,plain]-^  GameCharacter
+WarriorCreator       -[#008200,dashed]-^  CharacterCreator
+Wizard               -[#000082,plain]-^  GameCharacter
+WizardCreator        -[#008200,dashed]-^  CharacterCreator
 @enduml
