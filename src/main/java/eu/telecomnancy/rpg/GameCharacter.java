@@ -182,6 +182,8 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
     public int getHealth() {return health;}
 
 
+    public int getMaxHealth() {return health;}
+
     /**
      * Définit une nouvelle valeur pour les points de vie du personnage.
      *

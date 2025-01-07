@@ -3,6 +3,8 @@ package gameInterface.Scenes;
 import eu.telecomnancy.rpg.GameCharacter;
 import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
+
+import gameInterface.Scenes.GameLoop.GameScene2;
 import gameInterface.character.CharacterAnimation;
 import gameInterface.helpers.ButtonStyleHelper;
 import javafx.scene.control.Button;
@@ -130,6 +132,6 @@ public class CharacterSelectionScene {
     private static void startGame(Main mainApp, InterfaceConfiguration config, GameCharacter selectedCharacter) {
         mainApp.stopParallax();
         selectedCharacter.getAnimations().setState(CharacterAnimation.CharacterState.IDLE);
-        mainApp.setSceneContent(GameScene.create(mainApp, config, selectedCharacter));
+        mainApp.setSceneContent(GameScene2.create(mainApp, config, selectedCharacter));
     }
 }

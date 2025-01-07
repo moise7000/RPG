@@ -12,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.layout.Region;
 import javafx.geometry.Pos;
+import javafx.application.Platform;
 
 public class Main extends Application {
     private final InterfaceConfiguration config = InterfaceConfiguration.getShared();

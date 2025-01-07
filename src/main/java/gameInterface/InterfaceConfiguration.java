@@ -500,7 +500,7 @@ public class InterfaceConfiguration {
 
             static final String NAME = "Necromancer";
             static final int HEALTH = 150;
-            static CombatStrategy STRATEGY = new AggressiveStrategy();
+            static CombatStrategy STRATEGY = new NeutralStrategy();
             static final CharacterType TYPE = CharacterType.WIZARD;
             static final String INFO =
                     "Name: " + NAME + "\n"
