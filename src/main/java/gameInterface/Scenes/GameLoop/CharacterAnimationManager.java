@@ -48,90 +48,10 @@ public class CharacterAnimationManager {
         return instance;
     }
 
-    public void performAttackAnimation(CharacterAnimation characterAnimation) {
-        characterAnimation.setState(CharacterAnimation.CharacterState.ATTACK);
-        int attackAnimationFrameCount = characterAnimation.getFrameCount(characterAnimation.getCurrentState());
-        PauseTransition pause = new PauseTransition(Duration.millis(attackAnimationFrameCount * 100));
-        pause.setOnFinished(event -> characterAnimation.setState(CharacterAnimation.CharacterState.IDLE));
-        pause.play();
-    }
+    
 
-    public void performHitAnimation(CharacterAnimation characterAnimation) {
-        characterAnimation.setState(CharacterAnimation.CharacterState.HIT);
-        int hitAnimationFrameCount = characterAnimation.getFrameCount(characterAnimation.getCurrentState());
-        PauseTransition pause = new PauseTransition(Duration.millis(hitAnimationFrameCount * 100));
-        pause.setOnFinished(event -> characterAnimation.setState(CharacterAnimation.CharacterState.IDLE));
-        pause.play();
-    }
 
-    public void performMoveAnimation(CharacterAnimation characterAnimation, double targetX, Duration duration) {
-        characterAnimation.setState(CharacterAnimation.CharacterState.MOVE);
-        TranslateTransition moveTransition = new TranslateTransition(duration, characterAnimation.getSpriteView());
-        moveTransition.setToX(targetX);
-        moveTransition.setOnFinished(event -> characterAnimation.setState(CharacterAnimation.CharacterState.IDLE));
-        moveTransition.play();
-    }
 
-//    public void performAnimationSequence(CharacterAnimation characterAnimation, List<AnimationStep> steps) {
-//        SequentialTransition sequence = new SequentialTransition();
-//
-//        for (AnimationStep step : steps) {
-//            switch (step.type) {
-//                case MOVE:
-//                    // Créer une pause pour définir l'état MOVE avant le déplacement
-//                    PauseTransition setMoveState = new PauseTransition(Duration.ZERO);
-//                    setMoveState.setOnFinished(event ->
-//                            characterAnimation.setState(CharacterAnimation.CharacterState.MOVE)
-//                    );
-//                    sequence.getChildren().add(setMoveState);
-//
-//                    // Créer l'animation de déplacement
-//                    TranslateTransition moveTransition = new TranslateTransition(step.duration, characterAnimation.getSpriteView());
-//                    moveTransition.setToX(step.targetX);
-//                    moveTransition.setOnFinished(event ->
-//                            characterAnimation.setState(CharacterAnimation.CharacterState.IDLE)
-//                    );
-//                    sequence.getChildren().add(moveTransition);
-//                    break;
-//
-//                case ATTACK:
-//                    PauseTransition setAttackState = new PauseTransition(Duration.ZERO);
-//                    setAttackState.setOnFinished(event -> {
-//                        characterAnimation.setState(CharacterAnimation.CharacterState.ATTACK);
-//                        int attackFrames = characterAnimation.getFrameCount(CharacterAnimation.CharacterState.ATTACK);
-//                        PauseTransition attackDuration = new PauseTransition(Duration.millis(attackFrames * 100));
-//                        attackDuration.setOnFinished(e ->
-//                                characterAnimation.setState(CharacterAnimation.CharacterState.IDLE)
-//                        );
-//                        attackDuration.play();
-//                    });
-//                    sequence.getChildren().add(setAttackState);
-//                    sequence.getChildren().add(new PauseTransition(step.duration));
-//                    break;
-//
-//                case HIT:
-//                    PauseTransition setHitState = new PauseTransition(Duration.ZERO);
-//                    setHitState.setOnFinished(event -> {
-//                        characterAnimation.setState(CharacterAnimation.CharacterState.HIT);
-//                        int hitFrames = characterAnimation.getFrameCount(CharacterAnimation.CharacterState.HIT);
-//                        PauseTransition hitDuration = new PauseTransition(Duration.millis(hitFrames * 100));
-//                        hitDuration.setOnFinished(e ->
-//                                characterAnimation.setState(CharacterAnimation.CharacterState.IDLE)
-//                        );
-//                        hitDuration.play();
-//                    });
-//                    sequence.getChildren().add(setHitState);
-//                    sequence.getChildren().add(new PauseTransition(step.duration));
-//                    break;
-//            }
-//
-//            // Ajoute une petite pause entre chaque animation
-//            sequence.getChildren().add(new PauseTransition(Duration.millis(100)));
-//        }
-//
-//        // Démarre la séquence
-//        sequence.play();
-//    }
 
 
     public void performAnimationSequence(CharacterAnimation characterAnimation, List<AnimationStep> steps) {

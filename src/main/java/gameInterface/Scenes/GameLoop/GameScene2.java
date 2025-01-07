@@ -194,7 +194,7 @@ public class GameScene2 {
 
 
 
-    
+
 
 
 
@@ -457,7 +457,7 @@ public class GameScene2 {
 
         });
 
-        // Action du bouton Recruit (à implémenter selon vos besoins)
+
         recruitButton.setOnAction(e -> {
             if (isPlayerTurn) {
                 isPlayerTurn = false;
@@ -466,7 +466,7 @@ public class GameScene2 {
 
         });
 
-        // Action du bouton Add Decorator (à implémenter selon vos besoins)
+
         visitorButton.setOnAction(e -> {
             if (isPlayerTurn) {
                 VisitorSelectionPopup.show(config);
