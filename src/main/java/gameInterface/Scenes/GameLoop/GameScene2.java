@@ -9,9 +9,7 @@ import gameInterface.Scenes.GameOverScene;
 import gameInterface.Scenes.VisitorSelectionPopup;
 import gameInterface.character.CharacterAnimation;
 import gameInterface.helpers.ButtonStyleHelper;
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -62,6 +60,10 @@ public class GameScene2 {
 
         gameManager.initializeGame(selectedCharacter);
         gameManager.setMainApp(mainApp);
+
+
+
+
 
 
 
@@ -134,6 +136,7 @@ public class GameScene2 {
 
         // Assemblage de la scène
         root.getChildren().addAll(statusLabel, gameContainer, controlButtons, spacer, backButton );
+        gameManager.setGameContainer(gameContainer);
 
         return root;
     }
@@ -172,9 +175,7 @@ public class GameScene2 {
 
 
 
-    private static void p() {
 
-    }
 
 
     private static void performPlayerAttack() {
@@ -202,9 +203,12 @@ public class GameScene2 {
                 CharacterAnimationManager.AnimationDirection.RIGHT,
                 gameManager.getPlayerAnimation(),
                 sequence,
-                GameScene2::performEnemiesAttack);
+                () -> {
+                    gameManager.processPlayerAttack();
+                    performEnemiesAttack();
+                });
 
-        gameManager.processPlayerAttack();
+
         System.out.println("Animation and player attack is finished");
 
         //TODO: update healthBar
@@ -214,6 +218,18 @@ public class GameScene2 {
     public static void performEnemiesAttack() {
         InterfaceConfiguration config = InterfaceConfiguration.getShared();
         CharacterAnimationManager characterAnimationManager = CharacterAnimationManager.getInstance();
+
+
+        //TODO: check if the enemey team is wiped
+        System.out.println(gameManager.getCurrentLevel());
+
+        if(gameManager.allEnemiesAreDead()) {
+            System.out.println("All enemies are dead");
+            handleLevelTransition();
+            return;
+        }
+
+
 
         GameCharacter attackingEnemy = gameManager.getEnemies().get(0);
         double playerPosition = gameManager.getPlayerAnimation().getSpriteView().getX();
@@ -261,6 +277,104 @@ public class GameScene2 {
 
 
 
+
+
+    private static void handleLevelTransition() {
+        // Lancer l'animation de mort pour chaque ennemi
+        for (GameCharacter enemy : gameManager.getEnemies()) {
+            CharacterAnimation enemyAnim = enemy.getAnimations();
+            enemyAnim.setState(CharacterAnimation.CharacterState.DEATH);
+
+            // Attendre que l'animation de mort soit terminée
+            int deathFrames = enemyAnim.getFrameCount(CharacterAnimation.CharacterState.DEATH);
+            PauseTransition deathDuration = new PauseTransition(Duration.millis(deathFrames * 100));
+
+            deathDuration.setOnFinished(e -> {
+                // Fade out après l'animation de mort
+                FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5), enemyAnim.getSpriteView());
+                fadeOut.setFromValue(1.0);
+                fadeOut.setToValue(0.0);
+                fadeOut.setOnFinished(f -> enemyAnim.getSpriteView().setVisible(false));
+                fadeOut.play();
+            });
+            deathDuration.play();
+        }
+
+        // Afficher le popup de niveau après les animations
+        PauseTransition waitForDeathAnimations = new PauseTransition(Duration.seconds(2));
+        waitForDeathAnimations.setOnFinished(e -> showLevelUpPopup());
+        waitForDeathAnimations.play();
+    }
+
+    private static void showLevelUpPopup() {
+        Label levelPopup = createLevelPopup();
+        gameManager.getGameContainer().getChildren().add(levelPopup);
+
+        Timeline popupAnimation = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(levelPopup.scaleXProperty(), 0),
+                        new KeyValue(levelPopup.scaleYProperty(), 0)),
+                new KeyFrame(Duration.seconds(0.3),
+                        new KeyValue(levelPopup.scaleXProperty(), 1.2),
+                        new KeyValue(levelPopup.scaleYProperty(), 1.2)),
+                new KeyFrame(Duration.seconds(0.4),
+                        new KeyValue(levelPopup.scaleXProperty(), 1),
+                        new KeyValue(levelPopup.scaleYProperty(), 1)),
+                new KeyFrame(Duration.seconds(1.5)),
+                new KeyFrame(Duration.seconds(2),
+                        new KeyValue(levelPopup.scaleXProperty(), 0),
+                        new KeyValue(levelPopup.scaleYProperty(), 0))
+        );
+
+        popupAnimation.setOnFinished(e -> {
+            gameManager.getGameContainer().getChildren().remove(levelPopup);
+            setupNewLevel();
+        });
+        popupAnimation.play();
+    }
+
+    private static void setupNewLevel() {
+        // Nettoyer les anciens ennemis
+        for (GameCharacter enemy : gameManager.getEnemies()) {
+            gameManager.getGameContainer().getChildren().remove(enemy.getAnimations().getSpriteView());
+        }
+        enemyAnimations.clear();
+
+        // Créer les nouveaux ennemis
+        gameManager.handleLevelComplete();
+        setupEnemiesPosition();
+
+        // Mise à jour de l'interface
+        //updateHealthBars();
+        updateStatusLabel();
+
+        // Reset des positions et états
+        isPlayerTurn = true;
+        gameManager.getPlayerAnimation().setState(CharacterAnimation.CharacterState.IDLE);
+
+        // Faire apparaître les nouveaux ennemis avec fade in
+        for (GameCharacter enemy : gameManager.getEnemies()) {
+            CharacterAnimation enemyAnim = enemy.getAnimations();
+            enemyAnim.getSpriteView().setOpacity(0);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), enemyAnim.getSpriteView());
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
+        }
+    }
+
+    private static Label createLevelPopup() {
+        Label popup = new Label("Level " + (gameManager.getCurrentLevel() + 1));
+        popup.setStyle("-fx-background-color: rgba(0,0,0,0.8); " +
+                "-fx-text-fill: white; " +
+                "-fx-padding: 20px 40px; " +
+                "-fx-font-size: 24px; " +
+                "-fx-background-radius: 10px;");
+        popup.setLayoutX(gameManager.getGameContainer().getWidth()/2 - 100);
+        popup.setLayoutY(gameManager.getGameContainer().getHeight()/2 - 50);
+        return popup;
+    }
 
 
 

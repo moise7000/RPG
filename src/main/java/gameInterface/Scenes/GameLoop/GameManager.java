@@ -6,6 +6,7 @@ import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
 import gameInterface.Scenes.GameOverScene;
 import gameInterface.character.CharacterAnimation;
+import javafx.scene.layout.Pane;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -18,12 +19,14 @@ public class GameManager {
     private int currentLevel;
     private int score;
     private Main mainApp;
+    private Pane gameContainer;
 
     private GameManager() {
         this.isPlayerTurn = true;
         this.currentLevel = 1;
         this.score = 0;
         this.mainApp = null;
+        this.gameContainer = null;
     }
 
     public static GameManager getInstance() {
@@ -44,6 +47,9 @@ public class GameManager {
     public void setMainApp(Main mainApp) {this.mainApp = mainApp;}
     public Main getMainApp() {return this.mainApp;}
 
+    public void setGameContainer(Pane gameContainer) {this.gameContainer = gameContainer;}
+    public Pane getGameContainer() {return this.gameContainer;}
+
     private void createEnemies(int level) {
         List<GameCharacter> enemyList = new ArrayList<>();
         int enemyCount = Math.min(level, 3);
@@ -60,7 +66,7 @@ public class GameManager {
 //            }
 //        }
         GameCharacter enemy = InterfaceConfiguration.getShared().createNecromancerGameCharacter();
-        enemy.setHealth(50 * level);
+        //enemy.setHealth(50 * level);
         this.enemies.add(enemy);
 
     }
@@ -106,10 +112,14 @@ public class GameManager {
         }
     }
 
+    public boolean allEnemiesAreDead() {
+        return enemies.stream().allMatch(enemy -> enemy.getHealth() <= 0);
+    }
 
 
 
-    private void handleLevelComplete() {
+
+    void handleLevelComplete() {
         currentLevel++;
         score += 100 * currentLevel;
         enemies = new ArrayList<>();
