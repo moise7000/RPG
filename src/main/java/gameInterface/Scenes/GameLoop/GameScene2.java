@@ -65,13 +65,6 @@ public class GameScene2 {
 
 
 
-
-
-
-
-
-
-
         //enemies = createEnemies(currentLevel);
         enemyAnimations = new ArrayList<>();
 
@@ -225,7 +218,7 @@ public class GameScene2 {
 
         if(gameManager.allEnemiesAreDead()) {
             System.out.println("All enemies are dead");
-            handleLevelTransition();
+            handleLevelTransition2();
             return;
         }
 
@@ -280,30 +273,65 @@ public class GameScene2 {
 
 
     private static void handleLevelTransition() {
-        // Lancer l'animation de mort pour chaque ennemi
+
+
+        SequentialTransition sequence = new SequentialTransition();
+
+        // Animation de mort
+        ParallelTransition deathAnimations = new ParallelTransition();
         for (GameCharacter enemy : gameManager.getEnemies()) {
             CharacterAnimation enemyAnim = enemy.getAnimations();
-            enemyAnim.setState(CharacterAnimation.CharacterState.DEATH);
 
-            // Attendre que l'animation de mort soit terminée
+            PauseTransition deathAnimation = new PauseTransition(Duration.ZERO);
+            deathAnimation.setOnFinished(e -> enemyAnim.setState(CharacterAnimation.CharacterState.DEATH));
+
             int deathFrames = enemyAnim.getFrameCount(CharacterAnimation.CharacterState.DEATH);
-            PauseTransition deathDuration = new PauseTransition(Duration.millis(deathFrames * 100));
+            deathAnimations.getChildren().add(deathAnimation);
+        }
+        sequence.getChildren().add(deathAnimations);
 
-            deathDuration.setOnFinished(e -> {
-                // Fade out après l'animation de mort
-                FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5), enemyAnim.getSpriteView());
-                fadeOut.setFromValue(1.0);
-                fadeOut.setToValue(0.0);
-                fadeOut.setOnFinished(f -> enemyAnim.getSpriteView().setVisible(false));
-                fadeOut.play();
-            });
-            deathDuration.play();
+        // Attendre la fin de l'animation DEATH
+        sequence.getChildren().add(new PauseTransition(Duration.seconds(1.5)));
+
+        // Fade out
+        ParallelTransition fadeOuts = new ParallelTransition();
+        for (GameCharacter enemy : gameManager.getEnemies()) {
+            FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5), enemy.getAnimations().getSpriteView());
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOuts.getChildren().add(fadeOut);
+        }
+        sequence.getChildren().add(fadeOuts);
+
+        // Popup de niveau
+        sequence.getChildren().add(new PauseTransition(Duration.seconds(0.5)));
+        sequence.setOnFinished(e -> showLevelUpPopup());
+
+        sequence.play();
+    }
+
+
+    public static void handleLevelTransition2() {
+
+        System.out.println("Current level:" + gameManager.getCurrentLevel());
+        System.out.println("Enemy team size:" + gameManager.getEnemies().size());
+
+        for (GameCharacter enemy : gameManager.getEnemies()) {
+
+            enemy.getAnimations().setState(CharacterAnimation.CharacterState.DEATH);
+            int deathDuration = enemy.getAnimations().getFrameCount(CharacterAnimation.CharacterState.DEATH);
+
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(deathDuration * 100), enemy.getAnimations().getSpriteView());
+
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.setOnFinished(e -> {gameManager.setEnemies(new ArrayList<>());});
+            fadeOut.play();
+
+
         }
 
-        // Afficher le popup de niveau après les animations
-        PauseTransition waitForDeathAnimations = new PauseTransition(Duration.seconds(2));
-        waitForDeathAnimations.setOnFinished(e -> showLevelUpPopup());
-        waitForDeathAnimations.play();
+
     }
 
     private static void showLevelUpPopup() {
@@ -349,7 +377,7 @@ public class GameScene2 {
         updateStatusLabel();
 
         // Reset des positions et états
-        isPlayerTurn = true;
+
         gameManager.getPlayerAnimation().setState(CharacterAnimation.CharacterState.IDLE);
 
         // Faire apparaître les nouveaux ennemis avec fade in

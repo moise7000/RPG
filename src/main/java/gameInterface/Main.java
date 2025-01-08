@@ -36,11 +36,11 @@ public class Main extends Application {
 
         // Charger la musique
         try {
-            String musicPath = getClass().getResource(config.getMusicPath()).toExternalForm();
-            Media media = new Media(musicPath);
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            mediaPlayer.play();
+//            String musicPath = getClass().getResource(config.getMusicPath()).toExternalForm();
+//            Media media = new Media(musicPath);
+//            mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//            mediaPlayer.play();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Erreur lors du chargement ou de la lecture de la musique." + e.getMessage());

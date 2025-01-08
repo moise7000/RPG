@@ -50,7 +50,7 @@ public class GameManager {
     public void setGameContainer(Pane gameContainer) {this.gameContainer = gameContainer;}
     public Pane getGameContainer() {return this.gameContainer;}
 
-    private void createEnemies(int level) {
+    public void createEnemies(int level) {
         List<GameCharacter> enemyList = new ArrayList<>();
         int enemyCount = Math.min(level, 3);
 
@@ -70,6 +70,9 @@ public class GameManager {
         this.enemies.add(enemy);
 
     }
+
+    public void setEnemies(List<GameCharacter> enemies) {this.enemies = enemies;}
+    public void resetEnemies() {this.enemies.clear();}
 
     public void processPlayerAttack() {
         if (!isPlayerTurn || playerCharacter.getHealth() <= 0) return;
@@ -122,9 +125,12 @@ public class GameManager {
     void handleLevelComplete() {
         currentLevel++;
         score += 100 * currentLevel;
-        enemies = new ArrayList<>();
+        //enemies = new ArrayList<>();
         isPlayerTurn = true;
     }
+
+
+
 
     private void handleGameOver() {
         System.out.println("Game Over");
