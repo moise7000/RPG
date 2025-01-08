@@ -246,13 +246,15 @@ public class GameScene2 {
         characterAnimationManager.performAnimationSequence(
                 CharacterAnimationManager.AnimationDirection.LEFT,
                 attackingEnemy.getAnimations(),
-                sequence, null);
+                sequence,
+                () -> gameManager.processEnemyAttack());
 
 
-        gameManager.processEnemyAttack();
 
-        System.out.println("Animation and enemy attack is finished");
-        System.out.println("Is player turn:" + gameManager.isPlayerTurn());
+
+        System.out.println("Player Health:" + gameManager.getPlayerCharacter().getHealth());
+        System.out.println("Enemy Health:" + attackingEnemy.getHealth());
+
     }
 
 
@@ -480,10 +482,7 @@ public class GameScene2 {
         InterfaceConfiguration config = InterfaceConfiguration.getShared();
         GameConfiguration gameConfig = GameConfiguration.getShared();
 
-//        if (levelSystem.canRecruitMember()) {
-//            GameCharacter clonedPlayerCharacter = playerCharacter.duplicate();
-//            levelSystem.recruitMember(clonedPlayerCharacter);
-//        }
+
 
         if(gameManager.canPlayerRecruitMember()) {
             GameCharacter clonedPlayerMember = gameManager.getPlayerCharacter().duplicate();
