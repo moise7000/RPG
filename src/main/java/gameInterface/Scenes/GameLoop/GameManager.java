@@ -3,6 +3,8 @@ package gameInterface.Scenes.GameLoop;
 import eu.telecomnancy.rpg.GameCharacter;
 import eu.telecomnancy.rpg.GameConfiguration;
 import gameInterface.InterfaceConfiguration;
+import gameInterface.Main;
+import gameInterface.Scenes.GameOverScene;
 import gameInterface.character.CharacterAnimation;
 
 import java.util.List;
@@ -15,11 +17,13 @@ public class GameManager {
     private boolean isPlayerTurn;
     private int currentLevel;
     private int score;
+    private Main mainApp;
 
     private GameManager() {
         this.isPlayerTurn = true;
         this.currentLevel = 1;
         this.score = 0;
+        this.mainApp = null;
     }
 
     public static GameManager getInstance() {
@@ -37,6 +41,9 @@ public class GameManager {
         createEnemies(1);
     }
 
+    public void setMainApp(Main mainApp) {this.mainApp = mainApp;}
+    public Main getMainApp() {return this.mainApp;}
+
     private void createEnemies(int level) {
         List<GameCharacter> enemyList = new ArrayList<>();
         int enemyCount = Math.min(level, 3);
@@ -52,7 +59,7 @@ public class GameManager {
 //                enemyList.add(enemy);
 //            }
 //        }
-        GameCharacter enemy = InterfaceConfiguration.getShared().createNightBorneGameCharacter();
+        GameCharacter enemy = InterfaceConfiguration.getShared().createNecromancerGameCharacter();
         enemy.setHealth(50 * level);
         this.enemies.add(enemy);
 
@@ -99,6 +106,9 @@ public class GameManager {
         }
     }
 
+
+
+
     private void handleLevelComplete() {
         currentLevel++;
         score += 100 * currentLevel;
@@ -107,12 +117,39 @@ public class GameManager {
     }
 
     private void handleGameOver() {
-        // Cette méthode sera appelée par GameScene
+        System.out.println("Game Over");
+
+        InterfaceConfiguration config = InterfaceConfiguration.getShared();
+        mainApp.setSceneContent(GameOverScene.create(mainApp, config, playerCharacter, currentLevel,score));
     }
 
     // Getters
     public GameCharacter getPlayerCharacter() { return playerCharacter; }
     public CharacterAnimation getPlayerAnimation() {return playerCharacter.getAnimations();}
+
+
+
+    public boolean canPlayerRecruitMember() {
+        //TODO: Implémenter le test sur la possibilité de recrutement du joueur.
+        return isPlayerTurn;
+    }
+
+    public void recruitMember(GameCharacter member) {
+        //TODO: Ajouter un membre dans l'équipe du joueur.
+    }
+
+
+
+
+
+
+    public void killPlayer() {
+        playerCharacter.setHealth(0);
+        checkGameStatus();
+    }
+
+
+
 
 
 

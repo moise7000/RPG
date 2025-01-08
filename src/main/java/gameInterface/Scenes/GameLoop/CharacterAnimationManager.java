@@ -48,13 +48,16 @@ public class CharacterAnimationManager {
         return instance;
     }
 
-    
+
+
+    public enum AnimationDirection {
+        LEFT, RIGHT
+    }
 
 
 
 
-
-    public void performAnimationSequence(CharacterAnimation characterAnimation, List<AnimationStep> steps) {
+    public void performAnimationSequence(AnimationDirection direction, CharacterAnimation characterAnimation, List<AnimationStep> steps, Runnable onComplete) {
         SequentialTransition sequence = new SequentialTransition();
 
         for (AnimationStep step : steps) {
@@ -65,7 +68,14 @@ public class CharacterAnimationManager {
                     PauseTransition setOrientation = new PauseTransition(Duration.ZERO);
                     setOrientation.setOnFinished(event -> {
                         if (step.shouldFlip) {
-                            characterAnimation.getSpriteView().setScaleX(step.targetX > 0 ? 2 : -2);
+                            if (direction == AnimationDirection.LEFT) {
+                                characterAnimation.getSpriteView().setScaleX(step.targetX > 0 ? -2 : 2);
+                            } else {
+                                characterAnimation.getSpriteView().setScaleX(step.targetX > 0 ? 2 : -2);
+                            }
+
+
+
                         }
                         characterAnimation.setState(CharacterAnimation.CharacterState.MOVE);
                     });
@@ -116,7 +126,19 @@ public class CharacterAnimationManager {
         sequence.setOnFinished(event -> {
             // Obtenir le dernier élément de la liste
             AnimationStep lastStep = steps.get(steps.size() - 1);
-            characterAnimation.getSpriteView().setScaleX(lastStep.targetX > 0 ? -2 : 2);
+            if (direction== AnimationDirection.RIGHT) {
+
+                characterAnimation.getSpriteView().setScaleX(lastStep.targetX > 0 ? -2 : 2);
+
+            } else {
+                characterAnimation.getSpriteView().setScaleX(lastStep.targetX > 0 ? 2 : -2);
+            }
+
+            System.out.println("Animation finished.");
+            if (onComplete != null) {
+                onComplete.run();
+            }
+
         });
 
         sequence.play();
@@ -163,4 +185,6 @@ public class CharacterAnimationManager {
 
         return sequence;
     }
+
+
 }

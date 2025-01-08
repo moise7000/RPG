@@ -10,6 +10,7 @@ import gameInterface.Scenes.VisitorSelectionPopup;
 import gameInterface.character.CharacterAnimation;
 import gameInterface.helpers.ButtonStyleHelper;
 import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -53,11 +54,14 @@ public class GameScene2 {
         PositionManager positionManager = PositionManager.getInstance(config.getWindowWidth(), config.getWindowHeight());
 
 
+        System.out.println(mainApp.getClass());
+
         playerCharacter = selectedCharacter;
         playerCharacterAnimation = selectedCharacter.getAnimations();
 
 
         gameManager.initializeGame(selectedCharacter);
+        gameManager.setMainApp(mainApp);
 
 
 
@@ -165,6 +169,14 @@ public class GameScene2 {
 
 
 
+
+
+
+    private static void p() {
+
+    }
+
+
     private static void performPlayerAttack() {
         InterfaceConfiguration config = InterfaceConfiguration.getShared();
         CharacterAnimationManager characterAnimationManager = CharacterAnimationManager.getInstance();
@@ -186,9 +198,56 @@ public class GameScene2 {
                 );
 
 
-        characterAnimationManager.performAnimationSequence(gameManager.getPlayerAnimation(), sequence);
+        characterAnimationManager.performAnimationSequence(
+                CharacterAnimationManager.AnimationDirection.RIGHT,
+                gameManager.getPlayerAnimation(),
+                sequence,
+                GameScene2::performEnemiesAttack);
+
         gameManager.processPlayerAttack();
+
+        //TODO: update healthBar
     }
+
+
+    public static void performEnemiesAttack() {
+        InterfaceConfiguration config = InterfaceConfiguration.getShared();
+        CharacterAnimationManager characterAnimationManager = CharacterAnimationManager.getInstance();
+
+        GameCharacter attackingEnemy = gameManager.getEnemies().get(0);
+        double playerPosition = gameManager.getPlayerAnimation().getSpriteView().getX();
+        double attackingEnemyPosition = attackingEnemy.getAnimations().getSpriteView().getX();
+
+        double attackingSpace = 150;
+
+        double initialPosition = attackingEnemy.getAnimations().getSpriteView().getTranslateX();
+
+        double targetX = playerPosition - attackingEnemyPosition + attackingSpace;
+
+        System.out.println("Window width "+ config.getWindowWidth());
+        System.out.println("playerPosition: " + playerPosition);
+        System.out.println("enemyPosition: " + attackingEnemyPosition);
+        System.out.println("targetX: " + targetX);
+        System.out.println("initialPosition: " + initialPosition);
+
+
+        Duration moveDuration = Duration.seconds(1.5);
+        Duration attackDuration = Duration.seconds(1);
+
+        List<CharacterAnimationManager.AnimationStep> sequence =
+                characterAnimationManager.createAttackSequence(
+                        targetX,
+                        initialPosition,
+                        moveDuration,
+                        attackDuration
+                );
+
+        characterAnimationManager.performAnimationSequence(
+                CharacterAnimationManager.AnimationDirection.LEFT,
+                attackingEnemy.getAnimations(),
+                sequence, null);
+    }
+
 
 
 
@@ -410,13 +469,25 @@ public class GameScene2 {
 
 
 
-    private static void handleRecruit(Main mainApp, InterfaceConfiguration config) {
+    private static void handleRecruit() {
+        InterfaceConfiguration config = InterfaceConfiguration.getShared();
+        GameConfiguration gameConfig = GameConfiguration.getShared();
+
 //        if (levelSystem.canRecruitMember()) {
 //            GameCharacter clonedPlayerCharacter = playerCharacter.duplicate();
 //            levelSystem.recruitMember(clonedPlayerCharacter);
 //        }
+
+        if(gameManager.canPlayerRecruitMember()) {
+            GameCharacter clonedPlayerMember = gameManager.getPlayerCharacter().duplicate();
+            gameManager.recruitMember(clonedPlayerMember);
+            //TODO: Mettre à jour la postion de léquipe joueur
+
+        }
+
+
         updateStatusLabel();
-       mainApp.setSceneContent(GameOverScene.create(mainApp, config, playerCharacter, 1,1));
+       //mainApp.setSceneContent(GameOverScene.create(mainApp, config, playerCharacter, 1,1));
 
     }
 
@@ -450,9 +521,10 @@ public class GameScene2 {
             if (isPlayerTurn) {
                 isPlayerTurn = false;
                 updateStatusLabel();
-                //performAttackAnimation();
-                //performRunAndAttackAnimation(config);
+
                 performPlayerAttack();
+
+
             }
 
         });
@@ -461,7 +533,7 @@ public class GameScene2 {
         recruitButton.setOnAction(e -> {
             if (isPlayerTurn) {
                 isPlayerTurn = false;
-                handleRecruit(mainApp, config);
+                handleRecruit();
             }
 
         });
