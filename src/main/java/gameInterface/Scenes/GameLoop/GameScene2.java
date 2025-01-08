@@ -205,6 +205,7 @@ public class GameScene2 {
                 GameScene2::performEnemiesAttack);
 
         gameManager.processPlayerAttack();
+        System.out.println("Animation and player attack is finished");
 
         //TODO: update healthBar
     }
@@ -246,6 +247,12 @@ public class GameScene2 {
                 CharacterAnimationManager.AnimationDirection.LEFT,
                 attackingEnemy.getAnimations(),
                 sequence, null);
+
+
+        gameManager.processEnemyAttack();
+
+        System.out.println("Animation and enemy attack is finished");
+        System.out.println("Is player turn:" + gameManager.isPlayerTurn());
     }
 
 
@@ -518,8 +525,8 @@ public class GameScene2 {
 
         // Action du bouton Attack
         attackButton.setOnAction(e -> {
-            if (isPlayerTurn) {
-                isPlayerTurn = false;
+            if (gameManager.isPlayerTurn()) {
+
                 updateStatusLabel();
 
                 performPlayerAttack();
@@ -531,8 +538,8 @@ public class GameScene2 {
 
 
         recruitButton.setOnAction(e -> {
-            if (isPlayerTurn) {
-                isPlayerTurn = false;
+            if (gameManager.isPlayerTurn()) {
+
                 handleRecruit();
             }
 
@@ -540,7 +547,7 @@ public class GameScene2 {
 
 
         visitorButton.setOnAction(e -> {
-            if (isPlayerTurn) {
+            if (gameManager.isPlayerTurn()) {
                 VisitorSelectionPopup.show(config);
             }
 

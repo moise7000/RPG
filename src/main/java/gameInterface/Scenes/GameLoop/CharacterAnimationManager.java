@@ -134,7 +134,7 @@ public class CharacterAnimationManager {
                 characterAnimation.getSpriteView().setScaleX(lastStep.targetX > 0 ? 2 : -2);
             }
 
-            System.out.println("Animation finished.");
+
             if (onComplete != null) {
                 onComplete.run();
             }
