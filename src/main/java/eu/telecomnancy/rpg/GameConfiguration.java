@@ -165,6 +165,10 @@ public class GameConfiguration {
 
     public int getWizardXpBuff() {return VisitorStats.BuffStats.WIZARD_XP_BUFF * difficultyLevel;}
 
+    public int getCharacterXpBuff() {
+        return difficultyLevel * (VisitorStats.BuffStats.WARRIOR_XP_BUFF + VisitorStats.BuffStats.WIZARD_XP_BUFF)/2;
+    }
+
     public int getLevelBuff() {return VisitorStats.BuffStats.LEVEL_BUFF;}
 
 
@@ -172,6 +176,10 @@ public class GameConfiguration {
     public int getWarriorHealAmount() {return VisitorStats.HealStats.WARRIOR_HEAL_AMOUNT * difficultyLevel;}
 
     public int getWizardHealAmount() {return VisitorStats.HealStats.WIZARD_HEAL_AMOUT * difficultyLevel;}
+
+    public  int getCharacterHealAmount() {
+        return difficultyLevel * (VisitorStats.HealStats.WARRIOR_HEAL_AMOUNT + VisitorStats.HealStats.WIZARD_HEAL_AMOUT)/2;
+    }
 
 
     //DamageVisitor getters

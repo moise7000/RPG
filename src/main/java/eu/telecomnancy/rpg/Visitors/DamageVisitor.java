@@ -1,9 +1,6 @@
 package eu.telecomnancy.rpg.Visitors;
 
-import eu.telecomnancy.rpg.CharacterVisitor;
-import eu.telecomnancy.rpg.GameConfiguration;
-import eu.telecomnancy.rpg.Warrior;
-import eu.telecomnancy.rpg.Wizard;
+import eu.telecomnancy.rpg.*;
 
 /**
  * Visiteur appliquant des dégâts aux personnages Warrior et Wizard.
@@ -47,4 +44,18 @@ public class DamageVisitor implements CharacterVisitor {
         //Set
         wizard.setHealth(currentHealth - damageAmount);
     }
+
+    @Override
+    public void visit(GameCharacter gameCharacter){
+        //Values before visiting
+        int currentHealth = gameCharacter.getHealth();
+
+        //Action
+        int damageAmount = config.getBaseDamageAmount();
+
+        //Set
+        gameCharacter.setHealth(currentHealth - damageAmount);
+    }
+
+
 }

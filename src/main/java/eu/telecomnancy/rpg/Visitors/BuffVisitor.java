@@ -1,9 +1,6 @@
 package eu.telecomnancy.rpg.Visitors;
 
-import eu.telecomnancy.rpg.CharacterVisitor;
-import eu.telecomnancy.rpg.GameConfiguration;
-import eu.telecomnancy.rpg.Warrior;
-import eu.telecomnancy.rpg.Wizard;
+import eu.telecomnancy.rpg.*;
 
 /**
  * Visiteur appliquant des buffs aux personnages Warrior et Wizard.
@@ -76,6 +73,13 @@ public class BuffVisitor implements CharacterVisitor {
         wizard.setExperiencePoints(experiencePointsBuff);
 
 
+    }
+
+    @Override
+    public void visit(GameCharacter character){
+        int currentExperiencePoints = character.getExperiencePoints();
+        int experiencePointsBuff = currentExperiencePoints + config.getWizardXpBuff();
+        character.setExperiencePoints(experiencePointsBuff);
     }
 
 }

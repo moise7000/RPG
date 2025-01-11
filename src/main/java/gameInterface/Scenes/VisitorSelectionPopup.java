@@ -1,6 +1,9 @@
 package gameInterface.Scenes;
 
+import eu.telecomnancy.rpg.Visitors.BuffVisitor;
+import eu.telecomnancy.rpg.Visitors.HealVisitor;
 import gameInterface.InterfaceConfiguration;
+import gameInterface.Scenes.GameLoop.GameManager;
 import gameInterface.character.CharacterAnimation;
 import gameInterface.helpers.ButtonStyleHelper;
 import javafx.scene.Scene;
@@ -40,14 +43,18 @@ public class VisitorSelectionPopup {
 
         // Add visitors side by side
         visitorsContainer.getChildren().addAll(
-                createVisitorCard(config.getBuffName(),
+                createVisitorCard(
+                        config.getBuffName(),
                         config.getBuffDescription(),
                         config.getBuffAnimation(),
-                        config),
-                createVisitorCard(config.getHealName(),
+                        config
+                ),
+                createVisitorCard(
+                        config.getHealName(),
                         config.getHealDescription(),
                         config.getHealAnimation(),
-                        config)
+                        config
+                )
         );
 
         Button closeButton = new Button(config.getExitButtonLabel());
@@ -116,13 +123,24 @@ public class VisitorSelectionPopup {
     }
 
     private static void applyVisitor(String visitorType) {
-        // Implement visitor pattern logic here
+
+        GameManager gameManager = GameManager.getInstance();
+
         switch(visitorType) {
             case "Buff bonus":
-                // Apply buff modifications
+                BuffVisitor buffVisitor = new BuffVisitor();
+
+                System.out.println("Player before buff bonus, xp: "+ gameManager.getPlayerCharacter().getExperiencePoints());
+                buffVisitor.visit(gameManager.getPlayerCharacter());
+                System.out.println("Player after buff bonus, xp: "+ gameManager.getPlayerCharacter().getExperiencePoints());
+
                 break;
             case "Heal bonus":
-                // Apply heal modifications
+                System.out.println("Heal bonus");
+                HealVisitor healVisitor = new HealVisitor();
+                System.out.println("Before apply heal bonus, player health is " + gameManager.getPlayerCharacter().getHealth());
+                healVisitor.visit(gameManager.getPlayerCharacter());
+                System.out.println("After apply heal bonus, player health is " + gameManager.getPlayerCharacter().getHealth());
                 break;
         }
     }

@@ -1,5 +1,7 @@
 package eu.telecomnancy.rpg;
 
+import gameInterface.Scenes.GameLoop.GameManager;
+
 /**
  * Interface représentant un visiteur de personnages.
  * <p>
@@ -22,4 +24,6 @@ public interface CharacterVisitor {
      * @param wizard le personnage Wizard à visiter.
      */
     void visit(Wizard wizard);
+
+    void visit(GameCharacter character);
 }

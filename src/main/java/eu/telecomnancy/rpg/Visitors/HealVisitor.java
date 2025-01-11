@@ -1,9 +1,6 @@
 package eu.telecomnancy.rpg.Visitors;
 
-import eu.telecomnancy.rpg.CharacterVisitor;
-import eu.telecomnancy.rpg.GameConfiguration;
-import eu.telecomnancy.rpg.Warrior;
-import eu.telecomnancy.rpg.Wizard;
+import eu.telecomnancy.rpg.*;
 
 /**
  * Visiteur appliquant des soins aux personnages Warrior et Wizard.
@@ -46,6 +43,19 @@ public class HealVisitor implements CharacterVisitor {
 
         //Set
         wizard.setHealth(currentHealth + healAmount);
+
+    }
+
+    @Override
+    public void visit(GameCharacter character) {
+        //Values before visiting
+        int currentHealth = character.getHealth();
+
+        //Action
+        int healAmount = config.getCharacterHealAmount();
+
+        //Set
+        character.setHealth(currentHealth + healAmount);
 
     }
 }
