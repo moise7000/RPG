@@ -123,24 +123,15 @@ public class VisitorSelectionPopup {
     }
 
     private static void applyVisitor(String visitorType) {
-
         GameManager gameManager = GameManager.getInstance();
-
         switch(visitorType) {
             case "Buff bonus":
                 BuffVisitor buffVisitor = new BuffVisitor();
-
-                System.out.println("Player before buff bonus, xp: "+ gameManager.getPlayerCharacter().getExperiencePoints());
                 buffVisitor.visit(gameManager.getPlayerCharacter());
-                System.out.println("Player after buff bonus, xp: "+ gameManager.getPlayerCharacter().getExperiencePoints());
-
                 break;
             case "Heal bonus":
-                System.out.println("Heal bonus");
                 HealVisitor healVisitor = new HealVisitor();
-                System.out.println("Before apply heal bonus, player health is " + gameManager.getPlayerCharacter().getHealth());
                 healVisitor.visit(gameManager.getPlayerCharacter());
-                System.out.println("After apply heal bonus, player health is " + gameManager.getPlayerCharacter().getHealth());
                 break;
         }
     }
