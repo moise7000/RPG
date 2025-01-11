@@ -81,6 +81,7 @@ public class GameManager {
 
         for (GameCharacter enemy : enemies) {
             enemy.receiveAttack(damage);
+            System.out.println("In process Player attack, enemy health: "+ enemy.getHealth());
         }
 
         isPlayerTurn = false;
@@ -155,6 +156,22 @@ public class GameManager {
     }
 
 
+    public double getPlayerHealthPercentage() {
+        //TODO: change GameCharacter to give them a max health and then the fuction will be juste p.getHealth / p.maxHealth * 100
+        return (double) playerCharacter.getHealth() / 200;
+    }
+
+    public double getEnemiesTotalHealth() {
+        return enemies.stream().mapToDouble(GameCharacter::getHealth).sum();
+    }
+
+    public double getEnemiesMaxHealth() {
+        return enemies.stream().mapToDouble(GameCharacter::getMaxHealth).sum();
+    }
+
+    public double getEnemiesHealthPercentage() {
+        return getEnemiesTotalHealth() / getEnemiesMaxHealth();
+    }
 
 
 

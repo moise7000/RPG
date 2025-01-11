@@ -10,8 +10,12 @@ import gameInterface.Scenes.VisitorSelectionPopup;
 import gameInterface.character.CharacterAnimation;
 import gameInterface.helpers.ButtonStyleHelper;
 import javafx.animation.*;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -37,6 +41,7 @@ public class GameScene2 {
     private static Rectangle enemyHealthBar;
     private static final double HEALTH_BAR_WIDTH = 200;
     private static final double HEALTH_BAR_HEIGHT = 20;
+    private static final double CORNER_RADIUS = 8;
     private static Main mainApp;
     private static Label turnLabel;
     private static int currentLevel = 1;
@@ -65,6 +70,7 @@ public class GameScene2 {
 
 
 
+
         //enemies = createEnemies(currentLevel);
         enemyAnimations = new ArrayList<>();
 
@@ -76,18 +82,18 @@ public class GameScene2 {
         Pane gameContainer = new Pane();
         gameContainer.setPrefSize(config.getWindowWidth(), config.getWindowHeight());
 
-        playerHealthBar = new Rectangle(HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT);
-        playerHealthBar.setStyle("-fx-fill: green; -fx-stroke: black;");
-        playerHealthBar.setX(20);
-        playerHealthBar.setY(20);
 
-// Enemy health bar
-        enemyHealthBar = new Rectangle(HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT);
-        enemyHealthBar.setStyle("-fx-fill: red; -fx-stroke: black;");
-        enemyHealthBar.setX(config.getWindowWidth() - HEALTH_BAR_WIDTH - 20);
-        enemyHealthBar.setY(20);
 
-        gameContainer.getChildren().addAll(playerHealthBar, enemyHealthBar);
+        setupHealthBars(gameContainer);
+        updateHealthBars();
+
+
+
+
+
+
+
+
 
 
         // Créer le label de statut
@@ -138,6 +144,9 @@ public class GameScene2 {
 
 
 
+
+
+
     private static void setupEnemiesPosition() {
         InterfaceConfiguration config = InterfaceConfiguration.getShared();
         PositionManager positionManager = PositionManager.getInstance(config.getWindowWidth(), config.getWindowHeight());
@@ -162,6 +171,32 @@ public class GameScene2 {
 
     }
 
+    private static void setupHealthBars(Pane gameContainer) {
+        InterfaceConfiguration config = InterfaceConfiguration.getShared();
+
+        playerHealthBar = new Rectangle(HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT);
+        playerHealthBar.setStyle("-fx-fill: rgb(1,135,1); -fx-stroke: #3c1d1d;");
+        playerHealthBar.setX(20);
+        playerHealthBar.setY(20);
+        playerHealthBar.setArcWidth(CORNER_RADIUS);
+        playerHealthBar.setArcHeight(CORNER_RADIUS);
+
+
+        enemyHealthBar = new Rectangle(HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT);
+        enemyHealthBar.setStyle("-fx-fill: rgb(147,2,2); -fx-stroke: #3c1d1d;");
+        enemyHealthBar.setX(config.getWindowWidth() - HEALTH_BAR_WIDTH - 20);
+        enemyHealthBar.setY(20);
+        enemyHealthBar.setArcWidth(CORNER_RADIUS);
+        enemyHealthBar.setArcHeight(CORNER_RADIUS);
+
+        gameContainer.getChildren().addAll(playerHealthBar, enemyHealthBar);
+
+
+
+
+
+
+    }
 
 
 
@@ -199,6 +234,7 @@ public class GameScene2 {
                 () -> {
                     gameManager.processPlayerAttack();
                     performEnemiesAttack();
+                    updateHealthBars();
                 });
 
 
@@ -234,11 +270,7 @@ public class GameScene2 {
 
         double targetX = playerPosition - attackingEnemyPosition + attackingSpace;
 
-        System.out.println("Window width "+ config.getWindowWidth());
-        System.out.println("playerPosition: " + playerPosition);
-        System.out.println("enemyPosition: " + attackingEnemyPosition);
-        System.out.println("targetX: " + targetX);
-        System.out.println("initialPosition: " + initialPosition);
+
 
 
         Duration moveDuration = Duration.seconds(1.5);
@@ -256,7 +288,10 @@ public class GameScene2 {
                 CharacterAnimationManager.AnimationDirection.LEFT,
                 attackingEnemy.getAnimations(),
                 sequence,
-                () -> gameManager.processEnemyAttack());
+                () -> {
+                    gameManager.processEnemyAttack();
+                    updateHealthBars();
+                });
 
 
 
@@ -709,19 +744,19 @@ public class GameScene2 {
 
 
 
-//    private static void updateHealthBars() {
-//        // Update player health bar
-//        double playerHealthPercentage = (double) playerCharacter.getHealth() / 200;
-//        playerHealthBar.setWidth(HEALTH_BAR_WIDTH * Math.max(0, playerHealthPercentage));
-//
-//        // Update enemy health bar - calculate total enemy health percentage
-//        double totalEnemyHealth = enemies.stream().mapToDouble(GameCharacter::getHealth).sum();
-//
-//        double totalMaxEnemyHealth = enemies.stream().mapToDouble(GameCharacter::getMaxHealth).sum();
-//
-//        double enemyHealthPercentage = totalEnemyHealth / totalMaxEnemyHealth;
-//        enemyHealthBar.setWidth(HEALTH_BAR_WIDTH * Math.max(0, enemyHealthPercentage));
-//    }
+    private static void updateHealthBars() {
+
+        double playerHealthPercentage = gameManager.getPlayerHealthPercentage();
+        double enemyHealthPercentage = gameManager.getEnemiesHealthPercentage();
+
+        System.out.println("Player health bar :" + playerHealthPercentage);
+        System.out.println("Enemies health bar :" + enemyHealthPercentage);
+
+
+
+        playerHealthBar.setWidth(gameManager.getPlayerCharacter().getHealth());
+        enemyHealthBar.setWidth(gameManager.getEnemiesTotalHealth());
+    }
 
 
 
