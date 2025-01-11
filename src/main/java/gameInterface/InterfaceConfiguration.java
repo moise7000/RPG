@@ -1050,7 +1050,7 @@ public class InterfaceConfiguration {
     private static final class GamePlayConfiguration {
         static final String ATTACK = "Attack";
         static final String RECRUIT = "Recruit";
-        static final String ADD_VISITORS = "Add bonus";
+        static final String ADD_VISITORS = "Bonus";
     }
 
     public String getAttackButtonLabel() {return GamePlayConfiguration.ATTACK;}

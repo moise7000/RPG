@@ -6,6 +6,7 @@ import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
 import gameInterface.Scenes.CharacterSelectionScene;
 import gameInterface.Scenes.GameOverScene;
+import gameInterface.Scenes.MainMenuScene;
 import gameInterface.Scenes.VisitorSelectionPopup;
 import gameInterface.character.CharacterAnimation;
 import gameInterface.helpers.ButtonStyleHelper;
@@ -728,6 +729,39 @@ public class GameScene2 {
             }
 
         });
+
+
+        mainApp.getScene().setOnKeyPressed(event -> {
+            if (gameManager.isPlayerTurn()) {
+                switch (event.getCode()) {
+                    case A -> {
+
+                        if (gameManager.isPlayerTurn()) {
+                            attackButton.fire();
+                        }
+
+                    }
+                    case R -> {
+                        if (gameManager.isPlayerTurn()) {
+                            recruitButton.fire();
+                        }
+
+                    }
+                    case B -> {
+                        if (gameManager.isPlayerTurn()) {
+                            visitorButton.fire();
+                        }
+
+                    }
+
+                    case ESCAPE -> {
+                        mainApp.setSceneContent(CharacterSelectionScene.create(mainApp, config));
+                    }
+
+                }
+            }
+        });
+
 
         buttonContainer.getChildren().addAll(attackButton, recruitButton, visitorButton);
         return buttonContainer;

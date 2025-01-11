@@ -108,6 +108,7 @@ public class Main extends Application {
     public void startParallax() {parallaxBackground.startAnimation();}
     public void stopMusic() {mediaPlayer.stop();}
     public void startMusic() {mediaPlayer.play();}
+    public Scene getScene() {return scalingRoot.getScene();}
 
     public static void main(String[] args) {
         launch(args);
