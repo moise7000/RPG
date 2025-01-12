@@ -4,10 +4,7 @@ import eu.telecomnancy.rpg.GameCharacter;
 import eu.telecomnancy.rpg.GameConfiguration;
 import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
-import gameInterface.Scenes.CharacterSelectionScene;
-import gameInterface.Scenes.GameOverScene;
-import gameInterface.Scenes.MainMenuScene;
-import gameInterface.Scenes.VisitorSelectionPopup;
+import gameInterface.Scenes.*;
 import gameInterface.character.CharacterAnimation;
 import gameInterface.helpers.ButtonStyleHelper;
 import javafx.animation.*;
@@ -750,6 +747,21 @@ public class GameScene2 {
                     case B -> {
                         if (gameManager.isPlayerTurn()) {
                             visitorButton.fire();
+                        }
+
+                    }
+                    case W -> {
+                        if (gameManager.isPlayerTurn()) {
+                            VBox gameWonScene = GameWonScene.create(
+                                    mainApp,
+                                    config,
+                                    gameManager.getPlayerCharacter(),
+                                    gameManager.getCurrentLevel(),
+                                    gameManager.getScore()
+                            );
+
+                            mainApp.setSceneContent(gameWonScene);
+
                         }
 
                     }

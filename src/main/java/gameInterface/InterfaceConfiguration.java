@@ -48,6 +48,7 @@ public class InterfaceConfiguration {
         static final String GAME_TITLE = "The Kingdom of the Lost Oyster";
         static final String SELECT_CHARACTER = "Select your character";
         static final String GAME_OVER = "Game Over";
+        static final String GAME_WON = "Game Won";
         static final String SELECT = "Select";
 
 
@@ -57,6 +58,7 @@ public class InterfaceConfiguration {
 
     public double getZoom() {return ZOOM;}
 
+    public String getGameWonLablel() {return UserInterfaceConfiguration.GAME_WON;}
     public String getSelectLabel() {return UserInterfaceConfiguration.SELECT;}
     public String getGameOverLabel() {return UserInterfaceConfiguration.GAME_OVER;}
     public String getGameTitle() {return UserInterfaceConfiguration.GAME_TITLE;}
@@ -159,6 +161,13 @@ public class InterfaceConfiguration {
                         "-fx-background-color: rgba(0, 0, 0, 0.0);" +
                         "-fx-text-fill: #850606;";
 
+        static final String GAME_WON_STYLE =
+                "-fx-font-family:" + FONT_NAME + ";" +
+                        "-fx-font-size: 160px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-background-color: rgba(0, 0, 0, 0.0);" +
+                        "-fx-text-fill: #FFF200;";
+
         static final String EXIT_BUTTON_STYLE =
                 "-fx-font-family:" + FONT_NAME + ";" +
                         "-fx-font-size: 25px;" +
@@ -196,6 +205,7 @@ public class InterfaceConfiguration {
     public String getVisitorDescriptionStyle() {return StylesConfiguration.VISITOR_DESCRIPTION_STYLE;}
     public String getLevelStyle() {return StylesConfiguration.LEVEL_STYLE;}
     public String getGameOverStyle() {return StylesConfiguration.GAME_OVER_STYLE;}
+    public String getGameWonStyle() {return StylesConfiguration.GAME_WON_STYLE;}
     public String getGameTitleStyle() {return StylesConfiguration.GAME_TITLE_STYLE;}
     public String getButtonStyle() {return StylesConfiguration.BUTTON_STYLE;}
     public String getExitButtonStyle() {return StylesConfiguration.EXIT_BUTTON_STYLE;}
