@@ -52,6 +52,7 @@ public class Main extends Application {
             Media media = new Media(musicPath);
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            setMusicVolume(0.5);
             mediaPlayer.play();
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,6 +136,20 @@ public class Main extends Application {
      * @return La scène actuelle.
      */
     public Scene getScene() {return scalingRoot.getScene();}
+
+
+
+
+    /**
+     * Définit le volume de la musique.
+     *
+     * @param volume La valeur du volume entre 0.0 (silence) et 1.0 (volume maximal).
+     */
+    public void setMusicVolume(double volume) {
+        if (mediaPlayer != null) {
+            mediaPlayer.setVolume(Math.max(0.0, Math.min(1.0, volume))); // Assurer que le volume est entre 0.0 et 1.0
+        }
+    }
 
     /**
      * Méthode main pour lancer l'application.
