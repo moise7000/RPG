@@ -14,19 +14,18 @@ After cloning the project, run this command  ~~to launch the fat JAR~~ to play :
 java -jar lib/rpg-1.0-SNAPSHOT-fat.jar
 ```
 
-## Evaluation
+## Assessment
 ### Report 
 You can find the report [here](RAPPORT_RPG.pdf).
 
 ### UML
-You can find the UML diagram for the backend/logic part [here](UML).
+You can find the UML diagram svg and pdf file for the backend/logic part [here](UML) and the plantuml [here](rpg.puml).
 
 ### Code 
 You can find the all commented source code [here](src/main/java/eu/telecomnancy/rpg).
-_ the interface code is also commented_[here](src/main/java/gameInterface).
-
 You can find the unit tests [here](src/tests).
 
+> The interface code is also commented [here](src/main/java/gameInterface).
 
 ## Structure
 
