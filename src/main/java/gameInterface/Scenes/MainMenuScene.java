@@ -38,7 +38,7 @@ public class MainMenuScene {
      */
     public static VBox create(Main mainApp, InterfaceConfiguration config) {
 
-        //Label gameTitle = new Label(config.getGameTitle());
+
         Label gameTitle = ReflectiveText.createReflectiveText(config.getGameTitle());
         gameTitle.setStyle(config.getGameTitleStyle());
 

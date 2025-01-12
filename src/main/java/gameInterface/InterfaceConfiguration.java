@@ -509,7 +509,7 @@ public class InterfaceConfiguration {
             static final int FRAME_HEIGHT = 128;
 
             static final String NAME = "Necromancer";
-            static final int HEALTH = 30;
+            static final int HEALTH = 10;
             static CombatStrategy STRATEGY = new NeutralStrategy();
             static final CharacterType TYPE = CharacterType.WIZARD;
             static final String INFO =
