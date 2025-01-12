@@ -8,17 +8,18 @@ This project implements a game system featuring different character types (Warri
 ![video](assets/trailer_rpg.mp4)
 
 ## How to use
-After cloning the project, run this command  ~~to launch the fat JAR~~ to play
+After cloning the project, run this command  ~~to launch the fat JAR~~ to play :
 
 ```
 java -jar lib/rpg-1.0-SNAPSHOT-fat.jar
 ```
 
-## Report 
-You can find the report [here](RAPPORT_RPG.pdf)
+## Evaluation
+### Report 
+You can find the report [here](RAPPORT_RPG.pdf).
 
-## UML
-You can find the UML diagram for the backend/logic part [here](UML)
+### UML
+You can find the UML diagram for the backend/logic part [here](UML).
 
 
 ## Structure
