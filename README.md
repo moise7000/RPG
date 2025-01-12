@@ -21,6 +21,12 @@ You can find the report [here](RAPPORT_RPG.pdf).
 ### UML
 You can find the UML diagram for the backend/logic part [here](UML).
 
+### Code 
+You can find the all commented source code [here](src/main/java/eu/telecomnancy/rpg).
+_ the interface code is also commented_[here](src/main/java/gameInterface).
+
+You can find the unit tests [here](src/tests).
+
 
 ## Structure
 
