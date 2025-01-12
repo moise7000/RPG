@@ -222,7 +222,7 @@ public class InterfaceConfiguration {
     private static final class CreditsConfiguration {
         static final String GAME_AUTHOR = "RPG by Ewan Decima";
         static final String MUSIC_NAME = "Challenge Accepted";
-        static final String MUSIC_PATH = "/assets/music/ChallengeAccepted.mp3";
+        static final String MUSIC_PATH = "/assets/music/challengeAccepted.wav";
         static final String MUSIC_AUTHOR = "Darren Curtis";
         static final String FONT = "Font : " + StylesConfiguration.FONT_AUTHOR;
         static final String MUSIC = "Music : " + MUSIC_NAME + " by "  + MUSIC_AUTHOR;
@@ -315,7 +315,7 @@ public class InterfaceConfiguration {
             static final int FRAME_HEIGHT = 150;
 
             static final String NAME = "EvilWizard";
-            static final int HEALTH = 80;
+            static final int HEALTH = 1;
             static CombatStrategy STRATEGY = new AggressiveStrategy();
             static final CharacterType TYPE = CharacterType.WIZARD;
             static final String INFO =

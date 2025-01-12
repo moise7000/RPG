@@ -747,7 +747,7 @@ public class GameScene2 {
                 updateStatusLabel();
 
                 performPlayerAttack();
-                
+
 
 
 
