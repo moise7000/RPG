@@ -4,6 +4,7 @@ import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Reflection;
 import javafx.util.Duration;
 import javafx.scene.effect.Glow;
 
@@ -16,6 +17,8 @@ public class FullAnimatedText {
         Glow glow = new Glow();
         glow.setLevel(1.5);
         label.setEffect(glow);
+
+
 
         // Animation de mouvement
         TranslateTransition move = new TranslateTransition(Duration.seconds(2), label);

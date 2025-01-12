@@ -205,6 +205,7 @@ public class GameScene2 {
 
 
     private static void performPlayerAttack() {
+
         InterfaceConfiguration config = InterfaceConfiguration.getShared();
         CharacterAnimationManager characterAnimationManager = CharacterAnimationManager.getInstance();
 
@@ -252,7 +253,15 @@ public class GameScene2 {
 
         if(gameManager.allEnemiesAreDead()) {
             System.out.println("All enemies are dead");
-            handleLevelTransition2();
+            VBox gameWonScene = GameWonScene.create(
+                    gameManager.getMainApp(),
+                    config,
+                    gameManager.getPlayerCharacter(),
+                    gameManager.getCurrentLevel(),
+                    gameManager.getScore()
+            );
+
+            gameManager.getMainApp().setSceneContent(gameWonScene);
             return;
         }
 
@@ -289,6 +298,7 @@ public class GameScene2 {
                 () -> {
                     gameManager.processEnemyAttack();
                     updateHealthBars();
+                    gameManager.setPlayerTurn(true);
                 });
 
 
@@ -677,6 +687,7 @@ public class GameScene2 {
 
 
 
+
     private static HBox createControlButtons(InterfaceConfiguration config, Main mainApp) {
         HBox buttonContainer = new HBox(20);
         buttonContainer.setStyle("-fx-alignment: center;");
@@ -704,6 +715,7 @@ public class GameScene2 {
                 updateStatusLabel();
 
                 performPlayerAttack();
+
 
 
             }
@@ -734,13 +746,16 @@ public class GameScene2 {
                     case A -> {
 
                         if (gameManager.isPlayerTurn()) {
+
                             attackButton.fire();
+                            gameManager.setPlayerTurn(false);
                         }
 
                     }
                     case R -> {
                         if (gameManager.isPlayerTurn()) {
                             recruitButton.fire();
+
                         }
 
                     }

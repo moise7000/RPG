@@ -231,6 +231,8 @@ public class GameManager {
 
     public List<GameCharacter> getEnemies() { return enemies; }
     public boolean isPlayerTurn() { return isPlayerTurn; }
+    public void setPlayerTurn(boolean playerTurn) { this.isPlayerTurn = playerTurn; }
+    public void isNotPlayerTurn() {this.isPlayerTurn = false;}
     public int getCurrentLevel() { return currentLevel; }
     public int getScore() { return score; }
 }

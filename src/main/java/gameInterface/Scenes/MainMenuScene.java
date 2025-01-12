@@ -3,10 +3,13 @@ package gameInterface.Scenes;
 import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
 import gameInterface.helpers.ButtonStyleHelper;
+import gameInterface.helpers.animatedText.FullAnimatedText;
+import gameInterface.helpers.animatedText.ReflectiveText;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -35,7 +38,8 @@ public class MainMenuScene {
      */
     public static VBox create(Main mainApp, InterfaceConfiguration config) {
 
-        Label gameTitle = new Label(config.getGameTitle());
+        //Label gameTitle = new Label(config.getGameTitle());
+        Label gameTitle = ReflectiveText.createReflectiveText(config.getGameTitle());
         gameTitle.setStyle(config.getGameTitleStyle());
 
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), gameTitle);
@@ -55,8 +59,10 @@ public class MainMenuScene {
         ButtonStyleHelper.applyButtonStyle(buttons, config.getButtonStyle());
         ButtonStyleHelper.applyHoverStyle(buttons, config.getButtonStyle(), config.getButtonHoverStyle());
 
+        Region spacer = new Region();
+        spacer.setPrefHeight(50);
 
-        VBox menu = new VBox(20, gameTitle, playButton, settingsButton, creditsButton, closeButton);
+        VBox menu = new VBox(20, gameTitle, spacer, playButton, settingsButton, creditsButton, closeButton);
         //menu.setTranslateY(200);
         menu.setStyle("-fx-alignment: center;");
 

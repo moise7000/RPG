@@ -21,7 +21,7 @@ public class SettingsScene {
         settingsLayout.setStyle("-fx-alignment: center; -fx-padding: 20px;");
 
         // Titre
-        Text title = new Text("Paramètres");
+        Text title = new Text("Parameters");
         title.setStyle(config.getGameTitleStyle());
 
         // Volume musique
@@ -36,14 +36,14 @@ public class SettingsScene {
 
 
         // Bouton de réinitialisation
-        Button resetButton = new Button("Réinitialiser");
+        Button resetButton = new Button("Reset");
         resetButton.setOnAction(e -> {
             settings.resetDefaults();
             musicSlider.setValue(0.5);
         });
 
         // Bouton de retour
-        Button backButton = new Button("Retour");
+        Button backButton = new Button("Exit");
 
 
 
@@ -56,7 +56,7 @@ public class SettingsScene {
         // Ajouter les contrôles
         settingsLayout.getChildren().addAll(
                 title,
-                new Text("Volume Musique"), musicSlider,
+                new Text("Music volume"), musicSlider,
                 resetButton,
                 backButton
         );
