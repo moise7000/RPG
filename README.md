@@ -17,6 +17,9 @@ java -jar lib/rpg-1.0-SNAPSHOT-fat.jar
 ## Report 
 You can find the report [here](RAPPORT_RPG.pdf)
 
+## UML
+You can find the UML diagram for the backend/logic part [here](UML)
+
 
 ## Structure
 
