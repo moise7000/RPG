@@ -1,15 +1,13 @@
 package gameInterface.Scenes.GameLoop;
 
-import eu.telecomnancy.rpg.GameCharacter;
-import eu.telecomnancy.rpg.GameConfiguration;
+import eu.telecomnancy.rpg.*;
 import gameInterface.InterfaceConfiguration;
 import gameInterface.Main;
 import gameInterface.Scenes.GameOverScene;
 import gameInterface.character.CharacterAnimation;
 import javafx.scene.layout.Pane;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Gère l'état du jeu, y compris le personnage du joueur, les ennemis, les niveaux, et la gestion des tours.
@@ -25,6 +23,7 @@ public class GameManager {
     private int score;
     private Main mainApp;
     private Pane gameContainer;
+    private Team teamPlayer;
 
     private GameManager() {
         this.isPlayerTurn = true;
@@ -32,6 +31,7 @@ public class GameManager {
         this.score = 0;
         this.mainApp = null;
         this.gameContainer = null;
+        this.teamPlayer = null;
     }
 
     /**
@@ -55,6 +55,9 @@ public class GameManager {
         this.playerCharacter = player;
         this.enemies = new ArrayList<>();
         this.isPlayerTurn = true;
+        this.currentLevel = 1;
+        this.score = 0;
+        this.teamPlayer = new Team.TeamBuilder().addPlayer(player).build();
 
         createEnemies(1);
     }
@@ -190,17 +193,54 @@ public class GameManager {
 
     public boolean canPlayerRecruitMember() {
         //TODO: Implémenter le test sur la possibilité de recrutement du joueur.
-        return isPlayerTurn;
+        return isPlayerTurn && teamPlayer.getPlayers().size() < GameConfiguration.getShared().getMaxTeamSize();
     }
 
-    public void recruitMember(GameCharacter member) {
+    public void recruitMember() {
         //TODO: Ajouter un membre dans l'équipe du joueur.
+        InterfaceConfiguration config = InterfaceConfiguration.getShared();
+        List<GameCharacter> members = new ArrayList<>();
+        Warrior heroKnight = (Warrior) config.createHeroKnightGameCharacter();
+        Wizard wizard = (Wizard) config.createEvilWizardGameCharacter();
+        Warrior martialHero = (Warrior) config.createMartialHeroGaleCharacter();
+
+        members.add(heroKnight);
+        members.add(wizard);
+        members.add(wizard);
+        members.add(wizard);
+        members.add(martialHero);
+        members.add(martialHero);
+
+        Collections.shuffle(members);
+
+
+
+        teamPlayer.getPlayers().add(members.get(0));
+
+    }
+
+    public AbstractMap.SimpleEntry<GameCharacter, Integer> getAttackerFromTeam() {
+        Random random = new Random();
+        int index = random.nextInt(getTeamPlayerSize() + 1);
+        return new AbstractMap.SimpleEntry<>(teamPlayer.getPlayers().get(index), index);
+    }
+
+    public int getTeamPlayerSize() {
+        return teamPlayer.getPlayers().size();
     }
 
 
     public double getPlayerHealthPercentage() {
         //TODO: change GameCharacter to give them a max health and then the fuction will be juste p.getHealth / p.maxHealth * 100
         return (double) playerCharacter.getHealth() / 200;
+    }
+
+    public int getTeamPlayerHealth() {
+        int health = playerCharacter.getHealth();
+        for (GameCharacter ally : teamPlayer.getPlayers()) {
+            health += ally.getHealth();
+        }
+        return health;
     }
 
     public double getEnemiesTotalHealth() {
@@ -215,6 +255,15 @@ public class GameManager {
         return getEnemiesTotalHealth() / getEnemiesMaxHealth();
     }
 
+    public int getTotalTeamPlayerDamage() {
+        int damage = 0;
+        for (GameCharacter ally : teamPlayer.getPlayers()) {
+            damage += ally.attack(GameConfiguration.getShared().getBaseDamageAmount());
+        }
+        damage += playerCharacter.attack(GameConfiguration.getShared().getBaseDamageAmount());
+        return damage;
+    }
+
 
 
 
@@ -223,6 +272,7 @@ public class GameManager {
         checkGameStatus();
     }
 
+    public Team getTeamPlayer() {return teamPlayer;}
 
 
 

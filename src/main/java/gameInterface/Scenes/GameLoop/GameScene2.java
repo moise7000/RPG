@@ -9,6 +9,7 @@ import gameInterface.character.CharacterAnimation;
 import gameInterface.helpers.ButtonStyleHelper;
 import javafx.animation.*;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,9 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GameScene2 {
     private static CharacterAnimation playerCharacterAnimation;
@@ -209,9 +208,14 @@ public class GameScene2 {
         InterfaceConfiguration config = InterfaceConfiguration.getShared();
         CharacterAnimationManager characterAnimationManager = CharacterAnimationManager.getInstance();
 
+       AbstractMap.SimpleEntry<GameCharacter, Integer>  attackerData = gameManager.getAttackerFromTeam();
 
-        double initialPosition = gameManager.getPlayerAnimation().getSpriteView().getTranslateX();
-        double targetX = config.getWindowWidth() - 300;
+       GameCharacter attacker = attackerData.getKey();
+       int index = attackerData.getValue();
+
+        double initialPosition = attacker.getAnimations().getSpriteView().getTranslateX();
+        double targetX = config.getWindowWidth() - 300 - (index + 1) * 50;
+        double targetPosition = config.getWindowWidth() - 300;
         Duration moveDuration = Duration.seconds(1.5);
         Duration attackDuration = Duration.seconds(1);
 
@@ -228,7 +232,7 @@ public class GameScene2 {
 
         characterAnimationManager.performAnimationSequence(
                 CharacterAnimationManager.AnimationDirection.RIGHT,
-                gameManager.getPlayerAnimation(),
+                attacker.getAnimations(),
                 sequence,
                 () -> {
                     gameManager.processPlayerAttack();
@@ -253,15 +257,7 @@ public class GameScene2 {
 
         if(gameManager.allEnemiesAreDead()) {
             System.out.println("All enemies are dead");
-            VBox gameWonScene = GameWonScene.create(
-                    gameManager.getMainApp(),
-                    config,
-                    gameManager.getPlayerCharacter(),
-                    gameManager.getCurrentLevel(),
-                    gameManager.getScore()
-            );
-
-            gameManager.getMainApp().setSceneContent(gameWonScene);
+            handleLevelTransition2();
             return;
         }
 
@@ -271,7 +267,7 @@ public class GameScene2 {
         double playerPosition = gameManager.getPlayerAnimation().getSpriteView().getX();
         double attackingEnemyPosition = attackingEnemy.getAnimations().getSpriteView().getX();
 
-        double attackingSpace = 150;
+        double attackingSpace = 150 + 50 * gameManager.getTeamPlayerSize();
 
         double initialPosition = attackingEnemy.getAnimations().getSpriteView().getTranslateX();
 
@@ -348,7 +344,17 @@ public class GameScene2 {
 
         // Popup de niveau
         sequence.getChildren().add(new PauseTransition(Duration.seconds(0.5)));
-        sequence.setOnFinished(e -> showLevelUpPopup());
+        sequence.setOnFinished(e -> {
+            VBox gameWonScene = GameWonScene.create(
+                    gameManager.getMainApp(),
+                    InterfaceConfiguration.getShared(),
+                    gameManager.getPlayerCharacter(),
+                    gameManager.getCurrentLevel(),
+                    gameManager.getScore()
+            );
+
+            gameManager.getMainApp().setSceneContent(gameWonScene);
+        });
 
         sequence.play();
     }
@@ -368,7 +374,18 @@ public class GameScene2 {
 
             fadeOut.setFromValue(1.0);
             fadeOut.setToValue(0.0);
-            fadeOut.setOnFinished(e -> {gameManager.setEnemies(new ArrayList<>());});
+            fadeOut.setOnFinished(e -> {
+                gameManager.setEnemies(new ArrayList<>());
+                VBox gameWonScene = GameWonScene.create(
+                        gameManager.getMainApp(),
+                        InterfaceConfiguration.getShared(),
+                        gameManager.getPlayerCharacter(),
+                        gameManager.getCurrentLevel(),
+                        gameManager.getScore()
+                );
+
+                gameManager.getMainApp().setSceneContent(gameWonScene);
+            });
             fadeOut.play();
 
 
@@ -670,9 +687,23 @@ public class GameScene2 {
 
 
         if(gameManager.canPlayerRecruitMember()) {
-            GameCharacter clonedPlayerMember = gameManager.getPlayerCharacter().duplicate();
-            gameManager.recruitMember(clonedPlayerMember);
-            //TODO: Mettre à jour la postion de léquipe joueur
+            gameManager.recruitMember();
+            PositionManager positionManager = PositionManager.getInstance(config.getWindowWidth(), config.getWindowHeight());
+            for(int i = 1; i < gameManager.getTeamPlayerSize(); i++ ) {
+                GameCharacter ally = gameManager.getTeamPlayer().getPlayers().get(i);
+                positionManager.setupAllyPosition(ally.getAnimations(), i);
+
+                System.out.println(gameManager.getTeamPlayerSize());
+                Node allySprite = ally.getAnimations().getSpriteView();
+                if (!gameManager.getGameContainer().getChildren().contains(allySprite)) {
+                    gameManager.getGameContainer().getChildren().add(allySprite);
+                }
+
+                updateHealthBars();
+
+            }
+
+
 
         }
 
@@ -806,16 +837,7 @@ public class GameScene2 {
 
 
     private static void updateHealthBars() {
-
-        double playerHealthPercentage = gameManager.getPlayerHealthPercentage();
-        double enemyHealthPercentage = gameManager.getEnemiesHealthPercentage();
-
-        System.out.println("Player health bar :" + playerHealthPercentage);
-        System.out.println("Enemies health bar :" + enemyHealthPercentage);
-
-
-
-        playerHealthBar.setWidth(gameManager.getPlayerCharacter().getHealth());
+        playerHealthBar.setWidth(gameManager.getTeamPlayerHealth());
         enemyHealthBar.setWidth(gameManager.getEnemiesTotalHealth());
     }
 

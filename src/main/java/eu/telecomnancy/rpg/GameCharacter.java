@@ -167,6 +167,7 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
         try {
             return (GameCharacter) super.clone();
 
+
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("GameCharacter could not be copied", e);
         }

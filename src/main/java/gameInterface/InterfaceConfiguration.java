@@ -315,7 +315,7 @@ public class InterfaceConfiguration {
             static final int FRAME_HEIGHT = 150;
 
             static final String NAME = "EvilWizard";
-            static final int HEALTH = 100;
+            static final int HEALTH = 80;
             static CombatStrategy STRATEGY = new AggressiveStrategy();
             static final CharacterType TYPE = CharacterType.WIZARD;
             static final String INFO =
@@ -367,7 +367,7 @@ public class InterfaceConfiguration {
             static final int FRAME_HEIGHT = 180;
 
             static final String NAME = "HeroKnight";
-            static final int HEALTH = 200;
+            static final int HEALTH = 30;
             static CombatStrategy STRATEGY = new NeutralStrategy();
             static final CharacterType TYPE = CharacterType.WARRIOR;
             static final String INFO = "Name: " + NAME + "\n"
@@ -416,7 +416,7 @@ public class InterfaceConfiguration {
             static final int FRAME_HEIGHT = 190;
 
             static final String NAME = "MartialHero";
-            static final int HEALTH = 250;
+            static final int HEALTH = 50;
             static CombatStrategy STRATEGY = new AggressiveStrategy();
             static final CharacterType TYPE = CharacterType.WARRIOR;
             static final String INFO =
@@ -509,7 +509,7 @@ public class InterfaceConfiguration {
             static final int FRAME_HEIGHT = 128;
 
             static final String NAME = "Necromancer";
-            static final int HEALTH = 10;
+            static final int HEALTH = 100;
             static CombatStrategy STRATEGY = new NeutralStrategy();
             static final CharacterType TYPE = CharacterType.WIZARD;
             static final String INFO =

@@ -48,6 +48,33 @@ public class PositionManager {
     }
 
     /**
+     * Configure la position initiale d'un allié à côté du joueur.
+     * L'allié est placé à droite du joueur avec une mise à l'échelle spécifique.
+     *
+     * @param allyAnim L'animation du personnage de l'allié
+     * @param index L'indice de l'allié pour décaler sa position si plusieurs alliés sont présents
+     */
+    public void setupAllyPosition(CharacterAnimation allyAnim, int index) {
+        double offsetX = 50;  // Décalage horizontal entre le joueur et l'allié
+        double playerX = 20;
+        double playerY = windowHeight - 350;
+        System.out.println("Player x: " + playerX);
+        System.out.println("Player y: " + playerY);
+
+        // Positionne l'allié à droite du joueur avec un décalage selon l'index
+        allyAnim.getSpriteView().setX(playerX + offsetX + (index * offsetX));
+
+        // Position verticale identique au joueur pour éviter le décalage vertical
+        allyAnim.getSpriteView().setY(playerY);
+
+        // Mise à l'échelle identique au joueur
+        allyAnim.getSpriteView().setScaleX(2.0);
+        allyAnim.getSpriteView().setScaleY(2.0);
+    }
+
+
+
+    /**
      * Configure la position initiale d'un ennemi dans la fenêtre du jeu.
      * L'ennemi est placé à droite de l'écran avec une mise à l'échelle spécifique en fonction de son type.
      *
