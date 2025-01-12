@@ -205,6 +205,7 @@ public class GameScene2 {
 
     private static void performPlayerAttack() {
 
+
         InterfaceConfiguration config = InterfaceConfiguration.getShared();
         CharacterAnimationManager characterAnimationManager = CharacterAnimationManager.getInstance();
 
@@ -746,6 +747,7 @@ public class GameScene2 {
                 updateStatusLabel();
 
                 performPlayerAttack();
+                
 
 
 

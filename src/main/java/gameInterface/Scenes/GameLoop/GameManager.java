@@ -24,6 +24,7 @@ public class GameManager {
     private Main mainApp;
     private Pane gameContainer;
     private Team teamPlayer;
+    private int teamHealth;
 
     private GameManager() {
         this.isPlayerTurn = true;
@@ -32,6 +33,7 @@ public class GameManager {
         this.mainApp = null;
         this.gameContainer = null;
         this.teamPlayer = null;
+        this.teamHealth = 0;
     }
 
     /**
@@ -58,6 +60,7 @@ public class GameManager {
         this.currentLevel = 1;
         this.score = 0;
         this.teamPlayer = new Team.TeamBuilder().addPlayer(player).build();
+        this.teamHealth = player.getHealth();
 
         createEnemies(1);
     }
@@ -119,6 +122,10 @@ public class GameManager {
     public void setEnemies(List<GameCharacter> enemies) {this.enemies = enemies;}
     public void resetEnemies() {this.enemies.clear();}
 
+    /**
+     * Gère l'attaque du joueur pendant son tour.
+     * L'attaque est effectuée contre tous les ennemis, et la santé des ennemis est réduite en conséquence.
+     */
     public void processPlayerAttack() {
         if (!isPlayerTurn || playerCharacter.getHealth() <= 0) return;
 
@@ -133,6 +140,10 @@ public class GameManager {
         checkGameStatus();
     }
 
+    /**
+     * Gère l'attaque des ennemis pendant leur tour.
+     * Les ennemis attaquent le joueur si ce dernier est toujours en vie.
+     */
     public void processEnemyAttack() {
         if (isPlayerTurn || playerCharacter.getHealth() <= 0) return;
 
@@ -140,6 +151,9 @@ public class GameManager {
             if (enemy.getHealth() > 0) {
                 int damage = enemy.attack(GameConfiguration.getShared().getBaseDamageAmount());
                 playerCharacter.receiveAttack(damage);
+                teamHealth -= damage;
+
+
             }
         }
 
@@ -147,8 +161,14 @@ public class GameManager {
         checkGameStatus();
     }
 
+
+    /**
+     * Vérifie l'état du jeu après chaque attaque (du joueur ou des ennemis).
+     * Si le joueur est mort, le jeu est terminé. Si tous les ennemis sont morts, le niveau est terminé.
+     */
     private void checkGameStatus() {
-        if (playerCharacter.getHealth() <= 0) {
+
+        if (teamHealth <= 0) {
             handleGameOver();
             return;
         }
@@ -161,6 +181,11 @@ public class GameManager {
         }
     }
 
+    /**
+     * Vérifie si tous les ennemis sont morts.
+     *
+     * @return true si tous les ennemis sont morts, false sinon.
+     */
     public boolean allEnemiesAreDead() {
         return enemies.stream().allMatch(enemy -> enemy.getHealth() <= 0);
     }
@@ -191,11 +216,19 @@ public class GameManager {
 
 
 
+    /**
+     * Vérifie si le joueur peut recruter un nouveau membre pour son équipe.
+     *
+     * @return true si le joueur peut recruter un membre, false sinon.
+     */
     public boolean canPlayerRecruitMember() {
-        //TODO: Implémenter le test sur la possibilité de recrutement du joueur.
         return isPlayerTurn && teamPlayer.getPlayers().size() < GameConfiguration.getShared().getMaxTeamSize();
     }
 
+    /**
+     * Recrute un nouveau membre pour l'équipe du joueur.
+     * Cette méthode ajoute un membre aléatoire à l'équipe du joueur.
+     */
     public void recruitMember() {
         //TODO: Ajouter un membre dans l'équipe du joueur.
         InterfaceConfiguration config = InterfaceConfiguration.getShared();
@@ -216,25 +249,37 @@ public class GameManager {
 
 
         teamPlayer.getPlayers().add(members.get(0));
+        teamHealth += members.get(0).getHealth();
 
     }
 
+    /**
+     * Sélectionne un attaquant aléatoire dans l'équipe du joueur.
+     *
+     * @return Un tuple contenant le personnage attaquant et son index dans l'équipe.
+     */
     public AbstractMap.SimpleEntry<GameCharacter, Integer> getAttackerFromTeam() {
         Random random = new Random();
         int index = random.nextInt(getTeamPlayerSize() + 1);
         return new AbstractMap.SimpleEntry<>(teamPlayer.getPlayers().get(index), index);
     }
 
+    /**
+     * Obtient la taille actuelle de l'équipe du joueur.
+     *
+     * @return La taille de l'équipe du joueur.
+     */
     public int getTeamPlayerSize() {
         return teamPlayer.getPlayers().size();
     }
 
 
-    public double getPlayerHealthPercentage() {
-        //TODO: change GameCharacter to give them a max health and then the fuction will be juste p.getHealth / p.maxHealth * 100
-        return (double) playerCharacter.getHealth() / 200;
-    }
 
+    /**
+     * Obtient la somme de la santé de tous les membres de l'équipe du joueur.
+     *
+     * @return La santé totale de l'équipe du joueur.
+     */
     public int getTeamPlayerHealth() {
         int health = playerCharacter.getHealth();
         for (GameCharacter ally : teamPlayer.getPlayers()) {
@@ -243,18 +288,28 @@ public class GameManager {
         return health;
     }
 
+
+
+
+
+    /**
+     * Obtient la santé totale de tous les ennemis.
+     *
+     * @return La somme de la santé de tous les ennemis.
+     */
     public double getEnemiesTotalHealth() {
         return enemies.stream().mapToDouble(GameCharacter::getHealth).sum();
     }
 
-    public double getEnemiesMaxHealth() {
-        return enemies.stream().mapToDouble(GameCharacter::getMaxHealth).sum();
-    }
 
-    public double getEnemiesHealthPercentage() {
-        return getEnemiesTotalHealth() / getEnemiesMaxHealth();
-    }
 
+
+
+    /**
+     * Obtient le total des dégâts que l'équipe du joueur peut infliger à l'ensemble des ennemis.
+     *
+     * @return Le total des dégâts infligés par l'équipe du joueur.
+     */
     public int getTotalTeamPlayerDamage() {
         int damage = 0;
         for (GameCharacter ally : teamPlayer.getPlayers()) {
@@ -266,7 +321,9 @@ public class GameManager {
 
 
 
-
+    /**
+     * Tue le personnage du joueur, mettant sa santé à zéro.
+     */
     public void killPlayer() {
         playerCharacter.setHealth(0);
         checkGameStatus();
