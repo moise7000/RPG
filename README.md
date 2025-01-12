@@ -5,7 +5,17 @@ This project implements a game system featuring different character types (Warri
 
 ## Interface Preview
 
-![video](assets/rpg_video_presentation.mp4)
+![video](assets/trailer.mp4)
+
+## How to use
+After cloning the project, run this command  ~~to launch the fat JAR~~ to play
+
+```
+java -jar lib/rpg-1.0-SNAPSHOT-fat.jar
+```
+
+## Report 
+You can find the report [here](RAPPORT_RPG.pdf)
 
 
 ## Structure
