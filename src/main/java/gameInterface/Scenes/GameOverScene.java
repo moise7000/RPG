@@ -12,7 +12,31 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
+/**
+ * Crée la scène de "Game Over" qui s'affiche à la fin d'une partie.
+ * <p>
+ * Cette scène affiche un titre "Game Over", les statistiques du joueur (niveau et score),
+ * ainsi qu'une animation du personnage. Elle propose également des boutons permettant de
+ * rejouer ou de revenir au menu principal.
+ *
+ * <p><b>Utilisation :</b></p>
+ * <pre>
+ * VBox gameOverScene = GameOverScene.create(mainApp, config, character, level, score);
+ * </pre>
+ */
 public class GameOverScene {
+
+    /**
+     * Crée la scène de "Game Over" avec un titre, les statistiques, une animation du personnage,
+     * et des boutons pour rejouer ou retourner au menu principal.
+     *
+     * @param mainApp L'application principale, utilisée pour changer de scène.
+     * @param config La configuration de l'interface, qui contient les styles et autres paramètres.
+     * @param character Le personnage du joueur, pour afficher son animation.
+     * @param level Le niveau atteint par le joueur dans la partie.
+     * @param score Le score final du joueur.
+     * @return Un VBox représentant la scène "Game Over".
+     */
     public static VBox create(Main mainApp, InterfaceConfiguration config, GameCharacter character, int level, int score) {
         VBox root = new VBox(30);
         root.setStyle("-fx-alignment: center;");

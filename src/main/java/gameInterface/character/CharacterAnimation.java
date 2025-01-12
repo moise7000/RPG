@@ -14,6 +14,14 @@ import java.util.Map;
 
 
 
+/**
+ * Gère les animations des personnages à partir de feuilles de sprites.
+ * <p>
+ * Cette classe permet de définir plusieurs animations (idle, attaque, déplacement, etc.)
+ * et de passer d'une animation à une autre en fonction de l'état du personnage.
+ * <p>
+ * Les animations sont créées via des timelines et des spritesheets.
+ */
 public class CharacterAnimation {
     private final ImageView spriteView;
     private Map<CharacterState, AnimationData> animations;
@@ -21,6 +29,9 @@ public class CharacterAnimation {
     private CharacterState currentState;
     private Map<CharacterAnimation.CharacterState, Integer> animationsFrameCounts;
 
+    /**
+     * Les différents états possibles pour l'animation d'un personnage.
+     */
     public enum CharacterState {
         IDLE,
         ATTACK,
@@ -29,12 +40,23 @@ public class CharacterAnimation {
         HIT
     }
 
+    /**
+     * Contient les données associées à une animation : la spritesheet, la timeline et la taille des frames.
+     */
     private static class AnimationData {
         final Image spriteSheet;
         final Timeline timeline;
         final int frameWidth;
         final int frameHeight;
 
+        /**
+         * Crée un conteneur pour les données d'une animation.
+         *
+         * @param spriteSheet La feuille de sprites.
+         * @param timeline    La timeline de l'animation.
+         * @param frameWidth  La largeur d'une frame.
+         * @param frameHeight La hauteur d'une frame.
+         */
         AnimationData(Image spriteSheet, Timeline timeline, int frameWidth, int frameHeight) {
             this.spriteSheet = spriteSheet;
             this.timeline = timeline;
@@ -43,6 +65,10 @@ public class CharacterAnimation {
         }
     }
 
+    /**
+     * Constructeur de l'animation du personnage.
+     * Initialise la vue du sprite et les conteneurs d'animations.
+     */
     public CharacterAnimation() {
         this.spriteView = new ImageView();
         this.animations = new HashMap<>();
@@ -52,6 +78,16 @@ public class CharacterAnimation {
 
     }
 
+    /**
+     * Ajoute une animation pour un état spécifique.
+     *
+     * @param state         L'état du personnage (ex : ATTACK, MOVE).
+     * @param spriteSheetPath Le chemin vers la feuille de sprites.
+     * @param frameCount    Le nombre de frames dans l'animation.
+     * @param frameWidth    La largeur d'une frame.
+     * @param frameHeight   La hauteur d'une frame.
+     * @param frameDuration La durée d'affichage de chaque frame.
+     */
     public void addAnimation(CharacterState state, String spriteSheetPath, int frameCount, int frameWidth, int frameHeight, Duration frameDuration) {
         Image spriteSheet = new Image(spriteSheetPath);
 
@@ -78,6 +114,17 @@ public class CharacterAnimation {
         }
     }
 
+    /**
+     * Ajoute plusieurs animations en une seule opération.
+     *
+     * @param states           Liste des états des animations.
+     * @param spriteSheetPaths Chemins des feuilles de sprites.
+     * @param frameCounts      Nombres de frames pour chaque animation.
+     * @param frameWidth       Largeur des frames.
+     * @param frameHeight      Hauteur des frames.
+     * @param frameDuration    Durée d'affichage de chaque frame.
+     * @throws IllegalArgumentException si les tailles des listes ne correspondent pas.
+     */
     public void addAnimations(List<CharacterState> states,List<String> spriteSheetPaths,
                               List<Integer> frameCounts, int frameWidth, int frameHeight,
                               Duration frameDuration) {
@@ -97,6 +144,12 @@ public class CharacterAnimation {
 
 
 
+    /**
+     * Modifie la frame affichée pour une animation donnée.
+     *
+     * @param state      L'état de l'animation.
+     * @param frameIndex L'index de la frame à afficher.
+     */
     private void updateFrame(CharacterState state, int frameIndex) {
         AnimationData animData = animations.get(state);
         if (animData != null) {
@@ -110,6 +163,11 @@ public class CharacterAnimation {
         }
     }
 
+    /**
+     * Définit le nouvel état de l'animation et lance celle-ci.
+     *
+     * @param newState Le nouvel état à activer.
+     */
     public void setState(CharacterState newState) {
         if (currentAnimation != null) {
             currentAnimation.stop();
@@ -147,6 +205,9 @@ public class CharacterAnimation {
     }
 }
 
+/**
+ * Gère l'animation d'un sprite simple à partir d'une feuille de sprites.
+ */
 class SpriteAnimation {
     private final Timeline timeline;
     private final ImageView imageView;
@@ -154,6 +215,17 @@ class SpriteAnimation {
     private final int frameWidth;
     private final int frameHeight;
     private int currentFrame;
+
+    /**
+     * Initialise l'animation du sprite.
+     *
+     * @param imageView    L'imageView qui affiche le sprite.
+     * @param spriteSheet  La feuille de sprites.
+     * @param frameCount   Le nombre de frames dans la feuille.
+     * @param frameWidth   La largeur d'une frame.
+     * @param frameHeight  La hauteur d'une frame.
+     * @param frameDuration La durée d'affichage de chaque frame.
+     */
 
     public SpriteAnimation(ImageView imageView, Image spriteSheet, int frameCount, int frameWidth, int frameHeight, Duration frameDuration) {
         this.imageView = imageView;

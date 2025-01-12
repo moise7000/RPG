@@ -11,6 +11,11 @@ import javafx.scene.layout.Pane;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Gère l'état du jeu, y compris le personnage du joueur, les ennemis, les niveaux, et la gestion des tours.
+ * Cette classe contient la logique pour les attaques du joueur et des ennemis, le passage entre les niveaux,
+ * et le suivi de la santé et du score du joueur.
+ */
 public class GameManager {
     private static GameManager instance;
     private GameCharacter playerCharacter;
@@ -29,6 +34,11 @@ public class GameManager {
         this.gameContainer = null;
     }
 
+    /**
+     * Obtient l'instance unique de {@code GameManager}.
+     *
+     * @return L'instance unique de {@code GameManager}.
+     */
     public static GameManager getInstance() {
         if (instance == null) {
             instance = new GameManager();
@@ -36,6 +46,11 @@ public class GameManager {
         return instance;
     }
 
+    /**
+     * Initialise le jeu avec le personnage du joueur.
+     *
+     * @param player Le personnage du joueur
+     */
     public void initializeGame(GameCharacter player) {
         this.playerCharacter = player;
         this.enemies = new ArrayList<>();
@@ -44,12 +59,39 @@ public class GameManager {
         createEnemies(1);
     }
 
+    /**
+     * Définit l'application principale du jeu.
+     *
+     * @param mainApp L'application principale du jeu
+     */
     public void setMainApp(Main mainApp) {this.mainApp = mainApp;}
+
+    /**
+     * Obtient l'application principale du jeu.
+     *
+     * @return L'application principale du jeu
+     */
     public Main getMainApp() {return this.mainApp;}
 
+    /**
+     * Définit le conteneur de jeu.
+     *
+     * @param gameContainer Le conteneur de jeu (panneau graphique)
+     */
     public void setGameContainer(Pane gameContainer) {this.gameContainer = gameContainer;}
+
+    /**
+     * Obtient le conteneur de jeu.
+     *
+     * @return Le conteneur de jeu
+     */
     public Pane getGameContainer() {return this.gameContainer;}
 
+    /**
+     * Crée une liste d'ennemis en fonction du niveau actuel.
+     *
+     * @param level Le niveau actuel
+     */
     public void createEnemies(int level) {
         List<GameCharacter> enemyList = new ArrayList<>();
         int enemyCount = Math.min(level, 3);

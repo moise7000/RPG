@@ -89,6 +89,7 @@ public class Wizard extends GameCharacter {
         clonedWizard.setExperiencePoints(this.getExperiencePoints());
         clonedWizard.setLevel(this.getLevel());
         clonedWizard.setAnimations(this.getAnimations());
+        clonedWizard.setIntelligence(this.getIntelligence());
 
         return clonedWizard;
     }

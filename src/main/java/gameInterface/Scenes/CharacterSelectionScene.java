@@ -16,7 +16,27 @@ import javafx.util.Duration;
 
 import java.util.List;
 
+/**
+ * Crée la scène de sélection des personnages pour un jeu.
+ * <p>
+ * Cette scène permet aux joueurs de choisir un personnage parmi plusieurs options
+ * et de visualiser les animations de chaque personnage. Lorsqu'un personnage est sélectionné,
+ * la scène de jeu est lancée avec le personnage choisi.
+ *
+ * <p><b>Utilisation :</b></p>
+ * <pre>
+ * VBox selectionScene = CharacterSelectionScene.create(mainApp, config);
+ * </pre>
+ */
 public class CharacterSelectionScene {
+
+    /**
+     * Crée la scène de sélection des personnages avec les prévisualisations et boutons de sélection.
+     *
+     * @param mainApp L'application principale, utilisée pour changer de scène.
+     * @param config La configuration de l'interface, qui contient des paramètres tels que les styles et les informations sur les personnages.
+     * @return Un VBox représentant la scène de sélection des personnages.
+     */
     public static VBox create(Main mainApp, InterfaceConfiguration config) {
         VBox root = new VBox(20);
         root.setStyle("-fx-alignment: center;");
@@ -91,6 +111,15 @@ public class CharacterSelectionScene {
     }
 
 
+    /**
+     * Initialise les animations de prévisualisation des personnages.
+     *
+     * @param evilWizard Le personnage du Sorcier Maléfique.
+     * @param heroKnight Le personnage du Chevalier Héroïque.
+     * @param martialHero Le personnage du Héros Martial.
+     * @param necromancer Le personnage du Nécromancien.
+     * @param nightBorne Le personnage du Night Borne.
+     */
     private static void setAllPreviewAnimations( GameCharacter evilWizard, GameCharacter heroKnight, GameCharacter martialHero, GameCharacter necromancer, GameCharacter nightBorne) {
 
         evilWizard.getAnimations().setState(CharacterAnimation.CharacterState.IDLE);
@@ -101,6 +130,14 @@ public class CharacterSelectionScene {
 
     }
 
+    /**
+     * Crée un conteneur pour la prévisualisation d'un personnage, incluant son sprite et un bouton de sélection.
+     *
+     * @param character L'animation du personnage à afficher.
+     * @param selectButton Le bouton permettant de sélectionner ce personnage.
+     * @param characterInfo L'information texte à afficher sous la prévisualisation du personnage.
+     * @return Un VBox contenant la prévisualisation du personnage et le bouton de sélection.
+     */
     private static VBox createCharacterPreviewBox(CharacterAnimation character,
                                                   Button selectButton,
                                                   String characterInfo) {
@@ -129,6 +166,13 @@ public class CharacterSelectionScene {
     }
 
 
+    /**
+     * Lance le jeu avec le personnage sélectionné.
+     *
+     * @param mainApp L'application principale, utilisée pour démarrer la scène de jeu.
+     * @param config La configuration de l'interface.
+     * @param selectedCharacter Le personnage sélectionné par l'utilisateur.
+     */
     private static void startGame(Main mainApp, InterfaceConfiguration config, GameCharacter selectedCharacter) {
         mainApp.stopParallax();
         selectedCharacter.getAnimations().setState(CharacterAnimation.CharacterState.IDLE);

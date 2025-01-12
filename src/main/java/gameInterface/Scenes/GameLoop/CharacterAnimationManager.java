@@ -9,6 +9,13 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Gère les animations d'un personnage dans le jeu.
+ * <p>
+ * Cette classe permet de coordonner une séquence d'animations pour un personnage en utilisant des transitions JavaFX.
+ * Elle prend en charge des animations telles que le déplacement, l'attaque, et l'impact, et peut gérer des effets comme le flip du sprite lors du mouvement.
+ * </p>
+ */
 public class CharacterAnimationManager {
     private static CharacterAnimationManager instance;
 
@@ -19,12 +26,23 @@ public class CharacterAnimationManager {
         HIT
     }
 
+    /**
+     * Représente une étape dans une séquence d'animation.
+     */
     public static class AnimationStep {
         private final AnimationType type;
         private final double targetX;
         private final Duration duration;
         private final boolean shouldFlip;  // Nouveau paramètre pour le flip
 
+        /**
+         * Constructeur pour créer une étape d'animation.
+         *
+         * @param type       Le type d'animation
+         * @param targetX    La position cible pour l'animation
+         * @param duration   La durée de l'animation
+         * @param shouldFlip Indique si un flip horizontal est nécessaire
+         */
         public AnimationStep(AnimationType type, double targetX, Duration duration, boolean shouldFlip) {
             this.type = type;
             this.targetX = targetX;
@@ -32,15 +50,33 @@ public class CharacterAnimationManager {
             this.shouldFlip = shouldFlip;
         }
 
+        /**
+         * Constructeur pour créer une étape d'animation sans flip.
+         *
+         * @param type     Le type d'animation
+         * @param targetX  La position cible pour l'animation
+         * @param duration La durée de l'animation
+         */
         public AnimationStep(AnimationType type, double targetX, Duration duration) {
             this(type, targetX, duration, false);
         }
 
+        /**
+         * Constructeur pour créer une étape d'animation sans position cible ni flip.
+         *
+         * @param type     Le type d'animation
+         * @param duration La durée de l'animation
+         */
         public AnimationStep(AnimationType type, Duration duration) {
             this(type, 0, duration, false);
         }
     }
 
+    /**
+     * Obtient l'instance unique de {@link CharacterAnimationManager}.
+     *
+     * @return L'instance unique de `CharacterAnimationManager`.
+     */
     public static CharacterAnimationManager getInstance() {
         if (instance == null) {
             instance = new CharacterAnimationManager();
@@ -56,7 +92,15 @@ public class CharacterAnimationManager {
 
 
 
-
+    /**
+     * Exécute une séquence d'animations pour un personnage.
+     * La séquence peut inclure des déplacements, attaques et impacts.
+     *
+     * @param direction   La direction du mouvement (gauche ou droite)
+     * @param characterAnimation L'animation du personnage à exécuter
+     * @param steps       La liste des étapes d'animation
+     * @param onComplete  Une action à exécuter une fois l'animation terminée
+     */
     public void performAnimationSequence(AnimationDirection direction, CharacterAnimation characterAnimation, List<AnimationStep> steps, Runnable onComplete) {
         SequentialTransition sequence = new SequentialTransition();
 

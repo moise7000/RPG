@@ -30,6 +30,7 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
     private CharacterAnimation animations;
 
 
+
     /**
      * Constructeur principal d'un personnage.
      * <p>
@@ -47,6 +48,7 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
         this.combatStrategy = new NeutralStrategy();
         this.observers = new ArrayList<>();
         this.animations = null;
+
     }
 
     /**
@@ -64,9 +66,10 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
         this.combatStrategy = combatStrategy;
         this.observers = new ArrayList<>();
         this.animations = null;
+
     }
 
-    public GameCharacter(String name, int health, CombatStrategy combatStrategy, CharacterAnimation animations ) {
+    public GameCharacter(String name, int health, CombatStrategy combatStrategy, CharacterAnimation animations) {
         this.name = name;
         this.experiencePoints = 0;
         this.level = 1;
@@ -107,6 +110,8 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
             observer.update(this, event);
         }
     }
+
+
 
 
 
@@ -224,7 +229,7 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
     /**
      * Accepte un visiteur pour exécuter des opérations spécifiques sur le personnage.
      *
-     * @param visitor le visiteur à appliquer au personnage.
+     * @param visitor le visiteur, à appliquer au personnage.
      */
     public abstract void accept(CharacterVisitor visitor);
 
@@ -232,4 +237,13 @@ public abstract class GameCharacter implements Duplicable<GameCharacter>, Charac
 
     public void setAnimations(CharacterAnimation animations) {this.animations = animations;}
 
+
+
+    public int getAttackPower() {
+        if (this instanceof Warrior) {
+            return ((Warrior) this).getStrength();
+        } else {
+            return ((Wizard) this).getIntelligence();
+        }
+    }
 }

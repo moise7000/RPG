@@ -12,8 +12,27 @@ import javafx.util.Duration;
 
 import java.util.List;
 
+/**
+ * Crée la scène du menu principal, qui s'affiche au lancement du jeu.
+ * <p>
+ * Cette scène comprend un titre du jeu, des boutons permettant de jouer, accéder aux paramètres,
+ * consulter les crédits ou quitter le jeu. Un effet de transition de fondu est appliqué au titre.
+ *
+ * <p><b>Utilisation :</b></p>
+ * <pre>
+ * VBox mainMenu = MainMenuScene.create(mainApp, config);
+ * </pre>
+ */
 public class MainMenuScene {
 
+    /**
+     * Crée la scène du menu principal avec un titre, des boutons pour jouer, accéder aux paramètres,
+     * consulter les crédits ou quitter le jeu. Le titre du jeu apparaît avec une transition de fondu.
+     *
+     * @param mainApp L'application principale, utilisée pour changer de scène.
+     * @param config La configuration de l'interface, qui contient les styles et autres paramètres.
+     * @return Un VBox représentant le menu principal.
+     */
     public static VBox create(Main mainApp, InterfaceConfiguration config) {
 
         Label gameTitle = new Label(config.getGameTitle());

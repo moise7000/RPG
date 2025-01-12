@@ -14,6 +14,13 @@ import javafx.scene.layout.Region;
 import javafx.geometry.Pos;
 import javafx.application.Platform;
 
+/**
+ * La classe principale du jeu qui gère la fenêtre de l'application, le menu principal, la musique et les effets parallax.
+ * <p>
+ * Cette classe étend <code>Application</code> et est responsable du lancement de l'application JavaFX, du chargement des ressources
+ * (police et musique), ainsi que de la gestion de la scène du jeu avec des effets visuels et de mise à l'échelle dynamique.
+ * </p>
+ */
 public class Main extends Application {
     private final InterfaceConfiguration config = InterfaceConfiguration.getShared();
     private StackPane scalingRoot;
@@ -21,6 +28,11 @@ public class Main extends Application {
     private ParallaxBackground parallaxBackground;
     private MediaPlayer mediaPlayer;
 
+    /**
+     * Méthode principale pour démarrer l'application. Crée la scène, le fond parallax, le menu principal, et configure les éléments visuels.
+     *
+     * @param primaryStage Le stage principal de l'application.
+     */
     @Override
     public void start(Stage primaryStage) {
         // Charger la police
@@ -89,6 +101,9 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Met à jour le facteur de mise à l'échelle pour s'adapter à la taille de la fenêtre.
+     */
     private void updateScale() {
         Scene scene = scalingRoot.getScene();
         double scaleX = scene.getWidth() / config.getWindowWidth();
@@ -99,6 +114,11 @@ public class Main extends Application {
         gameRoot.setScaleY(scale);
     }
 
+    /**
+     * Change le contenu de la scène du jeu en fonction du nouveau contenu passé.
+     *
+     * @param newContent Le nouveau contenu à afficher.
+     */
     public void setSceneContent(VBox newContent) {
         gameRoot.getChildren().clear();
         gameRoot.getChildren().addAll(parallaxBackground, newContent);
@@ -108,8 +128,19 @@ public class Main extends Application {
     public void startParallax() {parallaxBackground.startAnimation();}
     public void stopMusic() {mediaPlayer.stop();}
     public void startMusic() {mediaPlayer.play();}
+
+    /**
+     * Récupère la scène actuellement affichée.
+     *
+     * @return La scène actuelle.
+     */
     public Scene getScene() {return scalingRoot.getScene();}
 
+    /**
+     * Méthode main pour lancer l'application.
+     *
+     * @param args Les arguments de la ligne de commande.
+     */
     public static void main(String[] args) {
         launch(args);
     }

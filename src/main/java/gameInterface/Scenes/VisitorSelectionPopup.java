@@ -18,9 +18,18 @@ import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 
+/**
+ * Affiche une fenêtre pop-up permettant au joueur de choisir un bonus de visiteur (Buff ou Heal).
+ * Cette classe gère l'affichage des différentes options et l'application du bonus choisi.
+ */
 public class VisitorSelectionPopup {
     private static Stage popup;
 
+    /**
+     * Affiche le pop-up de sélection de bonus avec des cartes représentant chaque type de bonus.
+     *
+     * @param config La configuration de l'interface du jeu, contenant des informations sur le style et le contenu des cartes
+     */
     public static void show(InterfaceConfiguration config) {
         popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
@@ -73,6 +82,15 @@ public class VisitorSelectionPopup {
         popup.show();
     }
 
+    /**
+     * Crée une carte représentant un bonus (Buff ou Heal), avec le nom, l'animation, la description et un bouton de sélection.
+     *
+     * @param name Le nom du bonus
+     * @param description La description du bonus
+     * @param visitorAnimation L'animation du visiteur associé au bonus
+     * @param config La configuration de l'interface du jeu
+     * @return La carte représentant le bonus
+     */
     private static VBox createVisitorCard(String name, String description, CharacterAnimation visitorAnimation, InterfaceConfiguration config) {
         VBox card = new VBox(5);
         card.setStyle("""
@@ -122,6 +140,13 @@ public class VisitorSelectionPopup {
         return card;
     }
 
+
+
+    /**
+     * Applique le bonus sélectionné en fonction du type de visiteur choisi.
+     *
+     * @param visitorType Le type de visiteur (Buff ou Heal)
+     */
     private static void applyVisitor(String visitorType) {
         GameManager gameManager = GameManager.getInstance();
         switch(visitorType) {
