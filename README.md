@@ -6,8 +6,8 @@ This project implements a game system featuring different character types (Warri
 ## Interface Preview
 
 <p align="center">
-  <img src="assets/1.png" width="256"/>
   <img src="assets/2.png" width="256"/>
+  <img src="assets/1.png" width="256"/>
   <img src="assets/3.png" width="256"/>
 </p>
 
