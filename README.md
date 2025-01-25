@@ -5,7 +5,13 @@ This project implements a game system featuring different character types (Warri
 
 ## Interface Preview
 
-![video](assets/trailer_rpg.mp4)
+<p align="center">
+  <img src="assets/1.png" width="256"/>
+  <img src="assets/2.png" width="256"/>
+  <img src="assets/3.png" width="256"/>
+</p>
+
+
 
 ## How to use
 After cloning the project, run this command  ~~to launch the fat JAR~~ to play :
